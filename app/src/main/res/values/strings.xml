@@ -1,0 +1,151 @@
+<resources>
+    <string name="app_name">Organize Torneios</string>
+    <!-- Tela de Splash -->
+    <string name="txtContentDescriptionOrganizeSplash">Logo Organize Torneios</string>
+    <string name="txtContentDescriptionInnovateSplash">Logo Innovate Solutions</string>
+    <!-- Tela Login -->
+    <string name="txtLogo">Logo App Organize Torneios</string>
+    <string name="btnEntrar">Entrar</string>
+    <string name="txtCadastrar">Cadastrar-se</string>
+    <string name="txtEsqueceuSenha">Esqueceu sua senha?</string>
+    <string name="chLembrar">Lembrar</string>
+    <!-- Formulário cadastro de usuários -->
+    <string name="btnCadastrar">CADASTRAR</string>
+    <string name="txtTituloCadastro">Cadastro</string>
+    <string name="txtNome">Nome</string>
+    <string name="txtEmail">E-mail</string>
+    <string name="txtSenha">Senha</string>
+    <string name="txtConfirmacaoSenha">Repita sua senha</string>
+    <string name="chTermos">Li e concordo com os termos de uso.</string>
+    <string name="txtHintConfirmacaoSenha">Confirme a senha digitada...</string>
+    <string name="txtHintSenha">Informe uma senha...</string>
+    <string name="txtHintEmail">Digite seu e-mail...</string>
+    <string name="txtHintNome">Digite seu primeiro nome...</string>
+    <string name="txtTermos">Ler termos de uso.</string>
+    <!-- Tela Recuperar de senha -->
+    <string name="recuperarSenha">Recuperar Senha</string>
+    <string name="recuperar">Recuperar</string>
+    <!-- Tela Redefinir de senha -->
+    <string name="redefinirSenha">Redefinir Senha</string>
+    <string name="novaSenha">Nova Senha</string>
+    <string name="txtHintNovaSenha">Digite sua nova senha</string>
+    <string name="confirmacaoNovaSenha">Confirmação Nova Senha</string>
+    <string name="txtHintConfirmeNovaSenha">Confirme sua nova senha</string>
+    <string name="redefinir">Redefinir</string>
+    <!-- Tela Escolher torneio -->
+    <string name="txtUsuario">txtUsuario</string>
+    <string name="txtTituloEscolher">Quantidade de Equipes</string>
+    <string name="btnQuatroEquipesQuadrangular">4 Equipes (Quadrangular)</string>
+    <string name="btnDozeEquipesQuatroGrupos">12 Equipes (4 Grupos)</string>
+    <string name="btnDezesseisEquipesQuatroGrupos">16 Equipes (4 Grupos)</string>
+    <!-- Tela Cadastrar Grupos  -->
+    <string name="txtTituloCadastroGrupos">Cadastro Grupos</string>
+    <string name="btnSalvar">Salvar</string>
+    <string name="equipe1">Equipe 1</string>
+    <string name="equipe2">Equipe 2</string>
+    <string name="equipe3">Equipe 3</string>
+    <string name="equipe4">Equipe 4</string>
+    <string name="equipe5">Equipe 5</string>
+    <string name="equipe6">Equipe 6</string>
+    <string name="equipe7">Equipe 7</string>
+    <string name="equipe8">Equipe 8</string>
+    <string name="equipe9">Equipe 9</string>
+    <string name="equipe10">Equipe 10</string>
+    <string name="equipe11">Equipe 11</string>
+    <string name="equipe12">Equipe 12</string>
+    <string name="equipe13">Equipe 13</string>
+    <string name="equipe14">Equipe 14</string>
+    <string name="equipe15">Equipe 15</string>
+    <string name="equipe16">Equipe 16</string>
+    <!-- Tela Dashboard  -->
+    <string name="subTituloDashboard">Comece seu torneio</string>
+    <string name="equipes">Equipes</string>
+    <string name="jogosFaseGrupos">1ª Fase</string>
+    <string name="classificacao">Classificação</string>
+    <string name="jogosFaseEliminatoria">Eliminatórias</string>
+    <string name="melhorDefesa">Melhor Defesa</string>
+    <string name="melhorAtaque">Melhor Ataque</string>
+    <!-- Tela Equipes  -->
+    <string name="editar">Editar</string>
+    <!-- Tela de Jogos -->
+    <string name="btnFinalizarPrimeiraFase">finalizar 1ª Fase</string>
+    <string name="btnFinalizar">finalizar Torneio</string>
+    <!-- Tela Termos de uso -->
+    <string name="txtAceitacao">1. Aceitação</string>
+    <string name="txtLicenca">\n2. Licença Limitada</string>
+    <string name="txtAlteracoes">\n3. Alterações, Modificações e Rescisão</string>
+    <string name="txtConsentimento">\nConsentimento para coleta e uso de dados</string>
+    <string name="txtIsencao">\nIsenção de garantias e limitações de responsabilidade</string>
+    <string name="mensagemAceitacao">\nEste é um contrato firmado entre você, de agora em diante denominado como usuário, e a Innovate Solutions, organização com sede no município de Gravataí, Rio Grande do Sul, e de agora em diante denominada simplesmente de Innovate.
+        Este “Termo de Uso” rege o uso de  todos os aplicativos disponibilizados gratuitamente pela Innovate sejam para dispositivos móveis (Android ou IOS), servidores, computadores pessoais (desktops) ou serviços web. Se você não concordar com estes termos não use este aplicativo.
+        Você reconhece ainda que analisou e aceitou as condições de uso. Leia-as atentamente, pois o uso deste aplicativo significa que você aceitou todos os termos e concorda em cumpri-los. Se você, usuário, for menor de idade ou declarado incapaz em quaisquer aspectos, precisará da permissão de seus pais ou responsáveis que também deverão concordar com estes mesmos termos e condições.</string>
+    <string name="mensagemLicenca">\nVocê recebeu uma licença limitada, não transferível, não exclusiva, livre de royalties e revogável para baixar, instalar, executar e utilizar este aplicativo em seu dispositivo.
+        Você reconhece e concorda que a Innovate concede ao usuário uma licença exclusiva para uso e desta forma não lhe transfere os direitos sobre o produto. O aplicativo deverá ser utilizado por você, usuário.
+        A venda, transferência, modificação, engenharia reversa ou distribuição bem como a cópia de textos, imagens ou quaisquer partes nele contido é expressamente proibida.</string>
+    <string name="mensagemAlteracoes">\nA Innovate reserva-se no direito de, a qualquer tempo, modificar estes termos seja incluindo, removendo ou alterando quaisquer de suas cláusulas.
+        Tais modificações terão efeito imediato. Após publicadas tais alterações, ao continuar com o uso do aplicativo, você terá aceitado e concordado em cumprir os termos modificados.
+        \nA Innovate pode, de tempos em tempos, modificar ou descontinuar (temporária ou permanentemente) a distribuição ou a atualização deste aplicativo. \nA Innovate não é obrigada a fornecer nenhum serviço de suporte para este aplicativo.
+        \nO usuário não poderá responsabilizar a Innovate nem quaisquer funcionários, afiliados, agentes, contratados ou licenciadores por quaisquer modificações, suspensões ou descontinuidade do aplicativo.</string>
+    <string name="mensagemConsentimento">\nVocê concorda que a Innovate pode coletar e usar dados técnicos de seu dispositivo tais como especificações, configurações, versões de sistema operacional, tipo de conexão à internet e afins.</string>
+    <string name="mensagemIsencao">\nEste aplicativo estará em contínuo desenvolvimento e pode conter erros e, por isso, o uso é fornecido "no estado em que se encontra" e sob risco do usuário final.
+        Na extensão máxima permitida pela legislação aplicável a Innovate e seus fornecedores isentam-se de quaisquer garantias e condições expressas ou implícitas incluindo, sem limitação, garantias de comercialização, adequação a um propósito específico, titularidade e não violação no que diz respeito ao aplicativo e qualquer um de seus componentes ou ainda à prestação ou não de serviços de suporte.
+        A Innovate não garante que a operação deste aplicativo seja contínua e sem defeitos. \nExceto pelo estabelecido neste documento não há outras garantias, condições ou promessas aos aplicativos, expressas ou implícitas, e todas essas garantias, condições e promessas podem ser excluídas de acordo com o que é permitido por lei sem prejuízo à Innovate e seus colaboradores.
+
+        \nI.     A Innovate não garante, declara ou assegura que o uso deste aplicativo será ininterrupto ou livre de erros e você concorda que a Innovate poderá remover por períodos indefinidos ou cancelar este aplicativo a qualquer momento sem que você seja avisado.
+
+        \nII.    A Innovate não garante, declara nem assegura que este aplicativo esteja livre de perda, interrupção, ataque, vírus, interferência, pirataria ou outra invasão de segurança e isenta-se de qualquer responsabilidade em relação à essas questões. Você é responsável pelo backup do seu próprio dispositivo.
+
+        \nIII.   Em hipótese alguma a Innovate, bem como seus funcionários, afiliadas, agentes, contratados ou licenciadores responsabilizar-se-ão por perdas ou danos causados pelo uso do aplicativo.
+
+        \nIV.    Os conteúdos transmitidos pelos aplicativos tais como a transmissão da programação de rádios AM, FM, programações televisivas e afins são de responsabilidade de seus idealizadores. A Innovate isenta-se de qualquer responsabilidade direta ou indireta sobre estes conteúdos e o acesso é facultativo ao usuário.</string>
+    <!-- Tela de Notificação -->
+    <string name="mensagemNotificacaoVersaoPremium">Veja também a versão Premium do Organize torneios e tenha ainda mais recursos para organizar seus eventos...</string>
+    <string name="tituloNotificacaoVersaoPremium">Organize torneios Premium</string>
+    <!-- Tela de Eliminatórias -->
+    <string name="eliminatorias">Eliminatórias</string>
+    <!-- Tela de Cadastro Jogadores -->
+    <string name="numero">Número</string>
+    <string name="gols">Gols</string>
+    <string name="cartoesAmarelos">Cartões Amarelos</string>
+    <string name="cartoesVermelhos">Cartões Vermelhos</string>
+    <string name="cadastroJogador">Cadastro Jogador</string>
+    <string name="escolherEquipe">Escolher Equipe</string>
+    <!-- Tela de Artilharia -->
+    <string name="imgAvatar">Avatar do jogador</string>
+    <string name="jogador">JOGADOR</string>
+    <string name="equipe">Equipe</string>
+    <string name="adicionarGol">Adicionar Gol</string>
+    <string name="removerGol">Remover Gol</string>
+
+
+    <!-- Anuncios TESTE-->
+    <!--string name="anuncioBanner1">/6499/example/banner</string-->
+    <string name="anuncioBanner1">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="anuncioBanner2">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="anuncioIntersticial1">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="anuncioIntersticial2">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="deletarJogador">Deletar Jogador</string>
+    <string name="addJogador">Add Jogador</string>
+    <string name="title_activity_artilharia">Artilharia</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="cartoes">Cartões</string>
+    <string name="title_activity_cartoes">Cartoes</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="adicionarCartaoAmarelo">Adicionar Cartão Amarelo</string>
+    <string name="removerCartaoAmarelo">Remover Cartão Amarelo</string>
+    <string name="adicionarCartaoVermelho">Adicionar Cartão Vermelho</string>
+    <string name="removerCartaoVermelho">Remover Cartão Vermelho</string>
+
+
+    <!-- Anuncios >
+    <string name="anuncioBanner1">ca-app-pub-5291707701088051/7893286011</string>
+    <string name="anuncioBanner2">ca-app-pub-5291707701088051/5091812529</string>
+    <string name="anuncioIntersticial1">ca-app-pub-5291707701088051/4772314564</string>
+    <string name="anuncioIntersticial2">ca-app-pub-5291707701088051/6567013470</string-->
+</resources>
