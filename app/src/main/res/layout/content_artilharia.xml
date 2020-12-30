@@ -7,7 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <ListView
-        android:id="@+id/listviewJogadores"
+        android:id="@+id/listviewJogadoresArtilharia"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

@@ -46,6 +46,8 @@ public class CadastrarJogador extends AppCompatActivity {
 
     int ultimoID, equipeID, qtdJogadores, idEquipeSelecionada;
 
+    String telaAnterior;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,6 +127,7 @@ public class CadastrarJogador extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        limparTelaAnterior();
         Intent intent = new Intent(this, Dashboard.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
@@ -150,7 +153,6 @@ public class CadastrarJogador extends AppCompatActivity {
             jogador.setCartaoAmarelo(Integer.parseInt(editCartoesAmarelos.getText().toString()));
             jogador.setCartaoVermelho(Integer.parseInt(editCartoesVermelhos.getText().toString()));
 
-
             if (jogadorController.incluir(jogador)) {
 
                 ultimoID = jogadorController.getUltimoID();
@@ -161,11 +163,19 @@ public class CadastrarJogador extends AppCompatActivity {
 
                 Toast.makeText(this, "Cadastro concluído!", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(CadastrarJogador.this, Artilharia.class);
-                startActivity(intent);
-                finish();
-                return;
-
+                if (!telaAnterior.isEmpty()) {
+                    if (telaAnterior == "artilharia") {
+                        Intent intent = new Intent(CadastrarJogador.this, Artilharia.class);
+                        startActivity(intent);
+                        finish();
+                        return;
+                    } else {
+                        Intent intent = new Intent(CadastrarJogador.this, Cartoes.class);
+                        startActivity(intent);
+                        finish();
+                        return;
+                    }
+                }
             } else {
 
                 Toast.makeText(this, "Não foi possível concluir o adastro!", Toast.LENGTH_SHORT).show();
@@ -186,10 +196,19 @@ public class CadastrarJogador extends AppCompatActivity {
         listaEquipes.add(new Equipe());
     }
 
+    private void limparTelaAnterior() {
+        preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
+        SharedPreferences.Editor dados = preferences.edit();
+
+        dados.putString("telaAnterior", "");
+        dados.apply();
+    }
+
     private void restaurarSharedPreferences() {
 
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         qtdJogadores = preferences.getInt("qtdJogadores", -1);
+        telaAnterior = preferences.getString("telaAnterior", "");
 
     }
 

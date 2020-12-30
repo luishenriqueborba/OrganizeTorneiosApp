@@ -99,6 +99,7 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void verArtilharia(View view) {
+        salvarTelaAnterior("artilharia");
 
         if (qtdJogadores >= 1) {
 
@@ -118,6 +119,7 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void verCartoes(View view) {
+        salvarTelaAnterior("cartoes");
 
         if (qtdJogadores >= 1) {
 
@@ -152,7 +154,6 @@ public class Dashboard extends AppCompatActivity {
         finish();
         return;
 
-
     }
 
 
@@ -168,6 +169,14 @@ public class Dashboard extends AppCompatActivity {
         }
 
         backPressedTime = System.currentTimeMillis();
+    }
+
+    private void salvarTelaAnterior(String tela) {
+        preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
+        SharedPreferences.Editor dados = preferences.edit();
+
+        dados.putString("telaAnterior", tela);
+        dados.apply();
     }
 
     private void restaurarSharedPreferences() {

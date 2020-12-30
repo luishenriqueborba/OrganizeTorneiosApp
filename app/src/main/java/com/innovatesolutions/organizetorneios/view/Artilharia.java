@@ -17,6 +17,7 @@ import android.widget.ListView;
 
 import com.innovatesolutions.organizetorneios.R;
 import com.innovatesolutions.organizetorneios.adapter.JogadorArtilhariaListAdapter;
+import com.innovatesolutions.organizetorneios.api.AppUtil;
 import com.innovatesolutions.organizetorneios.controller.EquipeController;
 import com.innovatesolutions.organizetorneios.controller.JogadorController;
 import com.innovatesolutions.organizetorneios.model.Equipe;
@@ -56,7 +57,7 @@ public class Artilharia extends AppCompatActivity {
 
         jogadorController = new JogadorController(getApplicationContext());
 
-        listView = findViewById(R.id.listviewJogadores);
+        listView = findViewById(R.id.listviewJogadoresArtilharia);
 
         dataSet = jogadorController.listarTodosJogadores();
 
@@ -71,7 +72,6 @@ public class Artilharia extends AppCompatActivity {
                 jogador = dataSet.get(position);
 
                 Snackbar.make(view, "Nome: " + jogador.getNome() + " | Gols: " + jogador.getGols(), Snackbar.LENGTH_SHORT).setAction("No action", null).show();
-
             }
         });
 
@@ -91,11 +91,20 @@ public class Artilharia extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        limparTelaAnterior();
         Intent intent = new Intent(this, Dashboard.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
         return;
+    }
+
+    private void limparTelaAnterior() {
+        preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
+        SharedPreferences.Editor dados = preferences.edit();
+
+        dados.putString("telaAnterior", "");
+        dados.apply();
     }
 
 }

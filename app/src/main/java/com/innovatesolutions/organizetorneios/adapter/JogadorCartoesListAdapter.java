@@ -63,12 +63,11 @@ public class JogadorCartoesListAdapter extends ArrayAdapter<Jogador> implements 
         ImageView imgAdicionarCartaoVermelho;
         ImageView imgRemoverCartaoVermelho;
         ImageView imgDeletarJogador;
-
     }
 
 
     public JogadorCartoesListAdapter(ArrayList<Jogador> dataSet, Context context) {
-        super(context, R.layout.listview_jogadores_artilharia, dataSet);
+        super(context, R.layout.listview_jogadores_cartoes, dataSet);
 
         this.dados = dataSet;
         this.context = context;
@@ -223,15 +222,18 @@ public class JogadorCartoesListAdapter extends ArrayAdapter<Jogador> implements 
 
             LayoutInflater layoutElencoList = LayoutInflater.from(getContext());
 
-            dataSet = layoutElencoList.inflate(R.layout.listview_jogadores_artilharia, parent, false);
+            dataSet = layoutElencoList.inflate(R.layout.listview_jogadores_cartoes, parent, false);
 
             linha.txtNome = dataSet.findViewById(R.id.txtNome);
             linha.txtNumero = dataSet.findViewById(R.id.txtNumero);
             linha.txtEquipe = dataSet.findViewById(R.id.txtEquipe);
-            linha.txtQtdGols = dataSet.findViewById(R.id.txtQtdGols);
+            linha.txtQtdCartoesAmarelos = dataSet.findViewById(R.id.txtQtdCartoesAmarelos);
+            linha.txtQtdCartoesVermelhos = dataSet.findViewById(R.id.txtQtdCartoesVermelhos);
             linha.imgAvatar = dataSet.findViewById(R.id.imgAvatar);
-            linha.imgAdicionarGols = dataSet.findViewById(R.id.imgAdicionarGol);
-            linha.imgRemoverGols = dataSet.findViewById(R.id.imgRemoverGol);
+            linha.imgAdicionarCartaoAmarelo = dataSet.findViewById(R.id.imgAdicionarCartaoAmarelo);
+            linha.imgAdicionarCartaoVermelho = dataSet.findViewById(R.id.imgAdicionarCartaoVermelho);
+            linha.imgRemoverCartaoAmarelo = dataSet.findViewById(R.id.imgRemoverCartaoAmarelo);
+            linha.imgRemoverCartaoVermelho = dataSet.findViewById(R.id.imgRemoverCartaoVermelho);
             linha.imgDeletarJogador = dataSet.findViewById(R.id.imgDeletarJogador);
 
             dataSet.setTag(linha);
@@ -243,16 +245,19 @@ public class JogadorCartoesListAdapter extends ArrayAdapter<Jogador> implements 
         linha.txtNome.setText(jogador.getNome());
         linha.txtNumero.setText(jogador.getNumero());
         linha.txtEquipe.setText(equipe.getNome());
-        linha.txtQtdGols.setText(String.valueOf(jogador.getGols()));
+        linha.txtQtdCartoesAmarelos.setText(String.valueOf(jogador.getCartaoAmarelo()));
+        linha.txtQtdCartoesVermelhos.setText(String.valueOf(jogador.getCartaoVermelho()));
 
         linha.imgAvatar.setOnClickListener(this);
         linha.imgAvatar.setTag(position);
-
-        linha.imgAdicionarGols.setOnClickListener(this);
-        linha.imgAdicionarGols.setTag(position);
-
-        linha.imgRemoverGols.setOnClickListener(this);
-        linha.imgRemoverGols.setTag(position);
+        linha.imgAdicionarCartaoAmarelo.setOnClickListener(this);
+        linha.imgAdicionarCartaoAmarelo.setTag(position);
+        linha.imgAdicionarCartaoVermelho.setOnClickListener(this);
+        linha.imgAdicionarCartaoVermelho.setTag(position);
+        linha.imgRemoverCartaoAmarelo.setOnClickListener(this);
+        linha.imgRemoverCartaoAmarelo.setTag(position);
+        linha.imgRemoverCartaoVermelho.setOnClickListener(this);
+        linha.imgRemoverCartaoVermelho.setTag(position);
 
         linha.imgDeletarJogador.setOnClickListener(this);
         linha.imgDeletarJogador.setTag(position);

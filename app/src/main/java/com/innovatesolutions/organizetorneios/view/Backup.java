@@ -58,7 +58,7 @@ public class Backup extends AppCompatActivity {
 
         jogadorController = new JogadorController(getApplicationContext());
 
-        listView = findViewById(R.id.listviewJogadores);
+        listView = findViewById(R.id.listviewJogadoresArtilharia);
 
         dataSet = jogadorController.listarTodosJogadores();
 

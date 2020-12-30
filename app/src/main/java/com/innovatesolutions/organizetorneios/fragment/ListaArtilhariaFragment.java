@@ -51,7 +51,7 @@ public class ListaArtilhariaFragment extends Fragment {
 
         jogadorController = new JogadorController(getContext());
 
-        listView = view.findViewById(R.id.listviewJogadores);
+        listView = view.findViewById(R.id.listviewJogadoresArtilharia);
 
         dataSet = jogadorController.listarTodosJogadores();
 
