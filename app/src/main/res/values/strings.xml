@@ -116,36 +116,27 @@
     <string name="equipe">Equipe</string>
     <string name="adicionarGol">Adicionar Gol</string>
     <string name="removerGol">Remover Gol</string>
-
-
-    <!-- Anuncios TESTE-->
-    <!--string name="anuncioBanner1">/6499/example/banner</string-->
-    <string name="anuncioBanner1">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="anuncioBanner2">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="anuncioIntersticial1">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="anuncioIntersticial2">ca-app-pub-3940256099942544/1033173712</string>
     <string name="deletarJogador">Deletar Jogador</string>
     <string name="addJogador">Add Jogador</string>
     <string name="title_activity_artilharia">Artilharia</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <!-- Tela de Cartões -->
     <string name="cartoes">Cartões</string>
-    <string name="title_activity_cartoes">Cartoes</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_cartoes">Cartões</string>
     <string name="adicionarCartaoAmarelo">Adicionar Cartão Amarelo</string>
     <string name="removerCartaoAmarelo">Remover Cartão Amarelo</string>
     <string name="adicionarCartaoVermelho">Adicionar Cartão Vermelho</string>
     <string name="removerCartaoVermelho">Remover Cartão Vermelho</string>
 
-
-    <!-- Anuncios >
+    <!-- Anuncios TESTE-->
+    <!--string name="anuncioBanner1">/6499/example/banner</string>
+    <string name="anuncioBanner1">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="anuncioBanner2">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="anuncioIntersticial1">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="anuncioIntersticial2">ca-app-pub-3940256099942544/1033173712</string-->
+    <!-- Anuncios -->
     <string name="anuncioBanner1">ca-app-pub-5291707701088051/7893286011</string>
     <string name="anuncioBanner2">ca-app-pub-5291707701088051/5091812529</string>
     <string name="anuncioIntersticial1">ca-app-pub-5291707701088051/4772314564</string>
-    <string name="anuncioIntersticial2">ca-app-pub-5291707701088051/6567013470</string-->
+    <string name="anuncioIntersticial2">ca-app-pub-5291707701088051/6567013470</string>
+    <string name="first_fragment_label" />
 </resources>

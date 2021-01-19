@@ -28,7 +28,7 @@ public class CadastrarJogador extends AppCompatActivity {
 
     Jogador jogador;
 
-    Equipe equipe, equipeSelecionada;
+    Equipe equipeSelecionada;
 
     EquipeController equipeController;
 
@@ -44,7 +44,7 @@ public class CadastrarJogador extends AppCompatActivity {
 
     ArrayList<Equipe> listaEquipes;
 
-    int ultimoID, equipeID, qtdJogadores, idEquipeSelecionada;
+    int ultimoID, qtdJogadores, idEquipeSelecionada;
 
     String telaAnterior;
 
@@ -139,55 +139,77 @@ public class CadastrarJogador extends AppCompatActivity {
 
         if (validarFormulario()) {
 
-            equipeSelecionada = new Equipe();
-            equipeSelecionada = (Equipe) spinnerEquipes.getSelectedItem();
-            idEquipeSelecionada = equipeSelecionada.getId();
+            if(verificaSeJogadorCadastrado()) {
 
-            jogador = new Jogador();
-            jogadorController = new JogadorController(getApplicationContext());
+                equipeSelecionada = new Equipe();
+                equipeSelecionada = (Equipe) spinnerEquipes.getSelectedItem();
+                idEquipeSelecionada = equipeSelecionada.getId();
 
-            jogador.setEquipeId(idEquipeSelecionada);
-            jogador.setNome(editNome.getText().toString());
-            jogador.setNumero(editNumero.getText().toString());
-            jogador.setGols(Integer.parseInt(editGols.getText().toString()));
-            jogador.setCartaoAmarelo(Integer.parseInt(editCartoesAmarelos.getText().toString()));
-            jogador.setCartaoVermelho(Integer.parseInt(editCartoesVermelhos.getText().toString()));
+                jogador = new Jogador();
 
-            if (jogadorController.incluir(jogador)) {
+                jogador.setEquipeId(idEquipeSelecionada);
+                jogador.setNome(editNome.getText().toString());
+                jogador.setNumero(editNumero.getText().toString());
+                jogador.setGols(Integer.parseInt(editGols.getText().toString()));
+                jogador.setCartaoAmarelo(Integer.parseInt(editCartoesAmarelos.getText().toString()));
+                jogador.setCartaoVermelho(Integer.parseInt(editCartoesVermelhos.getText().toString()));
 
-                ultimoID = jogadorController.getUltimoID();
+                if (jogadorController.incluir(jogador)) {
 
-                qtdJogadores += +1;
+                    ultimoID = jogadorController.getUltimoID();
 
-                salvarSharedPreferences();
+                    qtdJogadores += +1;
 
-                Toast.makeText(this, "Cadastro concluído!", Toast.LENGTH_SHORT).show();
+                    salvarSharedPreferences();
 
-                if (!telaAnterior.isEmpty()) {
-                    if (telaAnterior == "artilharia") {
-                        Intent intent = new Intent(CadastrarJogador.this, Artilharia.class);
-                        startActivity(intent);
-                        finish();
-                        return;
-                    } else {
-                        Intent intent = new Intent(CadastrarJogador.this, Cartoes.class);
-                        startActivity(intent);
-                        finish();
-                        return;
+                    Toast.makeText(this, "Cadastro concluído!", Toast.LENGTH_SHORT).show();
+
+                    if (!telaAnterior.isEmpty()) {
+                        if (telaAnterior.equals("artilharia")) {
+                            //limparTelaAnterior();
+                            Intent intent = new Intent(CadastrarJogador.this, Artilharia.class);
+                            startActivity(intent);
+                            finish();
+                            return;
+                        } else {
+                            Intent intent = new Intent(CadastrarJogador.this, Cartoes.class);
+                            startActivity(intent);
+                            finish();
+                            return;
+                        }
                     }
+                } else {
+
+                    Toast.makeText(this, "Não foi possível concluir o adastro!", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(CadastrarJogador.this, Artilharia.class);
+                    startActivity(intent);
+                    finish();
+                    return;
                 }
-            } else {
-
-                Toast.makeText(this, "Não foi possível concluir o adastro!", Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(CadastrarJogador.this, Artilharia.class);
-                startActivity(intent);
-                finish();
-                return;
             }
+            else
+                Toast.makeText(this, "Esse jogador já está cadastrado!", Toast.LENGTH_SHORT).show();
 
         } else
             Toast.makeText(this, "Favor, preencher todos os campos!", Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean verificaSeJogadorCadastrado() {
+        boolean result = false;
+        jogadorController = new JogadorController(getApplicationContext());
+        ArrayList<Jogador> lista = jogadorController.listarTodosJogadores();
+
+        if (lista.size() == 0) {
+            result = true;
+        } else {
+            for (int i = 0; i < lista.size(); i++) {
+                if ((lista.get(i).getNome().equals(editNome.getText().toString())) && (lista.get(i).getNumero().equals(editNumero.getText().toString()))) {
+                    return result;
+                } else result = true;
+            }
+        }
+        return result;
     }
 
     public void popularSpinner() {

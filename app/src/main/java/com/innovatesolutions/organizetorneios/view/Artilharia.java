@@ -37,16 +37,9 @@ public class Artilharia extends AppCompatActivity {
 
     JogadorController jogadorController;
 
-    Equipe equipe;
-
-    EquipeController equipeController;
-
     ArrayList<Jogador> dataSet;
 
     ListView listView;
-
-    boolean possuiJogadores;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

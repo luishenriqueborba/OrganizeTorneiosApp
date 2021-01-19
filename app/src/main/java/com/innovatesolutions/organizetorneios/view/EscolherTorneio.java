@@ -190,7 +190,7 @@ public class EscolherTorneio extends AppCompatActivity {
 
     private void verificaTorneioAnterior() {
 
-        if (nomeEquipe1 != "") {
+        if (!nomeEquipe1.equals("")) {
 
             new FancyAlertDialog.Builder(this)
                     .setTitle("ATENÇÃO")
@@ -274,6 +274,8 @@ public class EscolherTorneio extends AppCompatActivity {
         dados.putString("nomeGrupo2", "");
         dados.putString("nomeGrupo3", "");
         dados.putString("nomeGrupo4", "");
+        dados.putInt("qtdJogadores", 0);
+        dados.putString("telaAnterior", "");
         dados.putBoolean("finalizouPrimeiraFase", false);
         dados.putBoolean("finalizouQuartas", false);
         dados.putBoolean("finalizouSemi", false);

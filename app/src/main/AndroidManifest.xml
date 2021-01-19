@@ -12,10 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".view.Cartoes"
-            android:label="@string/title_activity_cartoes"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
         <!--
         meta-data
             android:name="com.google.android.gms.ads.AD_MANAGER_APP"
@@ -52,6 +48,10 @@
             android:name=".view.Artilharia"
             android:label="@string/title_activity_artilharia"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Cartoes"
+            android:label="@string/title_activity_cartoes"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".view.CadastrarJogador" />
         <activity android:name=".view.Backup" />
         <activity android:name=".view.Final" />

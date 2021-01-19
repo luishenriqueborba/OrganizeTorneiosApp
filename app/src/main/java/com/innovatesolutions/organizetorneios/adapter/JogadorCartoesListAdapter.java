@@ -2,6 +2,7 @@ package com.innovatesolutions.organizetorneios.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.view.LayoutInflater;
@@ -123,7 +124,29 @@ public class JogadorCartoesListAdapter extends ArrayAdapter<Jogador> implements 
 
             case R.id.imgRemoverCartaoAmarelo:
 
-                jogador.setCartaoAmarelo(jogador.getCartaoAmarelo() - 1);
+                if (jogador.getCartaoAmarelo() > 0) {
+
+                    jogador.setCartaoAmarelo(jogador.getCartaoAmarelo() - 1);
+
+                    if (jogadorController.alterar(jogador)) {
+
+                        atualizarLista(jogadorController.listarTodosJogadores());
+
+                        notifyDataSetChanged();
+
+                        if (dados == null) {
+
+                            salvarSharedPreferences();
+                        }
+
+                    } else
+                        Toast.makeText(context, "Não foi possível fazer a alteração!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+            case R.id.imgAdicionarCartaoVermelho:
+
+                jogador.setCartaoVermelho(jogador.getCartaoVermelho() + 1);
 
                 if (jogadorController.alterar(jogador)) {
 
@@ -140,8 +163,30 @@ public class JogadorCartoesListAdapter extends ArrayAdapter<Jogador> implements 
                     Toast.makeText(context, "Não foi possível fazer a alteração!", Toast.LENGTH_SHORT).show();
                 break;
 
+            case R.id.imgRemoverCartaoVermelho:
+
+                if (jogador.getCartaoVermelho() > 0) {
+
+                    jogador.setCartaoVermelho(jogador.getCartaoVermelho() - 1);
+
+                    if (jogadorController.alterar(jogador)) {
+
+                        atualizarLista(jogadorController.listarTodosJogadores());
+
+                        notifyDataSetChanged();
+
+                        if (dados == null) {
+
+                            salvarSharedPreferences();
+                        }
+
+                    } else
+                        Toast.makeText(context, "Não foi possível fazer a alteração!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+
             case R.id.imgDeletarJogador:
-                /**builder = new AlertDialog.Builder(getContext());
+                 /**builder = new AlertDialog.Builder(getContext());
                  builder.setTitle("ALERTA");
                  builder.setMessage("Realmente deseja DELETAR essa equipe?");
                  builder.setCancelable(true);
@@ -268,7 +313,7 @@ public class JogadorCartoesListAdapter extends ArrayAdapter<Jogador> implements 
     private void restaurarSharedPreferences() {
 
         preferences = getContext().getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
-        qtdJogadores = preferences.getInt("qtdJogadores", -1);
+        qtdJogadores = preferences.getInt("qtdJogadores", 0);
 
     }
 

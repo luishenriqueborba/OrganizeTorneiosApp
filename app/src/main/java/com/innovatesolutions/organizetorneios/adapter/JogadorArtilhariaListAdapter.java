@@ -121,21 +121,24 @@ public class JogadorArtilhariaListAdapter extends ArrayAdapter<Jogador> implemen
 
             case R.id.imgRemoverGol:
 
-                jogador.setGols(jogador.getGols() - 1);
+                if (jogador.getGols() > 0) {
 
-                if (jogadorController.alterar(jogador)) {
+                    jogador.setGols(jogador.getGols() - 1);
 
-                    atualizarLista(jogadorController.listarTodosJogadores());
+                    if (jogadorController.alterar(jogador)) {
 
-                    notifyDataSetChanged();
+                        atualizarLista(jogadorController.listarTodosJogadores());
 
-                    if (dados == null) {
+                        notifyDataSetChanged();
 
-                        salvarSharedPreferences();
-                    }
+                        if (dados == null) {
 
-                } else
-                    Toast.makeText(context, "Não foi possível fazer a alteração!", Toast.LENGTH_SHORT).show();
+                            salvarSharedPreferences();
+                        }
+
+                    } else
+                        Toast.makeText(context, "Não foi possível fazer a alteração!", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.imgDeletarJogador:
@@ -260,7 +263,7 @@ public class JogadorArtilhariaListAdapter extends ArrayAdapter<Jogador> implemen
     private void restaurarSharedPreferences() {
 
         preferences = getContext().getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
-        qtdJogadores = preferences.getInt("qtdJogadores", -1);
+        qtdJogadores = preferences.getInt("qtdJogadores", 0);
 
     }
 

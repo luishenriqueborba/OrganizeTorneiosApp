@@ -8,8 +8,8 @@ android {
         applicationId "com.innovatesolutions.organizetorneios"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 9
-        versionName "9.0"
+        versionCode 11
+        versionName "9.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

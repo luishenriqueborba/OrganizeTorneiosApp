@@ -184,7 +184,7 @@ public class Dashboard extends AppCompatActivity {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         qtdEquipes = preferences.getInt("qtdEquipes", -1);
         finalizouPrimeiraFase = preferences.getBoolean("finalizouPrimeiraFase", false);
-        qtdJogadores = preferences.getInt("qtdJogadores", -1);
+        qtdJogadores = preferences.getInt("qtdJogadores", 0);
 
     }
 
