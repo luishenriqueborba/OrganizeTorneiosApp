@@ -1,11 +1,16 @@
 package com.innovatesolutions.organizetorneios.view;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -19,10 +24,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
-import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.innovatesolutions.organizetorneios.ActionDownloadApk;
 import com.innovatesolutions.organizetorneios.R;
 import com.innovatesolutions.organizetorneios.api.AppUtil;
 import com.innovatesolutions.organizetorneios.controller.EquipeController;
@@ -34,9 +38,15 @@ import com.shashank.sony.fancydialoglib.FancyAlertDialog;
 import com.shashank.sony.fancydialoglib.FancyAlertDialogListener;
 import com.shashank.sony.fancydialoglib.Icon;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Date;
+
 public class JogosPrimeiraFase extends AppCompatActivity {
 
-    private PublisherInterstitialAd mPublisherInterstitialAd;
+    //private PublisherInterstitialAd mPublisherInterstitialAd;
+    String mPath;
+    File fileScreenshot;
 
     TextView txtEquipe1J1, txtEquipe1J2, txtEquipe1J3,
             txtEquipe2J1, txtEquipe2J2, txtEquipe2J3,
@@ -138,9 +148,9 @@ public class JogosPrimeiraFase extends AppCompatActivity {
             }
         });
 
-        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+        /*mPublisherInterstitialAd = new PublisherInterstitialAd(this);
         mPublisherInterstitialAd.setAdUnitId(getString(R.string.anuncioIntersticial2));
-        mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+        mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());*/
 
         restaurarSharedPreferences();
         initFormulario();
@@ -156,22 +166,20 @@ public class JogosPrimeiraFase extends AppCompatActivity {
 
                 if (finalizouPrimeiraFase) {
 
-                    if (mPublisherInterstitialAd.isLoaded()) {
+                    /*if (mPublisherInterstitialAd.isLoaded()) {
                         mPublisherInterstitialAd.show();
 
                         mPublisherInterstitialAd.setAdListener(new AdListener() {
                             @Override
-                            public void onAdClosed() {
+                            public void onAdClosed() {*/
                                 Intent novaTela = new Intent(JogosPrimeiraFase.this, Dashboard.class);
                                 novaTela.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(novaTela);
                                 finish();
                                 return;
-                            }
+                            /*}
 
                         });
-
-
                     } else {
                         Log.d("TAG", "The interstitial wasn't loaded yet.");
 
@@ -180,7 +188,7 @@ public class JogosPrimeiraFase extends AppCompatActivity {
                         startActivity(novaTela);
                         finish();
                         return;
-                    }
+                    }*/
                 }
             }
         });
@@ -1186,6 +1194,101 @@ public class JogosPrimeiraFase extends AppCompatActivity {
 
         return retorno;
     }
+
+    public void shareScreenshot(View view) {
+        if (AppUtil.isAppInstalled(getApplicationContext(), "com.whatsapp") || AppUtil.isAppInstalled(getApplicationContext(), "com.whatsapp.w4b")) {
+            //TODO: Executar print e share
+            takeScreenshot();
+
+            Uri fileUri = Uri.fromFile(new File(mPath));
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.putExtra(Intent.EXTRA_STREAM, fileUri);
+            intent.setType("image/*");
+            startActivity(Intent.createChooser(intent, "Share Image:"));
+        } else {
+            new ActionDownloadApk((Activity) getApplicationContext(), "https://play.google.com/store/apps/details?id=com.whatsapp&hl=pt_BR", "whatsapp");
+        }
+    }
+
+    public void seila(View view) {
+        store(getScreenShot(view), "screenShot");
+        shareImage(fileScreenshot);
+    }
+    public static Bitmap getScreenShot(View view) {
+        View screenView = view.getRootView();
+        screenView.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(screenView.getDrawingCache());
+        screenView.setDrawingCacheEnabled(false);
+        return bitmap;
+    }
+    public void store(Bitmap bm, String fileName){
+        final String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Screenshots";
+        File dir = new File(dirPath);
+        if(!dir.exists())
+            dir.mkdirs();
+        File file = new File(dirPath, fileName);
+        try {
+            FileOutputStream fOut = new FileOutputStream(dir);
+            bm.compress(Bitmap.CompressFormat.PNG, 85, fOut);
+            fOut.flush();
+            fOut.close();
+            this.fileScreenshot = file;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void shareImage(File file){
+        Uri uri = Uri.fromFile(file);
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.setType("image/*");
+
+        intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "");
+        intent.putExtra(android.content.Intent.EXTRA_TEXT, "");
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        try {
+            startActivity(Intent.createChooser(intent, "Share Screenshot"));
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(getApplicationContext(), "No App Available", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /*public Bitmap takeScreenShot(View view) {
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(),
+                view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+        return bitmap;
+    }*/
+
+    private void takeScreenshot() {
+        Date now = new Date();
+        android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
+
+        try {
+            // image naming and path  to include sd card  appending name you choose for file
+            mPath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
+
+            // create bitmap screen capture
+            View v1 = getWindow().getDecorView().getRootView();
+            v1.setDrawingCacheEnabled(true);
+            Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+            v1.setDrawingCacheEnabled(false);
+
+            File imageFile = new File(mPath);
+
+            FileOutputStream outputStream = new FileOutputStream(imageFile);
+            int quality = 100;
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+            outputStream.flush();
+            outputStream.close();
+
+        } catch (Throwable e) {
+            // Several error may come out with file handling or DOM
+            e.printStackTrace();
+        }
+    }
+
 
     public void voltar(View view) {
 
