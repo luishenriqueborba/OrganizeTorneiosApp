@@ -1,5 +1,8 @@
 package com.innovatesolutions.organizetorneios.api;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
@@ -127,5 +130,14 @@ public class AppUtil {
 
         }
         return retorno;
+    }
+
+    public static boolean isAppInstalled(Context context, String packageName) {
+        try {
+            context.getPackageManager().getApplicationInfo(packageName, 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 }
