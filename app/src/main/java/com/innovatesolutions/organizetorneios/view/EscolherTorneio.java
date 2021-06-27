@@ -1,46 +1,37 @@
 package com.innovatesolutions.organizetorneios.view;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdSize;
+//import com.google.android.gms.ads.AdListener;
+//import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
-import com.google.android.gms.ads.doubleclick.PublisherAdView;
-import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+//import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+//import com.google.android.gms.ads.doubleclick.PublisherAdView;
+//import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
 import com.innovatesolutions.organizetorneios.R;
 import com.innovatesolutions.organizetorneios.api.AppUtil;
 import com.innovatesolutions.organizetorneios.model.Usuario;
 import com.shashank.sony.fancydialoglib.FancyAlertDialog;
-import com.shashank.sony.fancydialoglib.FancyAlertDialogListener;
 import com.shashank.sony.fancydialoglib.Icon;
+
+import java.text.MessageFormat;
 
 public class EscolherTorneio extends AppCompatActivity {
 
     private long backPressedTime;
-
-    private PublisherAdView mPublisherAdView;
-
-    private PublisherInterstitialAd mPublisherInterstitialAd;
-
-    Usuario usuario;
-
+    //private PublisherAdView mPublisherAdView;
+    //private PublisherInterstitialAd mPublisherInterstitialAd;
+    private Usuario usuario;
     private SharedPreferences preferences;
-
-    int qtdEquipes;
-
+    private int qtdEquipes;
     String nomeEquipe1;
 
     TextView txtNomeUsuario;
@@ -51,14 +42,10 @@ public class EscolherTorneio extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_escolher_torneio);
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-
-            }
+        MobileAds.initialize(this, initializationStatus -> {
         });
 
-        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+        /*mPublisherInterstitialAd = new PublisherInterstitialAd(this);
         mPublisherInterstitialAd.setAdUnitId(getString(R.string.anuncioIntersticial1));
         mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
 
@@ -66,168 +53,145 @@ public class EscolherTorneio extends AppCompatActivity {
         AdSize adSize = new AdSize(300, 50);
         mPublisherAdView.setAdSizes(adSize);
         PublisherAdRequest adRequest = new PublisherAdRequest.Builder().build();
-        mPublisherAdView.loadAd(adRequest);
+        mPublisherAdView.loadAd(adRequest);*/
 
         initFormulario();
+        restaurarSharedPreferences();
+
+        txtNomeUsuario.setText(MessageFormat.format("Bem vindo, {0}.", usuario.getNome()));
 
         verificaTorneioAnterior();
 
-        btnQuatroEquipes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btnQuatroEquipes.setOnClickListener(view -> {
+            qtdEquipes = 4;
 
-                qtdEquipes = 4;
+            salvarSharedPreferences();
+            AppUtil.goNextScreen(EscolherTorneio.this, CadastrarGrupos.class);
+            finish();
+            /*if (mPublisherInterstitialAd.isLoaded()) {
+                mPublisherInterstitialAd.show();
 
-                salvarSharedPreferences();
+                mPublisherInterstitialAd.setAdListener(new AdListener() {
+                    @Override
+                    public void onAdClosed() {
 
-                if (mPublisherInterstitialAd.isLoaded()) {
-                    mPublisherInterstitialAd.show();
+                        Intent novaTela = new Intent(EscolherTorneio.this, CadastrarGrupos.class);
+                        startActivity(novaTela);
+                        finish();
+                        return;
+                    }
 
-                    mPublisherInterstitialAd.setAdListener(new AdListener() {
-                        @Override
-                        public void onAdClosed() {
-
-                            Intent novaTela = new Intent(EscolherTorneio.this, CadastrarGrupos.class);
-                            startActivity(novaTela);
-                            finish();
-                            return;
-                        }
-
-                    });
+                });
 
 
-                } else {
-                    Log.d("TAG", "The interstitial wasn't loaded yet.");
-
-                    Intent novaTela = new Intent(EscolherTorneio.this, CadastrarGrupos.class);
-                    startActivity(novaTela);
-                    finish();
-                    return;
-                }
-
-            }
-        });
-
-        btnDozeEquipes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                qtdEquipes = 12;
-
-                salvarSharedPreferences();
-
-                if (mPublisherInterstitialAd.isLoaded()) {
-                    mPublisherInterstitialAd.show();
-
-                    mPublisherInterstitialAd.setAdListener(new AdListener() {
-                        @Override
-                        public void onAdClosed() {
-
-                            Intent novaTela = new Intent(EscolherTorneio.this, CadastrarGrupos.class);
-                            startActivity(novaTela);
-                            finish();
-                            return;
-                        }
-
-                    });
-
-                } else {
-                    Log.d("TAG", "The interstitial wasn't loaded yet.");
-
-                    Intent novaTela = new Intent(EscolherTorneio.this, CadastrarGrupos.class);
-                    startActivity(novaTela);
-                    finish();
-                    return;
-                }
-
-            }
-        });
-
-        btnDezesseisEquipes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                qtdEquipes = 16;
-
-                salvarSharedPreferences();
+            } else {
+                Log.d("TAG", "The interstitial wasn't loaded yet.");
 
                 Intent novaTela = new Intent(EscolherTorneio.this, CadastrarGrupos.class);
                 startActivity(novaTela);
                 finish();
                 return;
+            }*/
 
-            }
+        });
+
+        btnDozeEquipes.setOnClickListener(view -> {
+            qtdEquipes = 12;
+
+            salvarSharedPreferences();
+            AppUtil.goNextScreen(EscolherTorneio.this, CadastrarGrupos.class);
+            finish();
+            /*if (mPublisherInterstitialAd.isLoaded()) {
+                mPublisherInterstitialAd.show();
+
+                mPublisherInterstitialAd.setAdListener(new AdListener() {
+                    @Override
+                    public void onAdClosed() {
+
+                        Intent novaTela = new Intent(EscolherTorneio.this, CadastrarGrupos.class);
+                        startActivity(novaTela);
+                        finish();
+                        return;
+                    }
+
+                });
+
+            } else {
+                Log.d("TAG", "The interstitial wasn't loaded yet.");
+
+                Intent novaTela = new Intent(EscolherTorneio.this, CadastrarGrupos.class);
+                startActivity(novaTela);
+                finish();
+                return;
+            }*/
+
+        });
+
+        btnDezesseisEquipes.setOnClickListener(view -> {
+            qtdEquipes = 16;
+
+            salvarSharedPreferences();
+            AppUtil.goNextScreen(EscolherTorneio.this, CadastrarGrupos.class);
+            /*Intent novaTela = new Intent(EscolherTorneio.this, CadastrarGrupos.class);
+            startActivity(novaTela);*/
+            finish();
         });
     }
 
     private void initFormulario() {
-
         txtNomeUsuario = findViewById(R.id.txtNomeUsuario);
         btnQuatroEquipes = findViewById(R.id.btnQuatroEquipes);
         btnDozeEquipes = findViewById(R.id.btnDozeEquipes);
         btnDezesseisEquipes = findViewById(R.id.btnDezesseisEquipes);
 
         usuario = new Usuario();
-
-        restaurarSharedPreferences();
-
-        txtNomeUsuario.setText("Bem vindo, " + usuario.getNome() + ".");
     }
 
     @Override
     public void onBackPressed() {
-
         if (backPressedTime + 2000 > System.currentTimeMillis()) {
             super.onBackPressed();
             finish();
             return;
-        } else {
-            Toast.makeText(this, "Pressione novamente para sair.", Toast.LENGTH_SHORT).show();
         }
+        Toast.makeText(this, "Pressione novamente para sair.", Toast.LENGTH_SHORT).show();
 
         backPressedTime = System.currentTimeMillis();
     }
 
     private void verificaTorneioAnterior() {
-
-        if (!nomeEquipe1.equals("")) {
-
-            new FancyAlertDialog.Builder(this)
-                    .setTitle("ATENÇÃO")
-                    .setBackgroundColor(Color.parseColor("#303F9F"))
-                    .setMessage("Você havia iniciado um torneio anteriormente!\nDeseja continuá-lo?")
-                    .setNegativeBtnText("NÃO")
-                    .setNegativeBtnBackground(Color.parseColor("#FF4081"))
-                    .setPositiveBtnText("SIM")
-                    .setPositiveBtnBackground(Color.parseColor("#4ECA25"))
-                    .isCancellable(true)
-                    .setIcon(R.mipmap.ic_launcher_round, Icon.Visible)
-                    .OnPositiveClicked(new FancyAlertDialogListener() {
-                        @Override
-                        public void OnClick() {
-                            Toast.makeText(getApplicationContext(), "Continue seu torneio...", Toast.LENGTH_SHORT).show();
-
-                            Intent novaTela = new Intent(EscolherTorneio.this, Dashboard.class);
-                            novaTela.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(novaTela);
-                            finish();
-                            return;
-
-                        }
-                    })
-                    .OnNegativeClicked(new FancyAlertDialogListener() {
-                        @Override
-                        public void OnClick() {
-                            Toast.makeText(getApplicationContext(), "OK, inicie um novo torneio...", Toast.LENGTH_SHORT).show();
-
-                        }
-                    })
-                    .build();
+        //if (!nomeEquipe1.equals("")) {
+        if (!TextUtils.isEmpty(nomeEquipe1)) {
+            showFancyAlertDialog();
         }
     }
 
-    private void salvarSharedPreferences() {
+    private void showFancyAlertDialog() {
+        new FancyAlertDialog.Builder(this)
+                .setTitle("ATENÇÃO")
+                .setBackgroundColor(Color.parseColor("#303F9F"))
+                .setMessage("Você havia iniciado um torneio anteriormente!\nDeseja continuá-lo?")
+                .setNegativeBtnText("NÃO")
+                .setNegativeBtnBackground(Color.parseColor("#FF4081"))
+                .setPositiveBtnText("SIM")
+                .setPositiveBtnBackground(Color.parseColor("#4ECA25"))
+                .isCancellable(true)
+                .setIcon(R.mipmap.ic_launcher_round, Icon.Visible)
+                .OnPositiveClicked(() -> {
+                    Toast.makeText(getApplicationContext(), "Continue seu torneio...", Toast.LENGTH_SHORT).show();
 
+                    AppUtil.goNextScreen(EscolherTorneio.this, Dashboard.class);
+                    /*Intent novaTela = new Intent(EscolherTorneio.this, Dashboard.class);
+                    novaTela.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(novaTela);*/
+                    finish();
+                })
+                .OnNegativeClicked(() ->
+                        Toast.makeText(getApplicationContext(), "OK, inicie um novo torneio...", Toast.LENGTH_SHORT).show())
+                .build();
+    }
+
+    private void salvarSharedPreferences() {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
@@ -658,14 +622,12 @@ public class EscolherTorneio extends AppCompatActivity {
         dados.putInt("primeiroGrupoID", -1);
         dados.putInt("primeiroID", -1);
         dados.putString("nomePrimeiro", "");
-
         dados.apply();
-
     }
 
     private void restaurarSharedPreferences() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
+
         usuario.setNome(preferences.getString("nomeUsuario", "NULO"));
         qtdEquipes = preferences.getInt("qtdEquipes", -1);
         nomeEquipe1 = preferences.getString("nomeEquipe1", "");
