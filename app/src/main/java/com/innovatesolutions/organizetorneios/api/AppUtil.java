@@ -1,6 +1,7 @@
 package com.innovatesolutions.organizetorneios.api;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import java.security.MessageDigest;
@@ -27,12 +28,10 @@ public class AppUtil {
      * @return devolve a data atual.
      */
     public static String getDataAtual() {
-
         String dia, mes, ano;
         String dataAtual = "00/00/0000";
 
         try {
-
             Calendar calendar = Calendar.getInstance();
             dia = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
             mes = String.valueOf(calendar.get(Calendar.MONTH) + 1);
@@ -54,9 +53,7 @@ public class AppUtil {
         } catch (Exception e) {
 
         }
-
         return dataAtual;
-
     }
 
     /**
@@ -64,12 +61,10 @@ public class AppUtil {
      */
 
     public static String getHoraAtual() {
-
         String hora, minuto, segundo;
         String horaAtual = "00:00:00";
 
         try {
-
             Calendar calendar = Calendar.getInstance();
 
             int iHora = calendar.get(Calendar.HOUR_OF_DAY);
@@ -85,13 +80,10 @@ public class AppUtil {
 
             return horaAtual;
 
-
         } catch (Exception e) {
 
         }
-
         return horaAtual;
-
     }
 
     /**
@@ -101,13 +93,10 @@ public class AppUtil {
      * @return
      */
     public static String gerarMD5Hash(String password) {
-
         String retorno = "";
 
         if (!password.isEmpty()) {
-
             retorno = "falhou";
-
             try {
                 // Create MD5 Hash
                 MessageDigest digest = MessageDigest.getInstance("MD5");
@@ -121,13 +110,11 @@ public class AppUtil {
                         h = "0" + h;
                     MD5Hash.append(h);
                 }
-
                 return MD5Hash.toString();
 
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
             }
-
         }
         return retorno;
     }
@@ -139,5 +126,10 @@ public class AppUtil {
         } catch (PackageManager.NameNotFoundException e) {
             return false;
         }
+    }
+
+    public static void goNextScreen(Context context, Class<?> cls) {
+        Intent intent = new Intent(context, cls);
+        context.startActivity(intent);
     }
 }

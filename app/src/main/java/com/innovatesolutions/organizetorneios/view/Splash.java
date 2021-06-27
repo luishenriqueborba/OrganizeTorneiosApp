@@ -18,14 +18,11 @@ import com.innovatesolutions.organizetorneios.api.AppUtil;
 
 public class Splash extends AppCompatActivity {
 
-    private SharedPreferences preferences;
-
     private boolean isLembrarSenha = false;
 
     Animation topAnim, bottomAnim;
     ImageView imgLogo, imgInnovate;
     TextView txtTitulo;
-
     String pasta = "fonts/";
     String fontBanger = "Bangers.ttf";
 
@@ -50,36 +47,25 @@ public class Splash extends AppCompatActivity {
         imgInnovate.setAnimation(bottomAnim);
 
         restaurarSharedPreferences();
-
         iniciarAplicativo();
     }
 
     private void iniciarAplicativo() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                Intent novaTela;
-
-                if (isLembrarSenha) {
-                    novaTela = new Intent(Splash.this, EscolherTorneio.class);
-                } else {
-                    novaTela = new Intent(Splash.this, Login.class);
-                }
-
-                startActivity(novaTela);
-                finish();
-                return;
-
+        new Handler().postDelayed(() -> {
+            if (isLembrarSenha) {
+                AppUtil.goNextScreen(Splash.this, EscolherTorneio.class);
+            } else {
+                AppUtil.goNextScreen(Splash.this, Login.class);
             }
+            finish();
+
         }, AppUtil.TIME_SPLASH);
     }
 
     private void restaurarSharedPreferences() {
+        SharedPreferences preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
 
-        preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         isLembrarSenha = preferences.getBoolean("loginAutomatico", false);
-
     }
 
 }
