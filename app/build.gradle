@@ -8,6 +8,7 @@ android {
         applicationId "com.innovatesolutions.organizetorneios"
         minSdkVersion 19
         targetSdkVersion 30
+        multiDexEnabled = true
         versionCode 11
         versionName "9.2"
 
