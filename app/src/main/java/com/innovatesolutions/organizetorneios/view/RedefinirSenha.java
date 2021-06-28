@@ -21,22 +21,14 @@ import com.innovatesolutions.organizetorneios.model.Usuario;
 
 public class RedefinirSenha extends AppCompatActivity {
 
-    Usuario usuario;
-
-    UsuarioController controller;
-
-    AlertDialog.Builder builder;
-    AlertDialog alert;
-
+    private Usuario usuario;
+    private UsuarioController controller;
     private SharedPreferences preferences;
+    private int usuarioID;
+    private String emailUsuario, nomeUsuario;
 
     Button btnRedefinir;
     EditText editNovaSenha, editConfirmacaoNovaSenha;
-    Boolean isFormularioOK;
-
-    int usuarioID;
-
-    String emailUsuario, nomeUsuario, senha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,139 +36,103 @@ public class RedefinirSenha extends AppCompatActivity {
         setContentView(R.layout.activity_redefinir_senha);
 
         initFormulario();
-
+        restaurarSharedPreferences();
     }
 
     private void initFormulario() {
-
         editNovaSenha = findViewById(R.id.editNovaSenha);
         editConfirmacaoNovaSenha = findViewById(R.id.editConfirmacaoNovaSenha);
         btnRedefinir = findViewById(R.id.btnRedefinirSenha);
-        isFormularioOK = false;
 
         controller = new UsuarioController(getApplicationContext());
         usuario = new Usuario();
         usuario.setId(usuarioID);
-
-        restaurarSharedPreferences();
     }
 
     private boolean validarFormulario() {
-
-        boolean retorno = true;
-
         if (TextUtils.isEmpty(editNovaSenha.getText().toString())) {
             editNovaSenha.setError("*");
             editNovaSenha.requestFocus();
-            retorno = false;
+            return false;
         }
-
         if (TextUtils.isEmpty(editConfirmacaoNovaSenha.getText().toString())) {
             editConfirmacaoNovaSenha.setError("*");
             editConfirmacaoNovaSenha.requestFocus();
-            retorno = false;
+            return false;
         }
-
-        return retorno;
+        return true;
     }
 
     public boolean validarSenhasDigitadas() {
+        String senhaA = editNovaSenha.getText().toString();
+        String senhaB = editConfirmacaoNovaSenha.getText().toString();
 
-        boolean retorno = false;
-        String senhaA, senhaB;
-
-        senhaA = editNovaSenha.getText().toString();
-        senhaB = editConfirmacaoNovaSenha.getText().toString();
-
-        retorno = senhaA.equals(senhaB);
-
-        return retorno;
-
+        if (senhaA.equals(senhaB)) {
+            return true;
+        }
+        return false;
     }
 
     public void redefinir(View view) {
-
-        if (isFormularioOK = validarFormulario()) {
-
+        if (validarFormulario()) {
             if (!validarSenhasDigitadas()) {
                 editNovaSenha.setError("*");
                 editConfirmacaoNovaSenha.setError("*");
                 editNovaSenha.requestFocus();
-
-                builder = new AlertDialog.Builder(this);
-                builder.setTitle("ATENÇÃO:");
-                builder.setMessage("As senhas digitadas devem ser iguais, por favor tente novamente.");
-                builder.setCancelable(true);
-                builder.setIcon(R.mipmap.ic_launcher_round);
-
-                builder.setPositiveButton("ENTENDI", new Dialog.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                        dialogInterface.cancel();
-
-                    }
-                });
-
-                alert = builder.create();
-                alert.show();
-
+                showAlertDialog();
             } else {
-
                 usuario = controller.getUsuarioByID(usuario);
-
                 usuario.setId(usuarioID);
                 usuario.setNome(nomeUsuario);
                 usuario.setEmail(emailUsuario);
                 usuario.setSenha(AppUtil.gerarMD5Hash(editNovaSenha.getText().toString()));
 
                 if (controller.alterar(usuario)) {
-
                     salvarSharedPreferences();
-
                     Toast.makeText(getApplicationContext(), "Senha alterada com sucesso!!", Toast.LENGTH_LONG).show();
-                } else
+                } else {
                     Toast.makeText(getApplicationContext(), "Não foi possível alterar sua senha.", Toast.LENGTH_LONG).show();
-
-                Intent novaTela = new Intent(RedefinirSenha.this, Login.class);
-                novaTela.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(novaTela);
+                }
+                AppUtil.goNextScreen(RedefinirSenha.this, Login.class);
                 finish();
-                return;
-
             }
         } else
             Toast.makeText(getApplicationContext(), "Favor, preencher todos os campos!", Toast.LENGTH_SHORT).show();
     }
 
-    private void salvarSharedPreferences() {
+    private void showAlertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("ATENÇÃO:");
+        builder.setMessage("As senhas digitadas devem ser iguais, por favor tente novamente.");
+        builder.setCancelable(true);
+        builder.setIcon(R.mipmap.ic_launcher_round);
+        builder.setPositiveButton("ENTENDI", (dialogInterface, i) ->
+                dialogInterface.cancel());
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 
+    @Override
+    public void onBackPressed() {
+        AppUtil.goNextScreen(RedefinirSenha.this, Login.class);
+        finish();
+    }
+
+    private void salvarSharedPreferences() {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putString("senha", usuario.getSenha());
         dados.apply();
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(RedefinirSenha.this, Login.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
-        return;
     }
 
     private void restaurarSharedPreferences() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
 
         usuarioID = preferences.getInt("usuarioID", -1);
         emailUsuario = preferences.getString("emailUsuario", "");
         nomeUsuario = preferences.getString("nomeUsuario", "");
-        senha = preferences.getString("senha", "");
+        //String senha = preferences.getString("senha", "");
     }
 
 }

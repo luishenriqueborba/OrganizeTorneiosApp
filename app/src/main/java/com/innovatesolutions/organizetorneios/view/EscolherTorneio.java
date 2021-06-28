@@ -132,8 +132,6 @@ public class EscolherTorneio extends AppCompatActivity {
 
             salvarSharedPreferences();
             AppUtil.goNextScreen(EscolherTorneio.this, CadastrarGrupos.class);
-            /*Intent novaTela = new Intent(EscolherTorneio.this, CadastrarGrupos.class);
-            startActivity(novaTela);*/
             finish();
         });
     }
