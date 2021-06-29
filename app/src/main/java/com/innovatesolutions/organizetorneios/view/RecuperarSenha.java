@@ -80,5 +80,4 @@ public class RecuperarSenha extends AppCompatActivity {
 
         usuario.setEmail(preferences.getString("emailUsuario", "teste@teste.com"));
     }
-
 }

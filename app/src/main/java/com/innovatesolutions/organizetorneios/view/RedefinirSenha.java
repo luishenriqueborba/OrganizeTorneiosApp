@@ -1,8 +1,5 @@
 package com.innovatesolutions.organizetorneios.view;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -134,5 +131,4 @@ public class RedefinirSenha extends AppCompatActivity {
         nomeUsuario = preferences.getString("nomeUsuario", "");
         //String senha = preferences.getString("senha", "");
     }
-
 }
