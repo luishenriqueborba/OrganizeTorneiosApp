@@ -28,7 +28,7 @@ public class Login extends AppCompatActivity {
     TextView txtCadastrar, txtEsqueceuSenha;
     EditText editSenha, editEmail;
     CheckBox chLembrar;
-    Boolean isFormularioOK, isLembrarSenha;
+    Boolean isLembrarSenha;
     ImageView imgLogo;
 
     @Override
@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity {
         restaurarSharedPreferences();
 
         btnEntrar.setOnClickListener(view -> {
-            if (isFormularioOK = validarFormulario()) {
+            if (validarFormulario()) {
                 if (!validarDadosUsuario()) {
                     editEmail.setError("*");
                     editSenha.setError("*");
@@ -48,22 +48,19 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "O e-mail e/ou senha estão incorretos.", Toast.LENGTH_LONG).show();
                 } else {
                     salvarSharedPreferences();
-                    AppUtil.goNextScreen(Login.this, EscolherTorneio.class);
+                    AppUtil.goNextScreen(Login.this, EscolherTorneio.class, true);
                     finish();
                 }
-
             }
         });
-        txtCadastrar.setOnClickListener(view ->
-                goNextScreen(CadastrarUsuario.class));
-        txtEsqueceuSenha.setOnClickListener(view ->
-                goNextScreen(RecuperarSenha.class));
-    }
-
-    public void goNextScreen(Class<?> cls) {
-        Intent intent = new Intent(this, cls);
-        startActivity(intent);
-        finish();
+        txtCadastrar.setOnClickListener(view -> {
+            AppUtil.goNextScreen(Login.this, CadastrarUsuario.class, false);
+            finish();
+        });
+        txtEsqueceuSenha.setOnClickListener(view -> {
+            AppUtil.goNextScreen(Login.this, RecuperarSenha.class, false);
+            finish();
+        });
     }
 
     private boolean validarFormulario() {
@@ -91,7 +88,6 @@ public class Login extends AppCompatActivity {
         editSenha = findViewById(R.id.editSenhaLogin);
         chLembrar = findViewById(R.id.chLembrar);
         imgLogo = findViewById(R.id.imgLogo);
-        isFormularioOK = false;
 
         usuario = new Usuario();
     }

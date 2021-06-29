@@ -62,7 +62,7 @@ public class RecuperarSenha extends AppCompatActivity {
                 editEmailRecuperacaoSenha.requestFocus();
                 Toast.makeText(getApplicationContext(), "E-mail não cadastrado!", Toast.LENGTH_LONG).show();
             } else {
-                AppUtil.goNextScreen(RecuperarSenha.this, RedefinirSenha.class);
+                AppUtil.goNextScreen(RecuperarSenha.this, RedefinirSenha.class, false);
                 finish();
             }
         } else
@@ -71,7 +71,7 @@ public class RecuperarSenha extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AppUtil.goNextScreen(RecuperarSenha.this, Login.class);
+        AppUtil.goNextScreen(RecuperarSenha.this, Login.class, true);
         finish();
     }
 

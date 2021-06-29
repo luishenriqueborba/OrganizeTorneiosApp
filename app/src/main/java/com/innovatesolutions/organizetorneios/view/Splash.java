@@ -52,9 +52,9 @@ public class Splash extends AppCompatActivity {
     private void iniciarAplicativo() {
         new Handler().postDelayed(() -> {
             if (isLembrarSenha) {
-                AppUtil.goNextScreen(Splash.this, EscolherTorneio.class);
+                AppUtil.goNextScreen(Splash.this, EscolherTorneio.class, true);
             } else {
-                AppUtil.goNextScreen(Splash.this, Login.class);
+                AppUtil.goNextScreen(Splash.this, Login.class, true);
             }
             finish();
 

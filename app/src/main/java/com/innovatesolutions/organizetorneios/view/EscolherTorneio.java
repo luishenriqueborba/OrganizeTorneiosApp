@@ -66,7 +66,7 @@ public class EscolherTorneio extends AppCompatActivity {
             qtdEquipes = 4;
 
             salvarSharedPreferences();
-            AppUtil.goNextScreen(EscolherTorneio.this, CadastrarGrupos.class);
+            AppUtil.goNextScreen(EscolherTorneio.this, CadastrarGrupos.class, false);
             finish();
             /*if (mPublisherInterstitialAd.isLoaded()) {
                 mPublisherInterstitialAd.show();
@@ -99,7 +99,7 @@ public class EscolherTorneio extends AppCompatActivity {
             qtdEquipes = 12;
 
             salvarSharedPreferences();
-            AppUtil.goNextScreen(EscolherTorneio.this, CadastrarGrupos.class);
+            AppUtil.goNextScreen(EscolherTorneio.this, CadastrarGrupos.class, false);
             finish();
             /*if (mPublisherInterstitialAd.isLoaded()) {
                 mPublisherInterstitialAd.show();
@@ -131,7 +131,7 @@ public class EscolherTorneio extends AppCompatActivity {
             qtdEquipes = 16;
 
             salvarSharedPreferences();
-            AppUtil.goNextScreen(EscolherTorneio.this, CadastrarGrupos.class);
+            AppUtil.goNextScreen(EscolherTorneio.this, CadastrarGrupos.class, false);
             finish();
         });
     }
@@ -178,10 +178,7 @@ public class EscolherTorneio extends AppCompatActivity {
                 .OnPositiveClicked(() -> {
                     Toast.makeText(getApplicationContext(), "Continue seu torneio...", Toast.LENGTH_SHORT).show();
 
-                    AppUtil.goNextScreen(EscolherTorneio.this, Dashboard.class);
-                    /*Intent novaTela = new Intent(EscolherTorneio.this, Dashboard.class);
-                    novaTela.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(novaTela);*/
+                    AppUtil.goNextScreen(EscolherTorneio.this, Dashboard.class, true);
                     finish();
                 })
                 .OnNegativeClicked(() ->

@@ -38,13 +38,13 @@ public class TermosDeUso extends AppCompatActivity {
     }
 
     public void voltar(View view) {
-        AppUtil.goNextScreen(TermosDeUso.this, CadastrarUsuario.class);
+        AppUtil.goNextScreen(TermosDeUso.this, CadastrarUsuario.class, true);
         finish();
     }
 
     @Override
     public void onBackPressed() {
-        AppUtil.goNextScreen(TermosDeUso.this, CadastrarUsuario.class);
+        AppUtil.goNextScreen(TermosDeUso.this, CadastrarUsuario.class, true);
         finish();
     }
 }

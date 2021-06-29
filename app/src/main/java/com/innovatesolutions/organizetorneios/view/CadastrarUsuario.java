@@ -46,7 +46,7 @@ public class CadastrarUsuario extends AppCompatActivity {
         initFormulario();
 
         txtTermos.setOnClickListener(view -> {
-            AppUtil.goNextScreen(CadastrarUsuario.this, TermosDeUso.class);
+            AppUtil.goNextScreen(CadastrarUsuario.this, TermosDeUso.class, false);
             finish();
         });
 
@@ -152,7 +152,7 @@ public class CadastrarUsuario extends AppCompatActivity {
 
                         Toast.makeText(getApplicationContext(), "Cadastro concluído! Seja bem vindo...", Toast.LENGTH_SHORT).show();
 
-                        AppUtil.goNextScreen(CadastrarUsuario.this, Login.class);
+                        AppUtil.goNextScreen(CadastrarUsuario.this, Login.class, true);
                         finish();
                     }
                 } else {
@@ -196,7 +196,7 @@ public class CadastrarUsuario extends AppCompatActivity {
                 .OnPositiveClicked(() ->
                         Toast.makeText(getApplicationContext(), "Continue seu cadastro...", Toast.LENGTH_SHORT).show())
                 .OnNegativeClicked(() -> {
-                    AppUtil.goNextScreen(CadastrarUsuario.this, Login.class);
+                    AppUtil.goNextScreen(CadastrarUsuario.this, Login.class, true);
                     finish();
                 })
                 .build();
@@ -204,7 +204,7 @@ public class CadastrarUsuario extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AppUtil.goNextScreen(CadastrarUsuario.this, Login.class);
+        AppUtil.goNextScreen(CadastrarUsuario.this, Login.class, true);
         finish();
     }
 

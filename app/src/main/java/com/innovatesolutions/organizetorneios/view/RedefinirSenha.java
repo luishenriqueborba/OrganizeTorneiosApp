@@ -90,7 +90,7 @@ public class RedefinirSenha extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Não foi possível alterar sua senha.", Toast.LENGTH_LONG).show();
                 }
-                AppUtil.goNextScreen(RedefinirSenha.this, Login.class);
+                AppUtil.goNextScreen(RedefinirSenha.this, Login.class, true);
                 finish();
             }
         } else
@@ -111,7 +111,7 @@ public class RedefinirSenha extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AppUtil.goNextScreen(RedefinirSenha.this, Login.class);
+        AppUtil.goNextScreen(RedefinirSenha.this, RecuperarSenha.class, true);
         finish();
     }
 

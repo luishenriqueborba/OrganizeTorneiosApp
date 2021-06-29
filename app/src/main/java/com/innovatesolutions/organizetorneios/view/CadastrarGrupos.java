@@ -1,6 +1,5 @@
 package com.innovatesolutions.organizetorneios.view;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -20,23 +19,13 @@ import com.innovatesolutions.organizetorneios.model.Grupo;
 
 public class CadastrarGrupos extends AppCompatActivity {
 
-    SharedPreferences preferences;
-
-    Equipe equipe1, equipe2, equipe3, equipe4, equipe5, equipe6, equipe7, equipe8, equipe9, equipe10, equipe11, equipe12, equipe13, equipe14, equipe15, equipe16;
-
-    Grupo grupo1, grupo2, grupo3, grupo4;
-
-    EquipeController equipeController;
-
-    GrupoController grupoController;
+    private SharedPreferences preferences;
+    private Equipe equipe1, equipe2, equipe3, equipe4, equipe5, equipe6, equipe7, equipe8, equipe9, equipe10, equipe11, equipe12, equipe13, equipe14, equipe15, equipe16;
+    private Grupo grupo1, grupo2, grupo3, grupo4;
+    private int ultimoID, grupoID, qtdEquipes;
 
     EditText editEquipe1, editEquipe2, editEquipe3, editEquipe4, editEquipe5, editEquipe6, editEquipe7, editEquipe8, editEquipe9, editEquipe10, editEquipe11, editEquipe12, editEquipe13, editEquipe14, editEquipe15, editEquipe16;
-
     Button btnSalvar;
-
-    int ultimoID, grupoID, qtdEquipes;
-
-    Boolean isFormularioOK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,45 +33,31 @@ public class CadastrarGrupos extends AppCompatActivity {
         setContentView(R.layout.activity_cadastrar_grupos_quatro);
 
         restaurarSharedPreferencesQtdEquipes();
-
         switch (qtdEquipes) {
-
             case 4:
                 setContentView(R.layout.activity_cadastrar_grupos_quatro);
                 break;
-
             case 12:
                 setContentView(R.layout.activity_cadastrar_grupos_doze);
                 break;
-
             case 16:
                 setContentView(R.layout.activity_cadastrar_grupos_dezesseis);
                 break;
-
         }
-
         initFormulario();
 
-        btnSalvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                salvarFormulario();
-            }
-        });
+        btnSalvar.setOnClickListener(view ->
+                salvarFormulario());
     }
 
     private void initFormulario() {
-
         if (qtdEquipes == 4) {
-
             editEquipe1 = findViewById(R.id.editEquipe1);
             editEquipe2 = findViewById(R.id.editEquipe2);
             editEquipe3 = findViewById(R.id.editEquipe3);
             editEquipe4 = findViewById(R.id.editEquipe4);
             btnSalvar = findViewById(R.id.btnSalvar);
         } else if (qtdEquipes == 12) {
-
             editEquipe1 = findViewById(R.id.editEquipe1);
             editEquipe2 = findViewById(R.id.editEquipe2);
             editEquipe3 = findViewById(R.id.editEquipe3);
@@ -97,7 +72,6 @@ public class CadastrarGrupos extends AppCompatActivity {
             editEquipe12 = findViewById(R.id.editEquipe12);
             btnSalvar = findViewById(R.id.btnSalvar);
         } else if (qtdEquipes == 16) {
-
             editEquipe1 = findViewById(R.id.editEquipe1);
             editEquipe2 = findViewById(R.id.editEquipe2);
             editEquipe3 = findViewById(R.id.editEquipe3);
@@ -116,22 +90,18 @@ public class CadastrarGrupos extends AppCompatActivity {
             editEquipe16 = findViewById(R.id.editEquipe16);
             btnSalvar = findViewById(R.id.btnSalvar);
         }
-
     }
 
     private void salvarFormulario() {
-
         if (qtdEquipes == 4) {
-
-            if (isFormularioOK = validarFormulario()) {
-
+            if (validarFormulario()) {
                 salvarSharedPreferencesPlacares();
 
                 grupo1 = new Grupo();
                 grupo1.setNome("Grupo A");
 
-                equipeController = new EquipeController(getApplicationContext());
-                grupoController = new GrupoController(getApplicationContext());
+                EquipeController equipeController = new EquipeController(getApplicationContext());
+                GrupoController grupoController = new GrupoController(getApplicationContext());
 
                 grupoController.incluir(grupo1);
                 grupoID = grupoController.getUltimoID();
@@ -169,16 +139,15 @@ public class CadastrarGrupos extends AppCompatActivity {
                 grupo1.setEquipe4(equipe4);
                 salvarSharedPreferencesE4();
 
-                Intent intent = new Intent(CadastrarGrupos.this, Dashboard.class);
+                AppUtil.goNextScreen(CadastrarGrupos.this, Dashboard.class, true);
+                /*Intent intent = new Intent(CadastrarGrupos.this, Dashboard.class);
                 startActivity(intent);
                 finish();
-                return;
+                return;*/
             } else
                 Toast.makeText(getApplicationContext(), "Favor, preencher todos os campos!", Toast.LENGTH_SHORT).show();
         } else if (qtdEquipes == 12) {
-
-            if (isFormularioOK = validarFormulario()) {
-
+            if (validarFormulario()) {
                 salvarSharedPreferencesPlacares();
 
                 grupo1 = new Grupo();
@@ -193,8 +162,8 @@ public class CadastrarGrupos extends AppCompatActivity {
                 grupo4 = new Grupo();
                 grupo4.setNome("Grupo D");
 
-                equipeController = new EquipeController(getApplicationContext());
-                grupoController = new GrupoController(getApplicationContext());
+                EquipeController equipeController = new EquipeController(getApplicationContext());
+                GrupoController grupoController = new GrupoController(getApplicationContext());
 
                 /**
                  * Grupo 1 e Equipes
@@ -323,17 +292,15 @@ public class CadastrarGrupos extends AppCompatActivity {
                 grupo4.setEquipe3(equipe12);
                 salvarSharedPreferencesE12();
 
-                Intent intent = new Intent(CadastrarGrupos.this, Dashboard.class);
+                AppUtil.goNextScreen(CadastrarGrupos.this, Dashboard.class, true);
+                /*Intent intent = new Intent(CadastrarGrupos.this, Dashboard.class);
                 startActivity(intent);
                 finish();
-                return;
-
+                return;*/
             } else
                 Toast.makeText(getApplicationContext(), "Favor, preencher todos os campos!", Toast.LENGTH_SHORT).show();
         } else if (qtdEquipes == 16) {
-
-            if (isFormularioOK = validarFormulario()) {
-
+            if (validarFormulario()) {
                 salvarSharedPreferencesPlacares();
 
                 grupo1 = new Grupo();
@@ -348,8 +315,8 @@ public class CadastrarGrupos extends AppCompatActivity {
                 grupo4 = new Grupo();
                 grupo4.setNome("Grupo D");
 
-                equipeController = new EquipeController(getApplicationContext());
-                grupoController = new GrupoController(getApplicationContext());
+                EquipeController equipeController = new EquipeController(getApplicationContext());
+                GrupoController grupoController = new GrupoController(getApplicationContext());
 
                 /**
                  * Grupo 1 e Equipes
@@ -510,252 +477,214 @@ public class CadastrarGrupos extends AppCompatActivity {
                 grupo4.setEquipe4(equipe16);
                 salvarSharedPreferencesE16();
 
-
-                Intent intent = new Intent(CadastrarGrupos.this, Dashboard.class);
+                AppUtil.goNextScreen(CadastrarGrupos.this, Dashboard.class, true);
+                /*Intent intent = new Intent(CadastrarGrupos.this, Dashboard.class);
                 startActivity(intent);
                 finish();
-                return;
-
+                return;*/
             } else
                 Toast.makeText(getApplicationContext(), "Favor, preencher todos os campos!", Toast.LENGTH_SHORT).show();
         }
     }
 
     private boolean validarFormulario() {
-
-        boolean retorno = true;
-
         if (qtdEquipes == 4) {
-
             if (TextUtils.isEmpty(editEquipe1.getText().toString())) {
                 editEquipe1.setError("*");
                 editEquipe1.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe2.getText().toString())) {
                 editEquipe2.setError("*");
                 editEquipe2.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe3.getText().toString())) {
                 editEquipe3.setError("*");
                 editEquipe3.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe4.getText().toString())) {
                 editEquipe4.setError("*");
                 editEquipe4.requestFocus();
-                retorno = false;
+                return false;
             }
         } else if (qtdEquipes == 12) {
-
             if (TextUtils.isEmpty(editEquipe1.getText().toString())) {
                 editEquipe1.setError("*");
                 editEquipe1.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe2.getText().toString())) {
                 editEquipe2.setError("*");
                 editEquipe2.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe3.getText().toString())) {
                 editEquipe3.setError("*");
                 editEquipe3.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe4.getText().toString())) {
                 editEquipe4.setError("*");
                 editEquipe4.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe5.getText().toString())) {
                 editEquipe5.setError("*");
                 editEquipe5.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe6.getText().toString())) {
                 editEquipe6.setError("*");
                 editEquipe6.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe7.getText().toString())) {
                 editEquipe7.setError("*");
                 editEquipe7.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe8.getText().toString())) {
                 editEquipe8.setError("*");
                 editEquipe8.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe9.getText().toString())) {
                 editEquipe9.setError("*");
                 editEquipe9.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe10.getText().toString())) {
                 editEquipe10.setError("*");
                 editEquipe10.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe11.getText().toString())) {
                 editEquipe11.setError("*");
                 editEquipe11.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe12.getText().toString())) {
                 editEquipe12.setError("*");
                 editEquipe12.requestFocus();
-                retorno = false;
+                return false;
             }
         } else if (qtdEquipes == 16) {
-
             if (TextUtils.isEmpty(editEquipe1.getText().toString())) {
                 editEquipe1.setError("*");
                 editEquipe1.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe2.getText().toString())) {
                 editEquipe2.setError("*");
                 editEquipe2.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe3.getText().toString())) {
                 editEquipe3.setError("*");
                 editEquipe3.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe4.getText().toString())) {
                 editEquipe4.setError("*");
                 editEquipe4.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe5.getText().toString())) {
                 editEquipe5.setError("*");
                 editEquipe5.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe6.getText().toString())) {
                 editEquipe6.setError("*");
                 editEquipe6.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe7.getText().toString())) {
                 editEquipe7.setError("*");
                 editEquipe7.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe8.getText().toString())) {
                 editEquipe8.setError("*");
                 editEquipe8.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe9.getText().toString())) {
                 editEquipe9.setError("*");
                 editEquipe9.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe10.getText().toString())) {
                 editEquipe10.setError("*");
                 editEquipe10.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe11.getText().toString())) {
                 editEquipe11.setError("*");
                 editEquipe11.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe12.getText().toString())) {
                 editEquipe12.setError("*");
                 editEquipe12.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe13.getText().toString())) {
                 editEquipe13.setError("*");
                 editEquipe13.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe14.getText().toString())) {
                 editEquipe14.setError("*");
                 editEquipe14.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe15.getText().toString())) {
                 editEquipe15.setError("*");
                 editEquipe15.requestFocus();
-                retorno = false;
+                return false;
             }
-
             if (TextUtils.isEmpty(editEquipe16.getText().toString())) {
                 editEquipe16.setError("*");
                 editEquipe16.requestFocus();
-                retorno = false;
+                return false;
             }
         }
-
-        return retorno;
+        return true;
     }
 
     public void voltar(View view) {
-
-        Intent intent = new Intent(CadastrarGrupos.this, EscolherTorneio.class);
+        AppUtil.goNextScreen(CadastrarGrupos.this, EscolherTorneio.class, true);
+        finish();
+        /*Intent intent = new Intent(CadastrarGrupos.this, EscolherTorneio.class);
         startActivity(intent);
         finish();
-        return;
+        return;*/
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, EscolherTorneio.class);
+        AppUtil.goNextScreen(CadastrarGrupos.this, EscolherTorneio.class, true);
+        finish();
+        /*Intent intent = new Intent(this, EscolherTorneio.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
-        return;
+        return;*/
     }
 
     private void restaurarSharedPreferencesQtdEquipes() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         qtdEquipes = preferences.getInt("qtdEquipes", -1);
-
     }
 
     private void salvarSharedPreferencesPlacares() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         if (qtdEquipes == 4) {
-
             dados.putString("placarEquipe1J1", "");
             dados.putString("placarEquipe1J2", "");
             dados.putString("placarEquipe1J3", "");
@@ -770,7 +699,6 @@ public class CadastrarGrupos extends AppCompatActivity {
             dados.putString("placarEquipe4J3", "");
             dados.apply();
         } else if (qtdEquipes == 12) {
-
             dados.putString("placarEquipe1J1", "");
             dados.putString("placarEquipe1J2", "");
             dados.putString("placarEquipe2J1", "");
@@ -797,7 +725,6 @@ public class CadastrarGrupos extends AppCompatActivity {
             dados.putString("placarEquipe12J2", "");
             dados.apply();
         } else if (qtdEquipes == 16) {
-
             dados.putString("placarEquipe1J1", "");
             dados.putString("placarEquipe1J2", "");
             dados.putString("placarEquipe1J3", "");
@@ -851,222 +778,182 @@ public class CadastrarGrupos extends AppCompatActivity {
     }
 
     private void salvarSharedPreferencesG1() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("grupo1ID", grupoID);
         dados.putString("nomeGrupo1", grupo1.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesG2() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("grupo2ID", grupoID);
         dados.putString("nomeGrupo2", grupo2.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesG3() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("grupo3ID", grupoID);
         dados.putString("nomeGrupo3", grupo3.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesG4() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("grupo4ID", grupoID);
         dados.putString("nomeGrupo4", grupo4.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesE1() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("equipe1ID", ultimoID);
         dados.putString("nomeEquipe1", equipe1.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesE2() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("equipe2ID", ultimoID);
         dados.putString("nomeEquipe2", equipe2.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesE3() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("equipe3ID", ultimoID);
         dados.putString("nomeEquipe3", equipe3.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesE4() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("equipe4ID", ultimoID);
         dados.putString("nomeEquipe4", equipe4.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesE5() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("equipe5ID", ultimoID);
         dados.putString("nomeEquipe5", equipe5.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesE6() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("equipe6ID", ultimoID);
         dados.putString("nomeEquipe6", equipe6.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesE7() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("equipe7ID", ultimoID);
         dados.putString("nomeEquipe7", equipe7.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesE8() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("equipe8ID", ultimoID);
         dados.putString("nomeEquipe8", equipe8.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesE9() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("equipe9ID", ultimoID);
         dados.putString("nomeEquipe9", equipe9.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesE10() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("equipe10ID", ultimoID);
         dados.putString("nomeEquipe10", equipe10.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesE11() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("equipe11ID", ultimoID);
         dados.putString("nomeEquipe11", equipe11.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesE12() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("equipe12ID", ultimoID);
         dados.putString("nomeEquipe12", equipe12.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesE13() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("equipe13ID", ultimoID);
         dados.putString("nomeEquipe13", equipe13.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesE14() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("equipe14ID", ultimoID);
         dados.putString("nomeEquipe14", equipe14.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesE15() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("equipe15ID", ultimoID);
         dados.putString("nomeEquipe15", equipe15.getNome());
         dados.apply();
-
     }
 
     private void salvarSharedPreferencesE16() {
-
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("equipe16ID", ultimoID);
         dados.putString("nomeEquipe16", equipe16.getNome());
         dados.apply();
-
     }
 }
