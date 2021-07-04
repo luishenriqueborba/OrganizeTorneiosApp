@@ -16,6 +16,7 @@ import com.innovatesolutions.organizetorneios.controller.EquipeController;
 import com.innovatesolutions.organizetorneios.controller.GrupoController;
 import com.innovatesolutions.organizetorneios.model.Equipe;
 import com.innovatesolutions.organizetorneios.model.Grupo;
+import com.innovatesolutions.organizetorneios.model.Torneio;
 
 public class CadastrarGrupos extends AppCompatActivity {
 
@@ -34,13 +35,13 @@ public class CadastrarGrupos extends AppCompatActivity {
 
         restaurarSharedPreferencesQtdEquipes();
         switch (qtdEquipes) {
-            case 4:
+            case Torneio.TORNEIO_QUATRO_EQUIPES:
                 setContentView(R.layout.activity_cadastrar_grupos_quatro);
                 break;
-            case 12:
+            case Torneio.TORNEIO_DOZE_EQUIPES:
                 setContentView(R.layout.activity_cadastrar_grupos_doze);
                 break;
-            case 16:
+            case Torneio.TORNEIO_DEZESSEIS_EQUIPES:
                 setContentView(R.layout.activity_cadastrar_grupos_dezesseis);
                 break;
         }
@@ -51,17 +52,11 @@ public class CadastrarGrupos extends AppCompatActivity {
     }
 
     private void initFormulario() {
-        if (qtdEquipes == 4) {
-            editEquipe1 = findViewById(R.id.editEquipe1);
-            editEquipe2 = findViewById(R.id.editEquipe2);
-            editEquipe3 = findViewById(R.id.editEquipe3);
-            editEquipe4 = findViewById(R.id.editEquipe4);
-            btnSalvar = findViewById(R.id.btnSalvar);
-        } else if (qtdEquipes == 12) {
-            editEquipe1 = findViewById(R.id.editEquipe1);
-            editEquipe2 = findViewById(R.id.editEquipe2);
-            editEquipe3 = findViewById(R.id.editEquipe3);
-            editEquipe4 = findViewById(R.id.editEquipe4);
+        editEquipe1 = findViewById(R.id.editEquipe1);
+        editEquipe2 = findViewById(R.id.editEquipe2);
+        editEquipe3 = findViewById(R.id.editEquipe3);
+        editEquipe4 = findViewById(R.id.editEquipe4);
+        if (qtdEquipes > Torneio.TORNEIO_QUATRO_EQUIPES) {
             editEquipe5 = findViewById(R.id.editEquipe5);
             editEquipe6 = findViewById(R.id.editEquipe6);
             editEquipe7 = findViewById(R.id.editEquipe7);
@@ -70,67 +65,57 @@ public class CadastrarGrupos extends AppCompatActivity {
             editEquipe10 = findViewById(R.id.editEquipe10);
             editEquipe11 = findViewById(R.id.editEquipe11);
             editEquipe12 = findViewById(R.id.editEquipe12);
-            btnSalvar = findViewById(R.id.btnSalvar);
-        } else if (qtdEquipes == 16) {
-            editEquipe1 = findViewById(R.id.editEquipe1);
-            editEquipe2 = findViewById(R.id.editEquipe2);
-            editEquipe3 = findViewById(R.id.editEquipe3);
-            editEquipe4 = findViewById(R.id.editEquipe4);
-            editEquipe5 = findViewById(R.id.editEquipe5);
-            editEquipe6 = findViewById(R.id.editEquipe6);
-            editEquipe7 = findViewById(R.id.editEquipe7);
-            editEquipe8 = findViewById(R.id.editEquipe8);
-            editEquipe9 = findViewById(R.id.editEquipe9);
-            editEquipe10 = findViewById(R.id.editEquipe10);
-            editEquipe11 = findViewById(R.id.editEquipe11);
-            editEquipe12 = findViewById(R.id.editEquipe12);
+        }
+        if (qtdEquipes > Torneio.TORNEIO_DOZE_EQUIPES) {
             editEquipe13 = findViewById(R.id.editEquipe13);
             editEquipe14 = findViewById(R.id.editEquipe14);
             editEquipe15 = findViewById(R.id.editEquipe15);
             editEquipe16 = findViewById(R.id.editEquipe16);
-            btnSalvar = findViewById(R.id.btnSalvar);
         }
+        btnSalvar = findViewById(R.id.btnSalvar);
     }
 
     private void salvarFormulario() {
-        if (qtdEquipes == 4) {
-            if (validarFormulario()) {
-                salvarSharedPreferencesPlacares();
+        if (validarFormulario()) {
+            salvarSharedPreferencesPlacares();
 
-                grupo1 = new Grupo();
-                grupo1.setNome("Grupo A");
+            EquipeController equipeController = new EquipeController(getApplicationContext());
+            GrupoController grupoController = new GrupoController(getApplicationContext());
 
-                EquipeController equipeController = new EquipeController(getApplicationContext());
-                GrupoController grupoController = new GrupoController(getApplicationContext());
+            grupo1 = new Grupo();
+            grupo1.setNome("Grupo A");
+            /**
+             * Grupo 1 e Equipes
+             */
+            grupoController.incluir(grupo1);
+            grupoID = grupoController.getUltimoID();
+            salvarSharedPreferencesG1();
 
-                grupoController.incluir(grupo1);
-                grupoID = grupoController.getUltimoID();
-                salvarSharedPreferencesG1();
+            equipe1 = new Equipe();
+            equipe1.setNome(editEquipe1.getText().toString());
+            equipe1.setGrupoID(grupoID);
+            equipeController.incluir(equipe1);
+            ultimoID = equipeController.getUltimoID();
+            grupo1.setEquipe1(equipe1);
+            salvarSharedPreferencesE1();
 
-                equipe1 = new Equipe();
-                equipe1.setNome(editEquipe1.getText().toString());
-                equipe1.setGrupoID(grupoID);
-                equipeController.incluir(equipe1);
-                ultimoID = equipeController.getUltimoID();
-                grupo1.setEquipe1(equipe1);
-                salvarSharedPreferencesE1();
+            equipe2 = new Equipe();
+            equipe2.setNome(editEquipe2.getText().toString());
+            equipe2.setGrupoID(grupoID);
+            equipeController.incluir(equipe2);
+            ultimoID = equipeController.getUltimoID();
+            grupo1.setEquipe2(equipe2);
+            salvarSharedPreferencesE2();
 
-                equipe2 = new Equipe();
-                equipe2.setNome(editEquipe2.getText().toString());
-                equipe2.setGrupoID(grupoID);
-                equipeController.incluir(equipe2);
-                ultimoID = equipeController.getUltimoID();
-                grupo1.setEquipe2(equipe2);
-                salvarSharedPreferencesE2();
+            equipe3 = new Equipe();
+            equipe3.setNome(editEquipe3.getText().toString());
+            equipe3.setGrupoID(grupoID);
+            equipeController.incluir(equipe3);
+            ultimoID = equipeController.getUltimoID();
+            grupo1.setEquipe3(equipe3);
+            salvarSharedPreferencesE3();
 
-                equipe3 = new Equipe();
-                equipe3.setNome(editEquipe3.getText().toString());
-                equipe3.setGrupoID(grupoID);
-                equipeController.incluir(equipe3);
-                ultimoID = equipeController.getUltimoID();
-                grupo1.setEquipe3(equipe3);
-                salvarSharedPreferencesE3();
-
+            if (qtdEquipes == Torneio.TORNEIO_QUATRO_EQUIPES || qtdEquipes == Torneio.TORNEIO_DEZESSEIS_EQUIPES) {
                 equipe4 = new Equipe();
                 equipe4.setNome(editEquipe4.getText().toString());
                 equipe4.setGrupoID(grupoID);
@@ -138,21 +123,8 @@ public class CadastrarGrupos extends AppCompatActivity {
                 ultimoID = equipeController.getUltimoID();
                 grupo1.setEquipe4(equipe4);
                 salvarSharedPreferencesE4();
-
-                AppUtil.goNextScreen(CadastrarGrupos.this, Dashboard.class, true);
-                /*Intent intent = new Intent(CadastrarGrupos.this, Dashboard.class);
-                startActivity(intent);
-                finish();
-                return;*/
-            } else
-                Toast.makeText(getApplicationContext(), "Favor, preencher todos os campos!", Toast.LENGTH_SHORT).show();
-        } else if (qtdEquipes == 12) {
-            if (validarFormulario()) {
-                salvarSharedPreferencesPlacares();
-
-                grupo1 = new Grupo();
-                grupo1.setNome("Grupo A");
-
+            }
+            if (qtdEquipes == Torneio.TORNEIO_DOZE_EQUIPES || qtdEquipes == Torneio.TORNEIO_DEZESSEIS_EQUIPES) {
                 grupo2 = new Grupo();
                 grupo2.setNome("Grupo B");
 
@@ -162,374 +134,247 @@ public class CadastrarGrupos extends AppCompatActivity {
                 grupo4 = new Grupo();
                 grupo4.setNome("Grupo D");
 
-                EquipeController equipeController = new EquipeController(getApplicationContext());
-                GrupoController grupoController = new GrupoController(getApplicationContext());
+                if (qtdEquipes == Torneio.TORNEIO_DOZE_EQUIPES) {
+                    /**
+                     * Grupo 2 e Equipes
+                     */
+                    grupoController.incluir(grupo2);
+                    grupoID = grupoController.getUltimoID();
+                    salvarSharedPreferencesG2();
 
-                /**
-                 * Grupo 1 e Equipes
-                 */
-                grupoController.incluir(grupo1);
-                grupoID = grupoController.getUltimoID();
-                salvarSharedPreferencesG1();
+                    equipe4 = new Equipe();
+                    equipe4.setNome(editEquipe4.getText().toString());
+                    equipe4.setGrupoID(grupoID);
+                    equipeController.incluir(equipe4);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo2.setEquipe1(equipe4);
+                    salvarSharedPreferencesE4();
 
-                equipe1 = new Equipe();
-                equipe1.setNome(editEquipe1.getText().toString());
-                equipe1.setGrupoID(grupoID);
-                equipeController.incluir(equipe1);
-                ultimoID = equipeController.getUltimoID();
-                grupo1.setEquipe1(equipe1);
-                salvarSharedPreferencesE1();
+                    equipe5 = new Equipe();
+                    equipe5.setNome(editEquipe5.getText().toString());
+                    equipe5.setGrupoID(grupoID);
+                    equipeController.incluir(equipe5);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo2.setEquipe2(equipe5);
+                    salvarSharedPreferencesE5();
 
-                equipe2 = new Equipe();
-                equipe2.setNome(editEquipe2.getText().toString());
-                equipe2.setGrupoID(grupoID);
-                equipeController.incluir(equipe2);
-                ultimoID = equipeController.getUltimoID();
-                grupo1.setEquipe2(equipe2);
-                salvarSharedPreferencesE2();
+                    equipe6 = new Equipe();
+                    equipe6.setNome(editEquipe6.getText().toString());
+                    equipe6.setGrupoID(grupoID);
+                    equipeController.incluir(equipe6);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo2.setEquipe3(equipe6);
+                    salvarSharedPreferencesE6();
 
-                equipe3 = new Equipe();
-                equipe3.setNome(editEquipe3.getText().toString());
-                equipe3.setGrupoID(grupoID);
-                equipeController.incluir(equipe3);
-                ultimoID = equipeController.getUltimoID();
-                grupo1.setEquipe3(equipe3);
-                salvarSharedPreferencesE3();
+                    /**
+                     * Grupo 3 e Equipes
+                     */
+                    grupoController.incluir(grupo3);
+                    grupoID = grupoController.getUltimoID();
+                    salvarSharedPreferencesG3();
 
+                    equipe7 = new Equipe();
+                    equipe7.setNome(editEquipe7.getText().toString());
+                    equipe7.setGrupoID(grupoID);
+                    equipeController.incluir(equipe7);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo3.setEquipe1(equipe7);
+                    salvarSharedPreferencesE7();
 
-                /**
-                 * Grupo 2 e Equipes
-                 */
-                grupoController.incluir(grupo2);
-                grupoID = grupoController.getUltimoID();
-                salvarSharedPreferencesG2();
+                    equipe8 = new Equipe();
+                    equipe8.setNome(editEquipe8.getText().toString());
+                    equipe8.setGrupoID(grupoID);
+                    equipeController.incluir(equipe8);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo3.setEquipe2(equipe8);
+                    salvarSharedPreferencesE8();
 
-                equipe4 = new Equipe();
-                equipe4.setNome(editEquipe4.getText().toString());
-                equipe4.setGrupoID(grupoID);
-                equipeController.incluir(equipe4);
-                ultimoID = equipeController.getUltimoID();
-                grupo2.setEquipe1(equipe4);
-                salvarSharedPreferencesE4();
+                    equipe9 = new Equipe();
+                    equipe9.setNome(editEquipe9.getText().toString());
+                    equipe9.setGrupoID(grupoID);
+                    equipeController.incluir(equipe9);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo3.setEquipe3(equipe9);
+                    salvarSharedPreferencesE9();
 
-                equipe5 = new Equipe();
-                equipe5.setNome(editEquipe5.getText().toString());
-                equipe5.setGrupoID(grupoID);
-                equipeController.incluir(equipe5);
-                ultimoID = equipeController.getUltimoID();
-                grupo2.setEquipe2(equipe5);
-                salvarSharedPreferencesE5();
+                    /**
+                     * Grupo 4 e Equipes
+                     */
+                    grupoController.incluir(grupo4);
+                    grupoID = grupoController.getUltimoID();
+                    salvarSharedPreferencesG4();
 
-                equipe6 = new Equipe();
-                equipe6.setNome(editEquipe6.getText().toString());
-                equipe6.setGrupoID(grupoID);
-                equipeController.incluir(equipe6);
-                ultimoID = equipeController.getUltimoID();
-                grupo2.setEquipe3(equipe6);
-                salvarSharedPreferencesE6();
+                    equipe10 = new Equipe();
+                    equipe10.setNome(editEquipe10.getText().toString());
+                    equipe10.setGrupoID(grupoID);
+                    equipeController.incluir(equipe10);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo4.setEquipe1(equipe10);
+                    salvarSharedPreferencesE10();
 
+                    equipe11 = new Equipe();
+                    equipe11.setNome(editEquipe11.getText().toString());
+                    equipe11.setGrupoID(grupoID);
+                    equipeController.incluir(equipe11);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo4.setEquipe2(equipe11);
+                    salvarSharedPreferencesE11();
 
-                /**
-                 * Grupo 3 e Equipes
-                 */
-                grupoController.incluir(grupo3);
-                grupoID = grupoController.getUltimoID();
-                salvarSharedPreferencesG3();
+                    equipe12 = new Equipe();
+                    equipe12.setNome(editEquipe12.getText().toString());
+                    equipe12.setGrupoID(grupoID);
+                    equipeController.incluir(equipe12);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo4.setEquipe3(equipe12);
+                    salvarSharedPreferencesE12();
+                } else if (qtdEquipes == Torneio.TORNEIO_DEZESSEIS_EQUIPES) {
+                    /**
+                     * Grupo 2 e Equipes
+                     */
+                    grupoController.incluir(grupo2);
+                    grupoID = grupoController.getUltimoID();
+                    salvarSharedPreferencesG2();
 
-                equipe7 = new Equipe();
-                equipe7.setNome(editEquipe7.getText().toString());
-                equipe7.setGrupoID(grupoID);
-                equipeController.incluir(equipe7);
-                ultimoID = equipeController.getUltimoID();
-                grupo3.setEquipe1(equipe7);
-                salvarSharedPreferencesE7();
+                    equipe5 = new Equipe();
+                    equipe5.setNome(editEquipe5.getText().toString());
+                    equipe5.setGrupoID(grupoID);
+                    equipeController.incluir(equipe5);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo2.setEquipe1(equipe5);
+                    salvarSharedPreferencesE5();
 
-                equipe8 = new Equipe();
-                equipe8.setNome(editEquipe8.getText().toString());
-                equipe8.setGrupoID(grupoID);
-                equipeController.incluir(equipe8);
-                ultimoID = equipeController.getUltimoID();
-                grupo3.setEquipe2(equipe8);
-                salvarSharedPreferencesE8();
+                    equipe6 = new Equipe();
+                    equipe6.setNome(editEquipe6.getText().toString());
+                    equipe6.setGrupoID(grupoID);
+                    equipeController.incluir(equipe6);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo2.setEquipe2(equipe6);
+                    salvarSharedPreferencesE6();
 
-                equipe9 = new Equipe();
-                equipe9.setNome(editEquipe9.getText().toString());
-                equipe9.setGrupoID(grupoID);
-                equipeController.incluir(equipe9);
-                ultimoID = equipeController.getUltimoID();
-                grupo3.setEquipe3(equipe9);
-                salvarSharedPreferencesE9();
+                    equipe7 = new Equipe();
+                    equipe7.setNome(editEquipe7.getText().toString());
+                    equipe7.setGrupoID(grupoID);
+                    equipeController.incluir(equipe7);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo2.setEquipe3(equipe7);
+                    salvarSharedPreferencesE7();
 
+                    equipe8 = new Equipe();
+                    equipe8.setNome(editEquipe8.getText().toString());
+                    equipe8.setGrupoID(grupoID);
+                    equipeController.incluir(equipe8);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo2.setEquipe4(equipe8);
+                    salvarSharedPreferencesE8();
 
-                /**
-                 * Grupo 4 e Equipes
-                 */
-                grupoController.incluir(grupo4);
-                grupoID = grupoController.getUltimoID();
-                salvarSharedPreferencesG4();
+                    /**
+                     * Grupo 3 e Equipes
+                     */
+                    grupoController.incluir(grupo3);
+                    grupoID = grupoController.getUltimoID();
+                    salvarSharedPreferencesG3();
 
-                equipe10 = new Equipe();
-                equipe10.setNome(editEquipe10.getText().toString());
-                equipe10.setGrupoID(grupoID);
-                equipeController.incluir(equipe10);
-                ultimoID = equipeController.getUltimoID();
-                grupo4.setEquipe1(equipe10);
-                salvarSharedPreferencesE10();
+                    equipe9 = new Equipe();
+                    equipe9.setNome(editEquipe9.getText().toString());
+                    equipe9.setGrupoID(grupoID);
+                    equipeController.incluir(equipe9);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo3.setEquipe1(equipe9);
+                    salvarSharedPreferencesE9();
 
-                equipe11 = new Equipe();
-                equipe11.setNome(editEquipe11.getText().toString());
-                equipe11.setGrupoID(grupoID);
-                equipeController.incluir(equipe11);
-                ultimoID = equipeController.getUltimoID();
-                grupo4.setEquipe2(equipe11);
-                salvarSharedPreferencesE11();
+                    equipe10 = new Equipe();
+                    equipe10.setNome(editEquipe10.getText().toString());
+                    equipe10.setGrupoID(grupoID);
+                    equipeController.incluir(equipe10);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo3.setEquipe2(equipe10);
+                    salvarSharedPreferencesE10();
 
-                equipe12 = new Equipe();
-                equipe12.setNome(editEquipe12.getText().toString());
-                equipe12.setGrupoID(grupoID);
-                equipeController.incluir(equipe12);
-                ultimoID = equipeController.getUltimoID();
-                grupo4.setEquipe3(equipe12);
-                salvarSharedPreferencesE12();
+                    equipe11 = new Equipe();
+                    equipe11.setNome(editEquipe11.getText().toString());
+                    equipe11.setGrupoID(grupoID);
+                    equipeController.incluir(equipe11);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo3.setEquipe3(equipe11);
+                    salvarSharedPreferencesE11();
 
-                AppUtil.goNextScreen(CadastrarGrupos.this, Dashboard.class, true);
-                /*Intent intent = new Intent(CadastrarGrupos.this, Dashboard.class);
-                startActivity(intent);
-                finish();
-                return;*/
-            } else
-                Toast.makeText(getApplicationContext(), "Favor, preencher todos os campos!", Toast.LENGTH_SHORT).show();
-        } else if (qtdEquipes == 16) {
-            if (validarFormulario()) {
-                salvarSharedPreferencesPlacares();
+                    equipe12 = new Equipe();
+                    equipe12.setNome(editEquipe12.getText().toString());
+                    equipe12.setGrupoID(grupoID);
+                    equipeController.incluir(equipe12);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo3.setEquipe4(equipe12);
+                    salvarSharedPreferencesE12();
 
-                grupo1 = new Grupo();
-                grupo1.setNome("Grupo A");
+                    /**
+                     * Grupo 4 e Equipes
+                     */
+                    grupoController.incluir(grupo4);
+                    grupoID = grupoController.getUltimoID();
+                    salvarSharedPreferencesG4();
 
-                grupo2 = new Grupo();
-                grupo2.setNome("Grupo B");
+                    equipe13 = new Equipe();
+                    equipe13.setNome(editEquipe13.getText().toString());
+                    equipe13.setGrupoID(grupoID);
+                    equipeController.incluir(equipe13);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo4.setEquipe1(equipe13);
+                    salvarSharedPreferencesE13();
 
-                grupo3 = new Grupo();
-                grupo3.setNome("Grupo C");
+                    equipe14 = new Equipe();
+                    equipe14.setNome(editEquipe14.getText().toString());
+                    equipe14.setGrupoID(grupoID);
+                    equipeController.incluir(equipe14);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo4.setEquipe2(equipe14);
+                    salvarSharedPreferencesE14();
 
-                grupo4 = new Grupo();
-                grupo4.setNome("Grupo D");
+                    equipe15 = new Equipe();
+                    equipe15.setNome(editEquipe15.getText().toString());
+                    equipe15.setGrupoID(grupoID);
+                    equipeController.incluir(equipe15);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo4.setEquipe3(equipe15);
+                    salvarSharedPreferencesE15();
 
-                EquipeController equipeController = new EquipeController(getApplicationContext());
-                GrupoController grupoController = new GrupoController(getApplicationContext());
-
-                /**
-                 * Grupo 1 e Equipes
-                 */
-                grupoController.incluir(grupo1);
-                grupoID = grupoController.getUltimoID();
-                salvarSharedPreferencesG1();
-
-                equipe1 = new Equipe();
-                equipe1.setNome(editEquipe1.getText().toString());
-                equipe1.setGrupoID(grupoID);
-                equipeController.incluir(equipe1);
-                ultimoID = equipeController.getUltimoID();
-                grupo1.setEquipe1(equipe1);
-                salvarSharedPreferencesE1();
-
-                equipe2 = new Equipe();
-                equipe2.setNome(editEquipe2.getText().toString());
-                equipe2.setGrupoID(grupoID);
-                equipeController.incluir(equipe2);
-                ultimoID = equipeController.getUltimoID();
-                grupo1.setEquipe2(equipe2);
-                salvarSharedPreferencesE2();
-
-                equipe3 = new Equipe();
-                equipe3.setNome(editEquipe3.getText().toString());
-                equipe3.setGrupoID(grupoID);
-                equipeController.incluir(equipe3);
-                ultimoID = equipeController.getUltimoID();
-                grupo1.setEquipe3(equipe3);
-                salvarSharedPreferencesE3();
-
-                equipe4 = new Equipe();
-                equipe4.setNome(editEquipe4.getText().toString());
-                equipe4.setGrupoID(grupoID);
-                equipeController.incluir(equipe4);
-                ultimoID = equipeController.getUltimoID();
-                grupo1.setEquipe4(equipe4);
-                salvarSharedPreferencesE4();
-
-
-                /**
-                 * Grupo 2 e Equipes
-                 */
-                grupoController.incluir(grupo2);
-                grupoID = grupoController.getUltimoID();
-                salvarSharedPreferencesG2();
-
-                equipe5 = new Equipe();
-                equipe5.setNome(editEquipe5.getText().toString());
-                equipe5.setGrupoID(grupoID);
-                equipeController.incluir(equipe5);
-                ultimoID = equipeController.getUltimoID();
-                grupo2.setEquipe1(equipe5);
-                salvarSharedPreferencesE5();
-
-                equipe6 = new Equipe();
-                equipe6.setNome(editEquipe6.getText().toString());
-                equipe6.setGrupoID(grupoID);
-                equipeController.incluir(equipe6);
-                ultimoID = equipeController.getUltimoID();
-                grupo2.setEquipe2(equipe6);
-                salvarSharedPreferencesE6();
-
-                equipe7 = new Equipe();
-                equipe7.setNome(editEquipe7.getText().toString());
-                equipe7.setGrupoID(grupoID);
-                equipeController.incluir(equipe7);
-                ultimoID = equipeController.getUltimoID();
-                grupo2.setEquipe3(equipe7);
-                salvarSharedPreferencesE7();
-
-                equipe8 = new Equipe();
-                equipe8.setNome(editEquipe8.getText().toString());
-                equipe8.setGrupoID(grupoID);
-                equipeController.incluir(equipe8);
-                ultimoID = equipeController.getUltimoID();
-                grupo2.setEquipe4(equipe8);
-                salvarSharedPreferencesE8();
-
-
-                /**
-                 * Grupo 3 e Equipes
-                 */
-                grupoController.incluir(grupo3);
-                grupoID = grupoController.getUltimoID();
-                salvarSharedPreferencesG3();
-
-                equipe9 = new Equipe();
-                equipe9.setNome(editEquipe9.getText().toString());
-                equipe9.setGrupoID(grupoID);
-                equipeController.incluir(equipe9);
-                ultimoID = equipeController.getUltimoID();
-                grupo3.setEquipe1(equipe9);
-                salvarSharedPreferencesE9();
-
-                equipe10 = new Equipe();
-                equipe10.setNome(editEquipe10.getText().toString());
-                equipe10.setGrupoID(grupoID);
-                equipeController.incluir(equipe10);
-                ultimoID = equipeController.getUltimoID();
-                grupo3.setEquipe2(equipe10);
-                salvarSharedPreferencesE10();
-
-                equipe11 = new Equipe();
-                equipe11.setNome(editEquipe11.getText().toString());
-                equipe11.setGrupoID(grupoID);
-                equipeController.incluir(equipe11);
-                ultimoID = equipeController.getUltimoID();
-                grupo3.setEquipe3(equipe11);
-                salvarSharedPreferencesE11();
-
-                equipe12 = new Equipe();
-                equipe12.setNome(editEquipe12.getText().toString());
-                equipe12.setGrupoID(grupoID);
-                equipeController.incluir(equipe12);
-                ultimoID = equipeController.getUltimoID();
-                grupo3.setEquipe4(equipe12);
-                salvarSharedPreferencesE12();
-
-
-                /**
-                 * Grupo 4 e Equipes
-                 */
-                grupoController.incluir(grupo4);
-                grupoID = grupoController.getUltimoID();
-                salvarSharedPreferencesG4();
-
-                equipe13 = new Equipe();
-                equipe13.setNome(editEquipe13.getText().toString());
-                equipe13.setGrupoID(grupoID);
-                equipeController.incluir(equipe13);
-                ultimoID = equipeController.getUltimoID();
-                grupo4.setEquipe1(equipe13);
-                salvarSharedPreferencesE13();
-
-                equipe14 = new Equipe();
-                equipe14.setNome(editEquipe14.getText().toString());
-                equipe14.setGrupoID(grupoID);
-                equipeController.incluir(equipe14);
-                ultimoID = equipeController.getUltimoID();
-                grupo4.setEquipe2(equipe14);
-                salvarSharedPreferencesE14();
-
-                equipe15 = new Equipe();
-                equipe15.setNome(editEquipe15.getText().toString());
-                equipe15.setGrupoID(grupoID);
-                equipeController.incluir(equipe15);
-                ultimoID = equipeController.getUltimoID();
-                grupo4.setEquipe3(equipe15);
-                salvarSharedPreferencesE15();
-
-                equipe16 = new Equipe();
-                equipe16.setNome(editEquipe16.getText().toString());
-                equipe16.setGrupoID(grupoID);
-                equipeController.incluir(equipe16);
-                ultimoID = equipeController.getUltimoID();
-                grupo4.setEquipe4(equipe16);
-                salvarSharedPreferencesE16();
-
-                AppUtil.goNextScreen(CadastrarGrupos.this, Dashboard.class, true);
-                /*Intent intent = new Intent(CadastrarGrupos.this, Dashboard.class);
-                startActivity(intent);
-                finish();
-                return;*/
-            } else
-                Toast.makeText(getApplicationContext(), "Favor, preencher todos os campos!", Toast.LENGTH_SHORT).show();
+                    equipe16 = new Equipe();
+                    equipe16.setNome(editEquipe16.getText().toString());
+                    equipe16.setGrupoID(grupoID);
+                    equipeController.incluir(equipe16);
+                    ultimoID = equipeController.getUltimoID();
+                    grupo4.setEquipe4(equipe16);
+                    salvarSharedPreferencesE16();
+                }
+            }
+            AppUtil.goNextScreen(CadastrarGrupos.this, Dashboard.class, true);
+            finish();
+        } else {
+            Toast.makeText(getApplicationContext(), "Favor, preencher todos os campos!", Toast.LENGTH_SHORT).show();
         }
     }
 
     private boolean validarFormulario() {
-        if (qtdEquipes == 4) {
-            if (TextUtils.isEmpty(editEquipe1.getText().toString())) {
-                editEquipe1.setError("*");
-                editEquipe1.requestFocus();
-                return false;
-            }
-            if (TextUtils.isEmpty(editEquipe2.getText().toString())) {
-                editEquipe2.setError("*");
-                editEquipe2.requestFocus();
-                return false;
-            }
-            if (TextUtils.isEmpty(editEquipe3.getText().toString())) {
-                editEquipe3.setError("*");
-                editEquipe3.requestFocus();
-                return false;
-            }
-            if (TextUtils.isEmpty(editEquipe4.getText().toString())) {
-                editEquipe4.setError("*");
-                editEquipe4.requestFocus();
-                return false;
-            }
-        } else if (qtdEquipes == 12) {
-            if (TextUtils.isEmpty(editEquipe1.getText().toString())) {
-                editEquipe1.setError("*");
-                editEquipe1.requestFocus();
-                return false;
-            }
-            if (TextUtils.isEmpty(editEquipe2.getText().toString())) {
-                editEquipe2.setError("*");
-                editEquipe2.requestFocus();
-                return false;
-            }
-            if (TextUtils.isEmpty(editEquipe3.getText().toString())) {
-                editEquipe3.setError("*");
-                editEquipe3.requestFocus();
-                return false;
-            }
-            if (TextUtils.isEmpty(editEquipe4.getText().toString())) {
-                editEquipe4.setError("*");
-                editEquipe4.requestFocus();
-                return false;
-            }
+        if (TextUtils.isEmpty(editEquipe1.getText().toString())) {
+            editEquipe1.setError("*");
+            editEquipe1.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(editEquipe2.getText().toString())) {
+            editEquipe2.setError("*");
+            editEquipe2.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(editEquipe3.getText().toString())) {
+            editEquipe3.setError("*");
+            editEquipe3.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(editEquipe4.getText().toString())) {
+            editEquipe4.setError("*");
+            editEquipe4.requestFocus();
+            return false;
+        }
+        if (qtdEquipes > Torneio.TORNEIO_QUATRO_EQUIPES) {
             if (TextUtils.isEmpty(editEquipe5.getText().toString())) {
                 editEquipe5.setError("*");
                 editEquipe5.requestFocus();
@@ -570,67 +415,8 @@ public class CadastrarGrupos extends AppCompatActivity {
                 editEquipe12.requestFocus();
                 return false;
             }
-        } else if (qtdEquipes == 16) {
-            if (TextUtils.isEmpty(editEquipe1.getText().toString())) {
-                editEquipe1.setError("*");
-                editEquipe1.requestFocus();
-                return false;
-            }
-            if (TextUtils.isEmpty(editEquipe2.getText().toString())) {
-                editEquipe2.setError("*");
-                editEquipe2.requestFocus();
-                return false;
-            }
-            if (TextUtils.isEmpty(editEquipe3.getText().toString())) {
-                editEquipe3.setError("*");
-                editEquipe3.requestFocus();
-                return false;
-            }
-            if (TextUtils.isEmpty(editEquipe4.getText().toString())) {
-                editEquipe4.setError("*");
-                editEquipe4.requestFocus();
-                return false;
-            }
-            if (TextUtils.isEmpty(editEquipe5.getText().toString())) {
-                editEquipe5.setError("*");
-                editEquipe5.requestFocus();
-                return false;
-            }
-            if (TextUtils.isEmpty(editEquipe6.getText().toString())) {
-                editEquipe6.setError("*");
-                editEquipe6.requestFocus();
-                return false;
-            }
-            if (TextUtils.isEmpty(editEquipe7.getText().toString())) {
-                editEquipe7.setError("*");
-                editEquipe7.requestFocus();
-                return false;
-            }
-            if (TextUtils.isEmpty(editEquipe8.getText().toString())) {
-                editEquipe8.setError("*");
-                editEquipe8.requestFocus();
-                return false;
-            }
-            if (TextUtils.isEmpty(editEquipe9.getText().toString())) {
-                editEquipe9.setError("*");
-                editEquipe9.requestFocus();
-                return false;
-            }
-            if (TextUtils.isEmpty(editEquipe10.getText().toString())) {
-                editEquipe10.setError("*");
-                editEquipe10.requestFocus();
-                return false;
-            }
-            if (TextUtils.isEmpty(editEquipe11.getText().toString())) {
-                editEquipe11.setError("*");
-                editEquipe11.requestFocus();
-                return false;
-            }
-            if (TextUtils.isEmpty(editEquipe12.getText().toString())) {
-                editEquipe12.setError("*");
-                editEquipe12.requestFocus();
-                return false;
-            }
+        }
+        if (qtdEquipes > Torneio.TORNEIO_DOZE_EQUIPES) {
             if (TextUtils.isEmpty(editEquipe13.getText().toString())) {
                 editEquipe13.setError("*");
                 editEquipe13.requestFocus();
@@ -658,21 +444,12 @@ public class CadastrarGrupos extends AppCompatActivity {
     public void voltar(View view) {
         AppUtil.goNextScreen(CadastrarGrupos.this, EscolherTorneio.class, true);
         finish();
-        /*Intent intent = new Intent(CadastrarGrupos.this, EscolherTorneio.class);
-        startActivity(intent);
-        finish();
-        return;*/
     }
 
     @Override
     public void onBackPressed() {
         AppUtil.goNextScreen(CadastrarGrupos.this, EscolherTorneio.class, true);
         finish();
-        /*Intent intent = new Intent(this, EscolherTorneio.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
-        return;*/
     }
 
     private void restaurarSharedPreferencesQtdEquipes() {
@@ -684,7 +461,7 @@ public class CadastrarGrupos extends AppCompatActivity {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
-        if (qtdEquipes == 4) {
+        if (qtdEquipes == Torneio.TORNEIO_QUATRO_EQUIPES) {
             dados.putString("placarEquipe1J1", "");
             dados.putString("placarEquipe1J2", "");
             dados.putString("placarEquipe1J3", "");
@@ -697,8 +474,7 @@ public class CadastrarGrupos extends AppCompatActivity {
             dados.putString("placarEquipe4J1", "");
             dados.putString("placarEquipe4J2", "");
             dados.putString("placarEquipe4J3", "");
-            dados.apply();
-        } else if (qtdEquipes == 12) {
+        } else if (qtdEquipes == Torneio.TORNEIO_DOZE_EQUIPES) {
             dados.putString("placarEquipe1J1", "");
             dados.putString("placarEquipe1J2", "");
             dados.putString("placarEquipe2J1", "");
@@ -723,8 +499,7 @@ public class CadastrarGrupos extends AppCompatActivity {
             dados.putString("placarEquipe11J2", "");
             dados.putString("placarEquipe12J1", "");
             dados.putString("placarEquipe12J2", "");
-            dados.apply();
-        } else if (qtdEquipes == 16) {
+        } else if (qtdEquipes == Torneio.TORNEIO_DEZESSEIS_EQUIPES) {
             dados.putString("placarEquipe1J1", "");
             dados.putString("placarEquipe1J2", "");
             dados.putString("placarEquipe1J3", "");
@@ -773,8 +548,8 @@ public class CadastrarGrupos extends AppCompatActivity {
             dados.putString("placarEquipe16J1", "");
             dados.putString("placarEquipe16J2", "");
             dados.putString("placarEquipe16J3", "");
-            dados.apply();
         }
+        dados.apply();
     }
 
     private void salvarSharedPreferencesG1() {
