@@ -354,91 +354,92 @@ public class CadastrarGrupos extends AppCompatActivity {
     }
 
     private boolean validarFormulario() {
+        boolean sucesso = true;
         if (TextUtils.isEmpty(editEquipe1.getText().toString())) {
             editEquipe1.setError("*");
             editEquipe1.requestFocus();
-            return false;
+            sucesso = false;
         }
         if (TextUtils.isEmpty(editEquipe2.getText().toString())) {
             editEquipe2.setError("*");
             editEquipe2.requestFocus();
-            return false;
+            sucesso = false;
         }
         if (TextUtils.isEmpty(editEquipe3.getText().toString())) {
             editEquipe3.setError("*");
             editEquipe3.requestFocus();
-            return false;
+            sucesso = false;
         }
         if (TextUtils.isEmpty(editEquipe4.getText().toString())) {
             editEquipe4.setError("*");
             editEquipe4.requestFocus();
-            return false;
+            sucesso = false;
         }
         if (qtdEquipes > Torneio.TORNEIO_QUATRO_EQUIPES) {
             if (TextUtils.isEmpty(editEquipe5.getText().toString())) {
                 editEquipe5.setError("*");
                 editEquipe5.requestFocus();
-                return false;
+                sucesso = false;
             }
             if (TextUtils.isEmpty(editEquipe6.getText().toString())) {
                 editEquipe6.setError("*");
                 editEquipe6.requestFocus();
-                return false;
+                sucesso = false;
             }
             if (TextUtils.isEmpty(editEquipe7.getText().toString())) {
                 editEquipe7.setError("*");
                 editEquipe7.requestFocus();
-                return false;
+                sucesso = false;
             }
             if (TextUtils.isEmpty(editEquipe8.getText().toString())) {
                 editEquipe8.setError("*");
                 editEquipe8.requestFocus();
-                return false;
+                sucesso = false;
             }
             if (TextUtils.isEmpty(editEquipe9.getText().toString())) {
                 editEquipe9.setError("*");
                 editEquipe9.requestFocus();
-                return false;
+                sucesso = false;
             }
             if (TextUtils.isEmpty(editEquipe10.getText().toString())) {
                 editEquipe10.setError("*");
                 editEquipe10.requestFocus();
-                return false;
+                sucesso = false;
             }
             if (TextUtils.isEmpty(editEquipe11.getText().toString())) {
                 editEquipe11.setError("*");
                 editEquipe11.requestFocus();
-                return false;
+                sucesso = false;
             }
             if (TextUtils.isEmpty(editEquipe12.getText().toString())) {
                 editEquipe12.setError("*");
                 editEquipe12.requestFocus();
-                return false;
+                sucesso = false;
             }
         }
         if (qtdEquipes > Torneio.TORNEIO_DOZE_EQUIPES) {
             if (TextUtils.isEmpty(editEquipe13.getText().toString())) {
                 editEquipe13.setError("*");
                 editEquipe13.requestFocus();
-                return false;
+                sucesso = false;
             }
             if (TextUtils.isEmpty(editEquipe14.getText().toString())) {
                 editEquipe14.setError("*");
                 editEquipe14.requestFocus();
-                return false;
+                sucesso = false;
             }
             if (TextUtils.isEmpty(editEquipe15.getText().toString())) {
                 editEquipe15.setError("*");
                 editEquipe15.requestFocus();
-                return false;
+                sucesso = false;
             }
             if (TextUtils.isEmpty(editEquipe16.getText().toString())) {
                 editEquipe16.setError("*");
                 editEquipe16.requestFocus();
-                return false;
+                sucesso = false;
             }
         }
-        return true;
+        return sucesso;
     }
 
     public void voltar(View view) {

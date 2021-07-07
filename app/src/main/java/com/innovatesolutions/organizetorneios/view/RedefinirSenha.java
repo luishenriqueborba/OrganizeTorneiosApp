@@ -47,17 +47,18 @@ public class RedefinirSenha extends AppCompatActivity {
     }
 
     private boolean validarFormulario() {
+        boolean sucesso = true;
         if (TextUtils.isEmpty(editNovaSenha.getText().toString())) {
             editNovaSenha.setError("*");
             editNovaSenha.requestFocus();
-            return false;
+            sucesso = false;
         }
         if (TextUtils.isEmpty(editConfirmacaoNovaSenha.getText().toString())) {
             editConfirmacaoNovaSenha.setError("*");
             editConfirmacaoNovaSenha.requestFocus();
-            return false;
+            sucesso = false;
         }
-        return true;
+        return sucesso;
     }
 
     public boolean validarSenhasDigitadas() {

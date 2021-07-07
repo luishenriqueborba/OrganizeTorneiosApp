@@ -94,6 +94,7 @@
                     android:background="@drawable/btn_custom"
                     android:text="@string/btnEntrar"
                     android:textColor="@color/colorWhite"
+                    android:onClick="entrar"
                     app:layout_constraintBottom_toTopOf="@+id/txtCadastrar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

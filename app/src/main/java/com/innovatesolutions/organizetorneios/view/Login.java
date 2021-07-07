@@ -39,20 +39,6 @@ public class Login extends AppCompatActivity {
         initFormulario();
         restaurarSharedPreferences();
 
-        btnEntrar.setOnClickListener(view -> {
-            if (validarFormulario()) {
-                if (!validarDadosUsuario()) {
-                    editEmail.setError("*");
-                    editSenha.setError("*");
-                    editEmail.requestFocus();
-                    Toast.makeText(getApplicationContext(), "O e-mail e/ou senha estão incorretos.", Toast.LENGTH_LONG).show();
-                } else {
-                    salvarSharedPreferences();
-                    AppUtil.goNextScreen(Login.this, EscolherTorneio.class, true);
-                    finish();
-                }
-            }
-        });
         txtCadastrar.setOnClickListener(view -> {
             AppUtil.goNextScreen(Login.this, CadastrarUsuario.class, false);
             finish();
@@ -61,23 +47,6 @@ public class Login extends AppCompatActivity {
             AppUtil.goNextScreen(Login.this, RecuperarSenha.class, false);
             finish();
         });
-    }
-
-    private boolean validarFormulario() {
-        boolean isValid = true;
-
-        if (TextUtils.isEmpty(editEmail.getText().toString())) {
-            editEmail.setError("*");
-            editEmail.requestFocus();
-            isValid = false;
-        }
-
-        if (TextUtils.isEmpty(editSenha.getText().toString())) {
-            editSenha.setError("*");
-            editSenha.requestFocus();
-            isValid = false;
-        }
-        return isValid;
     }
 
     private void initFormulario() {
@@ -92,8 +61,38 @@ public class Login extends AppCompatActivity {
         usuario = new Usuario();
     }
 
+    public void entrar(View view) {
+        if (validarFormulario()) {
+            if (!validarDadosUsuario()) {
+                editEmail.setError("*");
+                editSenha.setError("*");
+                editEmail.requestFocus();
+                Toast.makeText(getApplicationContext(), "O e-mail e/ou senha estão incorretos.", Toast.LENGTH_LONG).show();
+            } else {
+                salvarSharedPreferences();
+                AppUtil.goNextScreen(Login.this, EscolherTorneio.class, true);
+                finish();
+            }
+        }
+    }
+
     public void lembrarSenha(View view) {
         isLembrarSenha = chLembrar.isChecked();
+    }
+
+    private boolean validarFormulario() {
+        boolean isValid = true;
+        if (TextUtils.isEmpty(editEmail.getText().toString())) {
+            editEmail.setError("*");
+            editEmail.requestFocus();
+            isValid = false;
+        }
+        if (TextUtils.isEmpty(editSenha.getText().toString())) {
+            editSenha.setError("*");
+            editSenha.requestFocus();
+            isValid = false;
+        }
+        return isValid;
     }
 
     public boolean validarDadosUsuario() {
