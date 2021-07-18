@@ -9,6 +9,7 @@ public class Version {
  * Novidades:
  *
  * Correções:
+ * Atualização dos Ads (anúncios)
  *
  * Versão: 9.2
  * Novidades:
