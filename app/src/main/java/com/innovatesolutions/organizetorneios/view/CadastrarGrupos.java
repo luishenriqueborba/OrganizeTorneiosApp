@@ -24,14 +24,12 @@ public class CadastrarGrupos extends AppCompatActivity {
     private Equipe equipe1, equipe2, equipe3, equipe4, equipe5, equipe6, equipe7, equipe8, equipe9, equipe10, equipe11, equipe12, equipe13, equipe14, equipe15, equipe16;
     private Grupo grupo1, grupo2, grupo3, grupo4;
     private int ultimoID, grupoID, qtdEquipes;
-
-    EditText editEquipe1, editEquipe2, editEquipe3, editEquipe4, editEquipe5, editEquipe6, editEquipe7, editEquipe8, editEquipe9, editEquipe10, editEquipe11, editEquipe12, editEquipe13, editEquipe14, editEquipe15, editEquipe16;
-    Button btnSalvar;
+    private EditText editEquipe1, editEquipe2, editEquipe3, editEquipe4, editEquipe5, editEquipe6, editEquipe7, editEquipe8, editEquipe9, editEquipe10, editEquipe11, editEquipe12, editEquipe13, editEquipe14, editEquipe15, editEquipe16;
+    private Button btnSalvar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastrar_grupos_quatro);
 
         restaurarSharedPreferencesQtdEquipes();
         switch (qtdEquipes) {

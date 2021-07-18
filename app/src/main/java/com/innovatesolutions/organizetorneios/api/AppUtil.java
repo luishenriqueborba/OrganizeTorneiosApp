@@ -1,12 +1,24 @@
 package com.innovatesolutions.organizetorneios.api;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+import com.innovatesolutions.organizetorneios.view.EscolherTorneio;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Classe de apoio contendo métodos que podem ser reutilizadas no projeto

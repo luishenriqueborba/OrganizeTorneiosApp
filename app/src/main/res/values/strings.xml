@@ -128,8 +128,7 @@
     <string name="removerCartaoVermelho">Remover Cartão Vermelho</string>
 
     <!-- Anuncios TESTE-->
-    <!--string name="anuncioBanner1">/6499/example/banner</string>
-    <string name="anuncioBanner1">ca-app-pub-3940256099942544/6300978111</string>
+    <!--string name="anuncioBanner1">ca-app-pub-3940256099942544/6300978111</string>
     <string name="anuncioBanner2">ca-app-pub-3940256099942544/6300978111</string>
     <string name="anuncioIntersticial1">ca-app-pub-3940256099942544/1033173712</string>
     <string name="anuncioIntersticial2">ca-app-pub-3940256099942544/1033173712</string-->

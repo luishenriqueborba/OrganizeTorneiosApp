@@ -126,15 +126,16 @@
 
             </androidx.cardview.widget.CardView>
 
-            <!--com.google.android.gms.ads.doubleclick.PublisherAdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/publisherAdView"
+            <com.google.android.gms.ads.AdView
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
                 ads:adSize="BANNER"
-                ads:adUnitId="@string/anuncioBanner1"></com.google.android.gms.ads.doubleclick.PublisherAdView-->
-
+                ads:adUnitId="@string/anuncioBanner1">
+            </com.google.android.gms.ads.AdView>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
