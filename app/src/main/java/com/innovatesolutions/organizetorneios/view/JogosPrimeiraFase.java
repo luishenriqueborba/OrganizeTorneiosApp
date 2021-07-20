@@ -138,7 +138,6 @@ public class JogosPrimeiraFase extends AppCompatActivity {
         btnFinalizarPrimeiraFase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 finalizarPrimeiraFase(null);
                 restaurarSharedPreferencesQtdEquipes();
                 if (finalizouPrimeiraFase) {

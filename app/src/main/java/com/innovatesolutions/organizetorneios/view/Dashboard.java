@@ -1,14 +1,17 @@
 package com.innovatesolutions.organizetorneios.view;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.innovatesolutions.organizetorneios.ActionDownloadApk;
 import com.innovatesolutions.organizetorneios.R;
 import com.innovatesolutions.organizetorneios.api.AppUtil;
 
@@ -20,8 +23,8 @@ public class Dashboard extends AppCompatActivity {
     private boolean finalizouPrimeiraFase;
     private final String pasta = "fonts/";
     private final String fontBanger = "Bangers.ttf";
-
-    TextView txtTitulo;
+    private TextView txtTitulo;
+    private ImageView iconWhatsApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +37,23 @@ public class Dashboard extends AppCompatActivity {
 
     private void init() {
         txtTitulo = findViewById(R.id.txtTituloDashboard);
+        iconWhatsApp = findViewById(R.id.imageViewWhatsApp);
 
         Typeface font = Typeface.createFromAsset(getAssets(), pasta + fontBanger);
         txtTitulo.setTypeface(font);
+    }
+
+    public void compartilhar(View view) {
+        if (AppUtil.isAppInstalled(Dashboard.this, "com.whatsapp")) {
+            String message = "Se liga nesse app pra organizar torneios...";
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setPackage("com.whatsapp");
+            intent.putExtra(Intent.EXTRA_TEXT, message);
+            intent.setType("text/txt");
+            startActivity(intent);
+        } else {
+            new ActionDownloadApk(Dashboard.this, "https://play.google.com/store/apps/details?id=com.whatsapp&hl=pt_BR", "whatsapp").doAction();
+        }
     }
 
     public void verEquipes(View view) {

@@ -21,12 +21,13 @@ public class ActionDownloadApk {
     private final String downloadUrl;
     private final String apkName;
     private final String downloadDirectory;
-    Context context;
+    private final Context context;
 
     public ActionDownloadApk(Activity activity, String downloadUrl, String apkName) {
         this.downloadUrl = downloadUrl;
         this.apkName = apkName;
         this.downloadDirectory = activity.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+        this.context = activity;
     }
 
     private boolean mustOpenGooglePlay() {
@@ -34,16 +35,15 @@ public class ActionDownloadApk {
     }
 
     public void doAction() {
-        this.context.getApplicationContext();
         if (mustOpenGooglePlay()) {
-            actionOpenGooglePlay(context, this.downloadUrl);
+            actionOpenGooglePlay(this.context, this.downloadUrl);
         } else {
             deleteCurrentFile();
             boolean apkDownloaded = downloadApk();
             if (apkDownloaded) {
                 installApk();
             } else {
-                AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                AlertDialog.Builder alert = new AlertDialog.Builder(this.context);
                 alert.setMessage(context.getResources().getString(R.string.downloadApkError));
                 alert.show();
             }

@@ -32,28 +32,50 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/txtSubTituloDashboard"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginEnd="99dp"
-                    android:text="@string/subTituloDashboard"
-
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtTituloDashboard" />
-
-
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
-                    android:layout_marginEnd="10dp"
                     android:src="@mipmap/ic_launcher_round"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/txtTituloDashboard"
                     app:layout_constraintTop_toTopOf="@+id/txtTituloDashboard" />
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/linearLayoutCompat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtTituloDashboard">
+
+                    <TextView
+                        android:id="@+id/txtSubTituloDashboard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:onClick="compartilhar"
+                        android:text="@string/compartilhar"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtTituloDashboard" />
+
+                    <ImageView
+                        android:id="@+id/imageViewWhatsApp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginEnd="10dp"
+                        android:onClick="compartilhar"
+                        android:src="@drawable/iconfinder_whatsapp" />
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

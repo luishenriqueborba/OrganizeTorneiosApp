@@ -7,6 +7,7 @@ public class Version {
 /**
  * Versão: 9.3
  * Novidades:
+ * Criada função de compartilhamento do app via whatsApp
  *
  * Correções:
  * Atualização dos Ads (anúncios)
