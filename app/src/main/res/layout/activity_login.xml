@@ -82,7 +82,6 @@
                     android:layout_margin="10dp"
                     android:layout_marginStart="2dp"
                     android:layout_marginTop="13dp"
-                    android:onClick="lembrarSenha"
                     android:text="@string/chLembrar" />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -94,7 +93,6 @@
                     android:background="@drawable/btn_custom"
                     android:text="@string/btnEntrar"
                     android:textColor="@color/colorWhite"
-                    android:onClick="entrar"
                     app:layout_constraintBottom_toTopOf="@+id/txtCadastrar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

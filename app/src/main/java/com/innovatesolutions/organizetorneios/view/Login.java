@@ -1,10 +1,8 @@
 package com.innovatesolutions.organizetorneios.view;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -28,7 +26,7 @@ public class Login extends AppCompatActivity {
     TextView txtCadastrar, txtEsqueceuSenha;
     EditText editSenha, editEmail;
     CheckBox chLembrar;
-    Boolean isLembrarSenha;
+    Boolean isLembrarSenha = false;
     ImageView imgLogo;
 
     @Override
@@ -47,6 +45,11 @@ public class Login extends AppCompatActivity {
             AppUtil.goNextScreen(Login.this, RecuperarSenha.class, false);
             finish();
         });
+
+        chLembrar.setOnClickListener(v ->
+                lembrarSenha());
+
+        btnEntrar.setOnClickListener(v -> entrar());
     }
 
     private void initFormulario() {
@@ -61,7 +64,7 @@ public class Login extends AppCompatActivity {
         usuario = new Usuario();
     }
 
-    public void entrar(View view) {
+    public void entrar() {
         if (validarFormulario()) {
             if (!validarDadosUsuario()) {
                 editEmail.setError("*");
@@ -76,7 +79,7 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    public void lembrarSenha(View view) {
+    public void lembrarSenha() {
         isLembrarSenha = chLembrar.isChecked();
     }
 
