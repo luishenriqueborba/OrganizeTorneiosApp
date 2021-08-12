@@ -65,8 +65,6 @@ public class ActionDownloadApk {
         FileOutputStream fileOutputStream = null;
         InputStream inputStream = null;
         try {
-            //getActionExecuter().getSafetyAsyncExecution().getProcessingDialog().setMode(ProcessingDialog.MODE_DOWNLOADING_APK);
-
             HttpURLConnection connection = (HttpURLConnection) new URL(this.downloadUrl).openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Cache-Control", "no-cache");

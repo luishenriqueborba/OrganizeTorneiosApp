@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.innovatesolutions.organizetorneios.ActionDownloadApk;
@@ -52,8 +53,22 @@ public class Dashboard extends AppCompatActivity {
             intent.setType("text/txt");
             startActivity(intent);
         } else {
-            new ActionDownloadApk(Dashboard.this, "https://play.google.com/store/apps/details?id=com.whatsapp&hl=pt_BR", "whatsapp").doAction();
+            showAlertDialog();
         }
+    }
+
+    private void showAlertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("ATENÇÃO:");
+        builder.setMessage("Você não tem o app WhatsApp instalado. Deseja fazer o download dele?");
+        builder.setCancelable(true);
+        builder.setIcon(R.mipmap.ic_launcher_round);
+        builder.setPositiveButton("SIM", (dialogInterface, i) ->
+                new ActionDownloadApk(Dashboard.this, "https://play.google.com/store/apps/details?id=com.whatsapp&hl=pt_BR", "whatsapp").doAction());
+        builder.setNegativeButton("NÃO", (dialogInterface, i) ->
+                dialogInterface.cancel());
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     public void verEquipes(View view) {
