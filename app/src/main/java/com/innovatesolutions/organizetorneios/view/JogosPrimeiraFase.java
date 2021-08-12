@@ -122,10 +122,7 @@ public class JogosPrimeiraFase extends AppCompatActivity {
                 break;
         }
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
+        MobileAds.initialize(this, initializationStatus -> {
         });
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -135,10 +132,8 @@ public class JogosPrimeiraFase extends AppCompatActivity {
         initFormulario();
         popularFormulario();
 
-        btnFinalizarPrimeiraFase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finalizarPrimeiraFase(null);
+        btnFinalizarPrimeiraFase.setOnClickListener(v -> {
+            if (finalizarPrimeiraFase(null)) {
                 restaurarSharedPreferencesQtdEquipes();
                 if (finalizouPrimeiraFase) {
                     showInterstitialAd(getString(R.string.anuncioIntersticial2), adRequest);
@@ -1728,7 +1723,7 @@ public class JogosPrimeiraFase extends AppCompatActivity {
         return conseguiu;
     }
 
-    public void finalizarPrimeiraFase(View view) {
+    public boolean finalizarPrimeiraFase(View view) {
         if (qtdEquipes == Torneio.TORNEIO_QUATRO_EQUIPES) {
             if (validarFormularioJogo(editPlacarEquipe1J1, editPlacarEquipe2J1) && validarFormularioJogo(editPlacarEquipe3J1, editPlacarEquipe4J1) &&
                     validarFormularioJogo(editPlacarEquipe4J2, editPlacarEquipe1J2) && validarFormularioJogo(editPlacarEquipe2J2, editPlacarEquipe3J2)
@@ -1755,9 +1750,11 @@ public class JogosPrimeiraFase extends AppCompatActivity {
                     equipes[3] = equipe4;
 
                     ordenaGrupo(equipes);
+                    return true;
                 }
             } else {
                 showFormErrorAlertDialog();
+                return false;
             }
         } else if (qtdEquipes == Torneio.TORNEIO_DOZE_EQUIPES) {
             if (validarFormularioJogo(editPlacarEquipe3J1, editPlacarEquipe2J1) && validarFormularioJogo(editPlacarEquipe6J1, editPlacarEquipe5J1) &&
@@ -1810,9 +1807,11 @@ public class JogosPrimeiraFase extends AppCompatActivity {
                     ordenaGrupo(equipesB);
                     ordenaGrupo(equipesC);
                     ordenaGrupo(equipesD);
+                    return true;
                 }
             } else {
                 showFormErrorAlertDialog();
+                return false;
             }
         } else if (qtdEquipes == Torneio.TORNEIO_DEZESSEIS_EQUIPES) {
             if (validarFormularioJogo(editPlacarEquipe1J1, editPlacarEquipe2J1) && validarFormularioJogo(editPlacarEquipe5J1, editPlacarEquipe6J1) &&
@@ -1902,9 +1901,11 @@ public class JogosPrimeiraFase extends AppCompatActivity {
                 }
             } else {
                 showFormErrorAlertDialog();
+                return false;
             }
         }
         salvarSharedPreferencesClassificados();
+        return true;
     }
 
     public void ordenaGrupo(Equipe[] equipes) {
