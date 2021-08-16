@@ -19,7 +19,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="5dp"
             android:contentDescription="@string/imgAvatar"
-            android:src="@drawable/iconfinder_user_avatar" />
+            android:src="@drawable/ic_user" />
 
         <LinearLayout
             android:layout_width="wrap_content"

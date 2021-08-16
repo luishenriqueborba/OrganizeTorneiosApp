@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/OrganizeTorneios/app/src/main/res/drawable-anydpi/ic_more.xml" value="0.1111111111111111" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/OrganizeTorneios/app/src/main/res/layout/activity_dashboard.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/OrganizeTorneios/app/src/main/res/layout/activity_jogos_primeira_fase_quatro.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/OrganizeTorneios/app/src/main/res/layout/activity_login.xml" value="0.17617753623188406" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/OrganizeTorneios/app/src/main/res/layout/listview_jogadores_artilharia.xml" value="0.15" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/OrganizeTorneios/app/src/main/res/layout/listview_jogadores_cartoes.xml" value="0.1" />
@@ -54,7 +56,7 @@
       </value>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
