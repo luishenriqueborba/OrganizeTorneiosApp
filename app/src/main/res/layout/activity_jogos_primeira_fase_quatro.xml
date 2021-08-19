@@ -850,7 +850,6 @@
                                 android:layout_marginBottom="8dp"
                                 android:background="@drawable/btn_custom"
                                 android:foregroundGravity="center_horizontal"
-                                android:onClick="salvarResultados"
                                 android:text="@string/btnSalvar"
                                 android:textColor="@color/colorWhite" />
 
@@ -864,7 +863,6 @@
                             android:layout_marginBottom="8dp"
                             android:background="@drawable/btn_custom"
                             android:foregroundGravity="center_horizontal"
-                            android:onClick="finalizarPrimeiraFase"
                             android:text="@string/btnFinalizarPrimeiraFase"
                             android:textColor="@color/colorWhite" />
 

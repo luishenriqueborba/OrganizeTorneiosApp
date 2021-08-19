@@ -1,7 +1,5 @@
 package com.innovatesolutions.organizetorneios.view;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -23,8 +21,6 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.innovatesolutions.organizetorneios.R;
@@ -36,7 +32,6 @@ import com.innovatesolutions.organizetorneios.model.Grupo;
 import com.innovatesolutions.organizetorneios.model.Torneio;
 import com.shashank.sony.fancydialoglib.Animation;
 import com.shashank.sony.fancydialoglib.FancyAlertDialog;
-import com.shashank.sony.fancydialoglib.FancyAlertDialogListener;
 import com.shashank.sony.fancydialoglib.Icon;
 
 import static android.content.ContentValues.TAG;
@@ -99,10 +94,11 @@ public class JogosPrimeiraFase extends AppCompatActivity {
     private Equipe[] equipes, equipesA, equipesB, equipesC, equipesD;
     private SharedPreferences preferences;
     private int grupo1ID, grupo2ID, grupo3ID, grupo4ID, equipe1ID, equipe2ID, equipe3ID, equipe4ID, equipe5ID, equipe6ID, equipe7ID, equipe8ID, equipe9ID, equipe10ID, equipe11ID, equipe12ID, equipe13ID, equipe14ID, equipe15ID, equipe16ID, placarA, placarB, qtdEquipes;
-    private final int quantidade1 = 4, quantidade2 = 3;
     private Button btnSalvar, btnEditar, btnFinalizarPrimeiraFase;
-    private boolean sucesso, trocaTela, conseguiu, finalizouQuartas, finalizouPrimeiraFase;
-    private AdView mAdView;
+    private boolean trocaTela;
+    private boolean conseguiu = false;
+    private boolean finalizouQuartas;
+    private boolean finalizouPrimeiraFase;
     private InterstitialAd mInterstitialAd;
 
     @Override
@@ -124,7 +120,7 @@ public class JogosPrimeiraFase extends AppCompatActivity {
 
         MobileAds.initialize(this, initializationStatus -> {
         });
-        mAdView = findViewById(R.id.adView);
+        AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
@@ -132,8 +128,10 @@ public class JogosPrimeiraFase extends AppCompatActivity {
         initFormulario();
         popularFormulario();
 
+        btnSalvar.setOnClickListener(v -> salvarResultados());
+
         btnFinalizarPrimeiraFase.setOnClickListener(v -> {
-            if (finalizarPrimeiraFase(null)) {
+            if (finalizarPrimeiraFase()) {
                 restaurarSharedPreferencesQtdEquipes();
                 if (finalizouPrimeiraFase) {
                     showInterstitialAd(getString(R.string.anuncioIntersticial2), adRequest);
@@ -240,8 +238,8 @@ public class JogosPrimeiraFase extends AppCompatActivity {
             editPlacarEquipe4J1 = findViewById(R.id.editPlacarEquipe4J1);
             editPlacarEquipe4J2 = findViewById(R.id.editPlacarEquipe4J2);
             editPlacarEquipe4J3 = findViewById(R.id.editPlacarEquipe4J3);
-
         }
+
         if (qtdEquipes > Torneio.TORNEIO_QUATRO_EQUIPES) {
             equipe5 = new Equipe();
             equipe5.setId(equipe5ID);
@@ -318,10 +316,10 @@ public class JogosPrimeiraFase extends AppCompatActivity {
                 editPlacarEquipe12J1 = findViewById(R.id.editPlacarEquipe12J1);
                 editPlacarEquipe12J2 = findViewById(R.id.editPlacarEquipe12J2);
 
-                equipesA = new Equipe[quantidade2];
-                equipesB = new Equipe[quantidade2];
-                equipesC = new Equipe[quantidade2];
-                equipesD = new Equipe[quantidade2];
+                equipesA = new Equipe[Torneio.GRUPO_TRES_EQUIPES];
+                equipesB = new Equipe[Torneio.GRUPO_TRES_EQUIPES];
+                equipesC = new Equipe[Torneio.GRUPO_TRES_EQUIPES];
+                equipesD = new Equipe[Torneio.GRUPO_TRES_EQUIPES];
             }
         } if (qtdEquipes > Torneio.TORNEIO_DOZE_EQUIPES) {
             equipe13 = new Equipe();
@@ -432,10 +430,10 @@ public class JogosPrimeiraFase extends AppCompatActivity {
                 editPlacarEquipe16J2 = findViewById(R.id.editPlacarEquipe16J2);
                 editPlacarEquipe16J3 = findViewById(R.id.editPlacarEquipe16J3);
 
-                equipesA = new Equipe[quantidade1];
-                equipesB = new Equipe[quantidade1];
-                equipesC = new Equipe[quantidade1];
-                equipesD = new Equipe[quantidade1];
+                equipesA = new Equipe[Torneio.GRUPO_QUATRO_EQUIPES];
+                equipesB = new Equipe[Torneio.GRUPO_QUATRO_EQUIPES];
+                equipesC = new Equipe[Torneio.GRUPO_QUATRO_EQUIPES];
+                equipesD = new Equipe[Torneio.GRUPO_QUATRO_EQUIPES];
             }
         }
     }
@@ -889,12 +887,9 @@ public class JogosPrimeiraFase extends AppCompatActivity {
                 .setAnimation(Animation.POP)
                 .isCancellable(true)
                 .setIcon(R.mipmap.ic_launcher_round, Icon.Visible)
-                .OnNegativeClicked(new FancyAlertDialogListener() {
-                    @Override
-                    public void OnClick() {
-                        AppUtil.goNextScreen(JogosPrimeiraFase.this, Dashboard.class, false);
-                        finish();
-                    }
+                .OnNegativeClicked(() -> {
+                    AppUtil.goNextScreen(JogosPrimeiraFase.this, Dashboard.class, false);
+                    finish();
                 })
                 .build();
     }
@@ -910,26 +905,18 @@ public class JogosPrimeiraFase extends AppCompatActivity {
             equipe1.setVitorias(equipe1.getVitorias() + 1);
             equipe1.setGolsPro(equipe1.getGolsPro() + placarA);
             equipe1.setGolsContra(equipe1.getGolsContra() + placarB);
-            if (equipeController.alterar(equipe1)) {
-                // obj salvo com sucesso no DB
-                sucesso = true;
-            } else {
+            if (!equipeController.alterar(equipe1)) {
                 // falha ao salvar o obj  no DB
-                sucesso = false;
-                return sucesso;
+                return false;
             }
-
             equipe2.setId(equipe2ID);
             equipe2.setGrupoID(grupo2ID);
             equipe2.setJogos(equipe2.getJogos() + 1);
             equipe2.setDerrotas(equipe2.getDerrotas() + 1);
             equipe2.setGolsPro(equipe2.getGolsPro() + placarB);
             equipe2.setGolsContra(equipe2.getGolsContra() + placarA);
-            if (equipeController.alterar(equipe2)) {
-                sucesso = true;
-            } else {
-                sucesso = false;
-                return sucesso;
+            if (!equipeController.alterar(equipe2)) {
+                return false;
             }
 
         } else if (placarA < placarB) {
@@ -940,27 +927,20 @@ public class JogosPrimeiraFase extends AppCompatActivity {
             equipe2.setVitorias(equipe2.getVitorias() + 1);
             equipe2.setGolsPro(equipe2.getGolsPro() + placarB);
             equipe2.setGolsContra(equipe2.getGolsContra() + placarA);
-            if (equipeController.alterar(equipe2)) {
-                // obj salvo com sucesso no DB
-                sucesso = true;
-            } else {
+            if (!equipeController.alterar(equipe2)) {
                 // falha ao salvar o obj  no DB
-                sucesso = false;
-                return sucesso;
+                return false;
             }
-
             equipe1.setId(equipe1ID);
             equipe1.setGrupoID(grupo1ID);
             equipe1.setJogos(equipe1.getJogos() + 1);
             equipe1.setDerrotas(equipe1.getDerrotas() + 1);
             equipe1.setGolsPro(equipe1.getGolsPro() + placarA);
             equipe1.setGolsContra(equipe1.getGolsContra() + placarB);
-            if (equipeController.alterar(equipe1)) {
-                sucesso = true;
-            } else {
-                sucesso = false;
-                return sucesso;
+            if (!equipeController.alterar(equipe1)) {
+                return false;
             }
+
         } else {
             equipe1.setId(equipe1ID);
             equipe1.setGrupoID(grupo1ID);
@@ -969,15 +949,10 @@ public class JogosPrimeiraFase extends AppCompatActivity {
             equipe1.setEmpates(equipe1.getEmpates() + 1);
             equipe1.setGolsPro(equipe1.getGolsPro() + placarA);
             equipe1.setGolsContra(equipe1.getGolsContra() + placarB);
-            if (equipeController.alterar(equipe1)) {
-                // obj salvo com sucesso no DB
-                sucesso = true;
-            } else {
+            if (!equipeController.alterar(equipe1)) {
                 // falha ao salvar o obj  no DB
-                sucesso = false;
-                return sucesso;
+                return false;
             }
-
             equipe2.setId(equipe2ID);
             equipe2.setGrupoID(grupo2ID);
             equipe2.setJogos(equipe2.getJogos() + 1);
@@ -985,14 +960,12 @@ public class JogosPrimeiraFase extends AppCompatActivity {
             equipe2.setEmpates(equipe2.getEmpates() + 1);
             equipe2.setGolsPro(equipe2.getGolsPro() + placarB);
             equipe2.setGolsContra(equipe2.getGolsContra() + placarA);
-            if (equipeController.alterar(equipe2)) {
-                sucesso = true;
-            } else {
-                sucesso = false;
-                return sucesso;
+            if (!equipeController.alterar(equipe2)) {
+                return false;
             }
         }
-        return sucesso;
+
+        return true;
     }
 
     private boolean validarFormularioJogo(EditText placarEquipe1, EditText placarEquipe2) {
@@ -1203,7 +1176,7 @@ public class JogosPrimeiraFase extends AppCompatActivity {
         }
     }
 
-    public boolean salvarResultados(View view) {
+    private boolean salvarResultados() {
         equipe1.setId(equipe1ID);
         equipe2.setId(equipe2ID);
         equipe3.setId(equipe3ID);
@@ -1723,7 +1696,7 @@ public class JogosPrimeiraFase extends AppCompatActivity {
         return conseguiu;
     }
 
-    public boolean finalizarPrimeiraFase(View view) {
+    private boolean finalizarPrimeiraFase() {
         if (qtdEquipes == Torneio.TORNEIO_QUATRO_EQUIPES) {
             if (validarFormularioJogo(editPlacarEquipe1J1, editPlacarEquipe2J1) && validarFormularioJogo(editPlacarEquipe3J1, editPlacarEquipe4J1) &&
                     validarFormularioJogo(editPlacarEquipe4J2, editPlacarEquipe1J2) && validarFormularioJogo(editPlacarEquipe2J2, editPlacarEquipe3J2)
@@ -1742,15 +1715,14 @@ public class JogosPrimeiraFase extends AppCompatActivity {
                 editPlacarEquipe4J2.setEnabled(true);
                 editPlacarEquipe4J3.setEnabled(true);
 
-                if (salvarResultados(view)) {
-                    equipes = new Equipe[quantidade1];
+                if (salvarResultados()) {
+                    equipes = new Equipe[Torneio.GRUPO_QUATRO_EQUIPES];
                     equipes[0] = equipe1;
                     equipes[1] = equipe2;
                     equipes[2] = equipe3;
                     equipes[3] = equipe4;
 
                     ordenaGrupo(equipes);
-                    return true;
                 }
             } else {
                 showFormErrorAlertDialog();
@@ -1789,7 +1761,7 @@ public class JogosPrimeiraFase extends AppCompatActivity {
                 editPlacarEquipe12J1.setEnabled(true);
                 editPlacarEquipe12J2.setEnabled(true);
 
-                if (salvarResultados(view)) {
+                if (salvarResultados()) {
                     equipesA[0] = equipe1;
                     equipesA[1] = equipe2;
                     equipesA[2] = equipe3;
@@ -1807,7 +1779,6 @@ public class JogosPrimeiraFase extends AppCompatActivity {
                     ordenaGrupo(equipesB);
                     ordenaGrupo(equipesC);
                     ordenaGrupo(equipesD);
-                    return true;
                 }
             } else {
                 showFormErrorAlertDialog();
@@ -1876,7 +1847,7 @@ public class JogosPrimeiraFase extends AppCompatActivity {
                 editPlacarEquipe16J2.setEnabled(true);
                 editPlacarEquipe16J3.setEnabled(true);
 
-                if (salvarResultados(view)) {
+                if (salvarResultados()) {
                     equipesA[0] = equipe1;
                     equipesA[1] = equipe2;
                     equipesA[2] = equipe3;
@@ -1961,14 +1932,8 @@ public class JogosPrimeiraFase extends AppCompatActivity {
         builder.setCancelable(true);
         builder.setIcon(R.mipmap.ic_launcher_round);
 
-        builder.setPositiveButton("OK", new Dialog.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-                dialogInterface.cancel();
-            }
-        });
+        builder.setPositiveButton("OK", (dialogInterface, i) ->
+                dialogInterface.cancel());
 
         AlertDialog alert = builder.create();
         alert.show();
