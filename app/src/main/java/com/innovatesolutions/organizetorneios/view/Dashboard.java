@@ -53,11 +53,11 @@ public class Dashboard extends AppCompatActivity {
             intent.setType("text/txt");
             startActivity(intent);
         } else {
-            showAlertDialog();
+            showDownloadWhatsAppAlertDialog();
         }
     }
 
-    private void showAlertDialog() {
+    private void showDownloadWhatsAppAlertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("ATENÇÃO:");
         builder.setMessage("Você não tem o app WhatsApp instalado. Deseja fazer o download dele?");
