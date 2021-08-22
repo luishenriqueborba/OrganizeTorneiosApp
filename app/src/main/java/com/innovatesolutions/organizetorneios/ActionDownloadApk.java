@@ -51,8 +51,9 @@ public class ActionDownloadApk {
     }
 
     private void actionOpenGooglePlay(Context context, String downloadUrl) {
-        String packageName = Uri.parse(downloadUrl).getQueryParameter("id");
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName));
+        //String packageName = Uri.parse(downloadUrl).getQueryParameter("id");
+        //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName));
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(downloadUrl));
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         context.startActivity(intent);
     }
