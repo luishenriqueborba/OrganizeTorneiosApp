@@ -126,9 +126,13 @@ public class JogosPrimeiraFase extends AppCompatActivity {
 
         restaurarSharedPreferences();
         initFormulario();
+        configuraBotoesCarregamentoTela();
         popularFormulario();
 
-        btnSalvar.setOnClickListener(v -> salvarResultados());
+        btnSalvar.setOnClickListener(v -> {
+            salvarStatusFaseSharedPreferences();
+            salvarResultados();
+        });
 
         btnFinalizarPrimeiraFase.setOnClickListener(v -> {
             if (finalizarPrimeiraFase()) {
@@ -161,7 +165,7 @@ public class JogosPrimeiraFase extends AppCompatActivity {
 
         if (mInterstitialAd != null) {
 
-            mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback(){
+            mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
                 @Override
                 public void onAdDismissedFullScreenContent() {
                     // Called when fullscreen content is dismissed.
@@ -321,7 +325,8 @@ public class JogosPrimeiraFase extends AppCompatActivity {
                 equipesC = new Equipe[Torneio.GRUPO_TRES_EQUIPES];
                 equipesD = new Equipe[Torneio.GRUPO_TRES_EQUIPES];
             }
-        } if (qtdEquipes > Torneio.TORNEIO_DOZE_EQUIPES) {
+        }
+        if (qtdEquipes > Torneio.TORNEIO_DOZE_EQUIPES) {
             equipe13 = new Equipe();
             equipe13.setId(equipe13ID);
             equipe14 = new Equipe();
@@ -438,78 +443,85 @@ public class JogosPrimeiraFase extends AppCompatActivity {
         }
     }
 
+    private void configuraBotoesCarregamentoTela() {
+        if(finalizouPrimeiraFase) {
+            btnSalvar.setVisibility(View.GONE);
+            btnFinalizarPrimeiraFase.setVisibility(View.GONE);
+        }
+    }
+
     private void popularFormulario() {
-            if (grupo1ID >= 1) {
-                grupo1 = grupoController.getGrupoByID(grupo1);
-                equipe1 = equipeController.getEquipeByID(equipe1);
-                equipe2 = equipeController.getEquipeByID(equipe2);
-                equipe3 = equipeController.getEquipeByID(equipe3);
-                equipe4 = equipeController.getEquipeByID(equipe4);
+        if (grupo1ID >= 1) {
+            grupo1 = grupoController.getGrupoByID(grupo1);
+            equipe1 = equipeController.getEquipeByID(equipe1);
+            equipe2 = equipeController.getEquipeByID(equipe2);
+            equipe3 = equipeController.getEquipeByID(equipe3);
+            equipe4 = equipeController.getEquipeByID(equipe4);
 
-                if (qtdEquipes == Torneio.TORNEIO_QUATRO_EQUIPES || qtdEquipes == Torneio.TORNEIO_DEZESSEIS_EQUIPES) {
-                    grupo1.setEquipe1(equipe1);
-                    grupo1.setEquipe2(equipe2);
-                    grupo1.setEquipe3(equipe3);
-                    grupo1.setEquipe4(equipe4);
-                }
-
-                if (qtdEquipes == Torneio.TORNEIO_QUATRO_EQUIPES) {
-                    txtEquipe1J1.setText(grupo1.getEquipe1().getNome());
-                    txtEquipe1J2.setText(grupo1.getEquipe1().getNome());
-                    txtEquipe1J3.setText(grupo1.getEquipe1().getNome());
-                    txtEquipe2J1.setText(grupo1.getEquipe2().getNome());
-                    txtEquipe2J2.setText(grupo1.getEquipe2().getNome());
-                    txtEquipe2J3.setText(grupo1.getEquipe2().getNome());
-                    txtEquipe3J1.setText(grupo1.getEquipe3().getNome());
-                    txtEquipe3J2.setText(grupo1.getEquipe3().getNome());
-                    txtEquipe3J3.setText(grupo1.getEquipe3().getNome());
-                    txtEquipe4J1.setText(grupo1.getEquipe4().getNome());
-                    txtEquipe4J2.setText(grupo1.getEquipe4().getNome());
-                    txtEquipe4J3.setText(grupo1.getEquipe4().getNome());
-
-                    editPlacarEquipe1J1.setText(placarEquipe1J1);
-                    editPlacarEquipe1J2.setText(placarEquipe1J2);
-                    editPlacarEquipe1J3.setText(placarEquipe1J3);
-                    editPlacarEquipe2J1.setText(placarEquipe2J1);
-                    editPlacarEquipe2J2.setText(placarEquipe2J2);
-                    editPlacarEquipe2J3.setText(placarEquipe2J3);
-                    editPlacarEquipe3J1.setText(placarEquipe3J1);
-                    editPlacarEquipe3J2.setText(placarEquipe3J2);
-                    editPlacarEquipe3J3.setText(placarEquipe3J3);
-                    editPlacarEquipe4J1.setText(placarEquipe4J1);
-                    editPlacarEquipe4J2.setText(placarEquipe4J2);
-                    editPlacarEquipe4J3.setText(placarEquipe4J3);
-
-                    trocaTela = true;
-
-                    if (!editPlacarEquipe1J1.getText().toString().equals("") && !editPlacarEquipe2J1.getText().toString().equals("")) {
-                        editPlacarEquipe1J1.setEnabled(false);
-                        editPlacarEquipe2J1.setEnabled(false);
-                    }
-                    if (!editPlacarEquipe3J1.getText().toString().equals("") && !editPlacarEquipe4J1.getText().toString().equals("")) {
-                        editPlacarEquipe3J1.setEnabled(false);
-                        editPlacarEquipe4J1.setEnabled(false);
-                    }
-                    if (!editPlacarEquipe4J2.getText().toString().equals("") && !editPlacarEquipe1J2.getText().toString().equals("")) {
-                        editPlacarEquipe4J2.setEnabled(false);
-                        editPlacarEquipe1J2.setEnabled(false);
-                    }
-                    if (!editPlacarEquipe2J2.getText().toString().equals("") && !editPlacarEquipe3J2.getText().toString().equals("")) {
-                        editPlacarEquipe2J2.setEnabled(false);
-                        editPlacarEquipe3J2.setEnabled(false);
-                    }
-                    if (!editPlacarEquipe1J3.getText().toString().equals("") && !editPlacarEquipe3J3.getText().toString().equals("")) {
-                        editPlacarEquipe1J3.setEnabled(false);
-                        editPlacarEquipe3J3.setEnabled(false);
-                    }
-                    if (!editPlacarEquipe2J3.getText().toString().equals("") && !editPlacarEquipe4J3.getText().toString().equals("")) {
-                        editPlacarEquipe2J3.setEnabled(false);
-                        editPlacarEquipe4J3.setEnabled(false);
-                    }
-                }
-            } else {
-                showFancyAlertDialog();
+            if (qtdEquipes == Torneio.TORNEIO_QUATRO_EQUIPES || qtdEquipes == Torneio.TORNEIO_DEZESSEIS_EQUIPES) {
+                grupo1.setEquipe1(equipe1);
+                grupo1.setEquipe2(equipe2);
+                grupo1.setEquipe3(equipe3);
+                grupo1.setEquipe4(equipe4);
             }
+
+            if (qtdEquipes == Torneio.TORNEIO_QUATRO_EQUIPES) {
+                txtEquipe1J1.setText(grupo1.getEquipe1().getNome());
+                txtEquipe1J2.setText(grupo1.getEquipe1().getNome());
+                txtEquipe1J3.setText(grupo1.getEquipe1().getNome());
+                txtEquipe2J1.setText(grupo1.getEquipe2().getNome());
+                txtEquipe2J2.setText(grupo1.getEquipe2().getNome());
+                txtEquipe2J3.setText(grupo1.getEquipe2().getNome());
+                txtEquipe3J1.setText(grupo1.getEquipe3().getNome());
+                txtEquipe3J2.setText(grupo1.getEquipe3().getNome());
+                txtEquipe3J3.setText(grupo1.getEquipe3().getNome());
+                txtEquipe4J1.setText(grupo1.getEquipe4().getNome());
+                txtEquipe4J2.setText(grupo1.getEquipe4().getNome());
+                txtEquipe4J3.setText(grupo1.getEquipe4().getNome());
+
+                editPlacarEquipe1J1.setText(placarEquipe1J1);
+                editPlacarEquipe1J2.setText(placarEquipe1J2);
+                editPlacarEquipe1J3.setText(placarEquipe1J3);
+                editPlacarEquipe2J1.setText(placarEquipe2J1);
+                editPlacarEquipe2J2.setText(placarEquipe2J2);
+                editPlacarEquipe2J3.setText(placarEquipe2J3);
+                editPlacarEquipe3J1.setText(placarEquipe3J1);
+                editPlacarEquipe3J2.setText(placarEquipe3J2);
+                editPlacarEquipe3J3.setText(placarEquipe3J3);
+                editPlacarEquipe4J1.setText(placarEquipe4J1);
+                editPlacarEquipe4J2.setText(placarEquipe4J2);
+                editPlacarEquipe4J3.setText(placarEquipe4J3);
+
+                trocaTela = true;
+
+                if (!editPlacarEquipe1J1.getText().toString().equals("") && !editPlacarEquipe2J1.getText().toString().equals("")) {
+                    editPlacarEquipe1J1.setEnabled(false);
+                    editPlacarEquipe2J1.setEnabled(false);
+                }
+                if (!editPlacarEquipe3J1.getText().toString().equals("") && !editPlacarEquipe4J1.getText().toString().equals("")) {
+                    editPlacarEquipe3J1.setEnabled(false);
+                    editPlacarEquipe4J1.setEnabled(false);
+                }
+                if (!editPlacarEquipe4J2.getText().toString().equals("") && !editPlacarEquipe1J2.getText().toString().equals("")) {
+                    editPlacarEquipe4J2.setEnabled(false);
+                    editPlacarEquipe1J2.setEnabled(false);
+                }
+                if (!editPlacarEquipe2J2.getText().toString().equals("") && !editPlacarEquipe3J2.getText().toString().equals("")) {
+                    editPlacarEquipe2J2.setEnabled(false);
+                    editPlacarEquipe3J2.setEnabled(false);
+                }
+                if (!editPlacarEquipe1J3.getText().toString().equals("") && !editPlacarEquipe3J3.getText().toString().equals("")) {
+                    editPlacarEquipe1J3.setEnabled(false);
+                    editPlacarEquipe3J3.setEnabled(false);
+                }
+                if (!editPlacarEquipe2J3.getText().toString().equals("") && !editPlacarEquipe4J3.getText().toString().equals("")) {
+                    editPlacarEquipe2J3.setEnabled(false);
+                    editPlacarEquipe4J3.setEnabled(false);
+                }
+            }
+        } else {
+            showFancyAlertDialog();
+        }
         if (qtdEquipes > Torneio.TORNEIO_QUATRO_EQUIPES) {
             if (grupo4ID >= 1) {
                 grupo2 = grupoController.getGrupoByID(grupo2);
@@ -990,18 +1002,24 @@ public class JogosPrimeiraFase extends AppCompatActivity {
     }
 
     public void voltar(View view) {
-        AppUtil.goNextScreen(JogosPrimeiraFase.this, Dashboard.class, true );
+        AppUtil.goNextScreen(JogosPrimeiraFase.this, Dashboard.class, true);
         finish();
     }
 
     @Override
     public void onBackPressed() {
-        AppUtil.goNextScreen(JogosPrimeiraFase.this, Dashboard.class, true );
+        AppUtil.goNextScreen(JogosPrimeiraFase.this, Dashboard.class, true);
         finish();
     }
 
     public void editarResultados(View view) {
+        if (finalizouPrimeiraFase) {
+            finalizouPrimeiraFase = false;
+            btnSalvar.setVisibility(View.VISIBLE);
+            btnFinalizarPrimeiraFase.setVisibility(View.VISIBLE);
+        }
         btnEditar.setEnabled(false);
+
         if (qtdEquipes == Torneio.TORNEIO_QUATRO_EQUIPES) {
             if (!editPlacarEquipe1J1.getText().toString().equals("")) {
                 editPlacarEquipe1J1.setEnabled(true);
@@ -1949,20 +1967,20 @@ public class JogosPrimeiraFase extends AppCompatActivity {
     private void restaurarSharedPreferences() {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
 
-            grupo1ID = preferences.getInt("grupo1ID", -1);
-            nomeGrupo1 = preferences.getString("nomeGrupo1", "");
-            equipe1ID = preferences.getInt("equipe1ID", -1);
-            nomeEquipe1 = preferences.getString("nomeEquipe1", "");
-            equipe2ID = preferences.getInt("equipe2ID", -1);
-            nomeEquipe2 = preferences.getString("nomeEquipe2", "");
-            equipe3ID = preferences.getInt("equipe3ID", -1);
-            nomeEquipe3 = preferences.getString("nomeEquipe3", "");
-            equipe4ID = preferences.getInt("equipe4ID", -1);
-            nomeEquipe4 = preferences.getString("nomeEquipe4", "");
-            finalizouPrimeiraFase = preferences.getBoolean("finalizouPrimeiraFase", false);
+        grupo1ID = preferences.getInt("grupo1ID", -1);
+        nomeGrupo1 = preferences.getString("nomeGrupo1", "");
+        equipe1ID = preferences.getInt("equipe1ID", -1);
+        nomeEquipe1 = preferences.getString("nomeEquipe1", "");
+        equipe2ID = preferences.getInt("equipe2ID", -1);
+        nomeEquipe2 = preferences.getString("nomeEquipe2", "");
+        equipe3ID = preferences.getInt("equipe3ID", -1);
+        nomeEquipe3 = preferences.getString("nomeEquipe3", "");
+        equipe4ID = preferences.getInt("equipe4ID", -1);
+        nomeEquipe4 = preferences.getString("nomeEquipe4", "");
+        finalizouPrimeiraFase = preferences.getBoolean("finalizouPrimeiraFase", false);
 
 
-            if (qtdEquipes == Torneio.TORNEIO_QUATRO_EQUIPES) {
+        if (qtdEquipes == Torneio.TORNEIO_QUATRO_EQUIPES) {
             placarEquipe1J1 = preferences.getString("placarEquipe1J1", "");
             placarEquipe1J2 = preferences.getString("placarEquipe1J2", "");
             placarEquipe1J3 = preferences.getString("placarEquipe1J3", "");
@@ -2707,6 +2725,14 @@ public class JogosPrimeiraFase extends AppCompatActivity {
             dados.putInt("gcEquipe16Class", equipe16.getGolsContra());
             dados.putInt("sgEquipe16Class", equipe16.getSaldoGols());
         }
+        dados.apply();
+    }
+
+    private void salvarStatusFaseSharedPreferences() {
+        preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
+        SharedPreferences.Editor dados = preferences.edit();
+
+        dados.putBoolean("finalizouPrimeiraFase", false);
         dados.apply();
     }
 
