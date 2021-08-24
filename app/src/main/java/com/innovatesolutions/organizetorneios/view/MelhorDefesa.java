@@ -151,7 +151,9 @@ public class MelhorDefesa extends AppCompatActivity {
         equipes[2] = equipe3;
         equipes[3] = equipe4;
 
-        ordenaMelhorDefesa(equipes);
+        if (qtdEquipes == Torneio.TORNEIO_QUATRO_EQUIPES || qtdEquipes == Torneio.TORNEIO_DEZESSEIS_EQUIPES) {
+            ordenaMelhorDefesa(equipes);
+        }
 
         txtEquipe1.setText(equipes[0].getNome());
         gcEquipe1.setText(String.valueOf(equipes[0].getGolsContra()));
