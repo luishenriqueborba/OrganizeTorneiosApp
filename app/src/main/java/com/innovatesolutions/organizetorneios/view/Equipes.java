@@ -70,6 +70,8 @@ public class Equipes extends AppCompatActivity {
         btnSalvarGrupoA = findViewById(R.id.btnSalvarGrupoA);
         btnEditarGrupoA = findViewById(R.id.btnEditarGrupoA);
 
+        btnSalvarGrupoA.setVisibility(View.GONE);
+
         grupo1 = new Grupo();
         grupo1.setId(grupo1ID);
         equipe1 = new Equipe();
@@ -101,6 +103,10 @@ public class Equipes extends AppCompatActivity {
             btnEditarGrupoB = findViewById(R.id.btnEditarGrupoB);
             btnEditarGrupoC = findViewById(R.id.btnEditarGrupoC);
             btnEditarGrupoD = findViewById(R.id.btnEditarGrupoD);
+
+            btnSalvarGrupoB.setVisibility(View.GONE);
+            btnSalvarGrupoC.setVisibility(View.GONE);
+            btnSalvarGrupoD.setVisibility(View.GONE);
 
             grupo2 = new Grupo();
             grupo2.setId(grupo2ID);
@@ -161,9 +167,10 @@ public class Equipes extends AppCompatActivity {
             grupo1.setEquipe3(equipe3);
             editEquipe3.setText(grupo1.getEquipe3().getNome());
 
-            if (qtdEquipes == Torneio.TORNEIO_QUATRO_EQUIPES || qtdEquipes == Torneio.TORNEIO_DEZESSEIS_EQUIPES)
-            grupo1.setEquipe4(equipe4);
-            editEquipe4.setText(grupo1.getEquipe4().getNome());
+            if (qtdEquipes == Torneio.TORNEIO_QUATRO_EQUIPES || qtdEquipes == Torneio.TORNEIO_DEZESSEIS_EQUIPES) {
+                grupo1.setEquipe4(equipe4);
+                editEquipe4.setText(grupo1.getEquipe4().getNome());
+            }
 
             if (qtdEquipes == Torneio.TORNEIO_DOZE_EQUIPES || qtdEquipes == Torneio.TORNEIO_DEZESSEIS_EQUIPES) {
                 grupo2 = grupoController.getGrupoByID(grupo2);
@@ -264,6 +271,8 @@ public class Equipes extends AppCompatActivity {
     }
 
     public void editarGrupoA(View view) {
+        btnEditarGrupoA.setVisibility(View.GONE);
+        btnSalvarGrupoA.setVisibility(View.VISIBLE);
         if (qtdEquipes == Torneio.TORNEIO_QUATRO_EQUIPES || qtdEquipes == Torneio.TORNEIO_DEZESSEIS_EQUIPES) {
             btnSalvarGrupoA.setEnabled(true);
             btnEditarGrupoA.setEnabled(false);
@@ -281,6 +290,8 @@ public class Equipes extends AppCompatActivity {
     }
 
     public void editarGrupoB(View view) {
+        btnEditarGrupoB.setVisibility(View.GONE);
+        btnSalvarGrupoB.setVisibility(View.VISIBLE);
         if (qtdEquipes == Torneio.TORNEIO_DEZESSEIS_EQUIPES) {
             btnSalvarGrupoB.setEnabled(true);
             btnEditarGrupoB.setEnabled(false);
@@ -298,6 +309,8 @@ public class Equipes extends AppCompatActivity {
     }
 
     public void editarGrupoC(View view) {
+        btnEditarGrupoC.setVisibility(View.GONE);
+        btnSalvarGrupoC.setVisibility(View.VISIBLE);
         if (qtdEquipes == Torneio.TORNEIO_DEZESSEIS_EQUIPES) {
             btnSalvarGrupoC.setEnabled(true);
             btnEditarGrupoC.setEnabled(false);
@@ -315,6 +328,8 @@ public class Equipes extends AppCompatActivity {
     }
 
     public void editarGrupoD(View view) {
+        btnEditarGrupoD.setVisibility(View.GONE);
+        btnSalvarGrupoD.setVisibility(View.VISIBLE);
         if (qtdEquipes == Torneio.TORNEIO_DEZESSEIS_EQUIPES) {
             btnSalvarGrupoD.setEnabled(true);
             btnEditarGrupoD.setEnabled(false);
