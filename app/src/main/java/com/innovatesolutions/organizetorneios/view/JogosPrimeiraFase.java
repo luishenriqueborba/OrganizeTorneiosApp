@@ -70,8 +70,7 @@ public class JogosPrimeiraFase extends AppCompatActivity {
             editPlacarEquipe14J1, editPlacarEquipe14J2, editPlacarEquipe14J3,
             editPlacarEquipe15J1, editPlacarEquipe15J2, editPlacarEquipe15J3,
             editPlacarEquipe16J1, editPlacarEquipe16J2, editPlacarEquipe16J3;
-    private String nomeGrupo1, nomeGrupo2, nomeGrupo3, nomeGrupo4, nomeEquipe1, nomeEquipe2, nomeEquipe3, nomeEquipe4, nomeEquipe5, nomeEquipe6, nomeEquipe7, nomeEquipe8, nomeEquipe9, nomeEquipe10, nomeEquipe11, nomeEquipe12, nomeEquipe13, nomeEquipe14, nomeEquipe15, nomeEquipe16,
-            placarEquipe1J1, placarEquipe1J2, placarEquipe1J3,
+    private String placarEquipe1J1, placarEquipe1J2, placarEquipe1J3,
             placarEquipe2J1, placarEquipe2J2, placarEquipe2J3,
             placarEquipe3J1, placarEquipe3J2, placarEquipe3J3,
             placarEquipe4J1, placarEquipe4J2, placarEquipe4J3,
@@ -1968,17 +1967,11 @@ public class JogosPrimeiraFase extends AppCompatActivity {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
 
         grupo1ID = preferences.getInt("grupo1ID", -1);
-        nomeGrupo1 = preferences.getString("nomeGrupo1", "");
         equipe1ID = preferences.getInt("equipe1ID", -1);
-        nomeEquipe1 = preferences.getString("nomeEquipe1", "");
         equipe2ID = preferences.getInt("equipe2ID", -1);
-        nomeEquipe2 = preferences.getString("nomeEquipe2", "");
         equipe3ID = preferences.getInt("equipe3ID", -1);
-        nomeEquipe3 = preferences.getString("nomeEquipe3", "");
         equipe4ID = preferences.getInt("equipe4ID", -1);
-        nomeEquipe4 = preferences.getString("nomeEquipe4", "");
         finalizouPrimeiraFase = preferences.getBoolean("finalizouPrimeiraFase", false);
-
 
         if (qtdEquipes == Torneio.TORNEIO_QUATRO_EQUIPES) {
             placarEquipe1J1 = preferences.getString("placarEquipe1J1", "");
@@ -1996,28 +1989,17 @@ public class JogosPrimeiraFase extends AppCompatActivity {
         }
         if (qtdEquipes > Torneio.TORNEIO_QUATRO_EQUIPES) {
             grupo2ID = preferences.getInt("grupo2ID", -1);
-            nomeGrupo2 = preferences.getString("nomeGrupo2", "");
             grupo3ID = preferences.getInt("grupo3ID", -1);
-            nomeGrupo3 = preferences.getString("nomeGrupo3", "");
             grupo4ID = preferences.getInt("grupo4ID", -1);
-            nomeGrupo4 = preferences.getString("nomeGrupo4", "");
 
             equipe5ID = preferences.getInt("equipe5ID", -1);
-            nomeEquipe5 = preferences.getString("nomeEquipe5", "");
             equipe6ID = preferences.getInt("equipe6ID", -1);
-            nomeEquipe6 = preferences.getString("nomeEquipe6", "");
             equipe7ID = preferences.getInt("equipe7ID", -1);
-            nomeEquipe7 = preferences.getString("nomeEquipe7", "");
             equipe8ID = preferences.getInt("equipe8ID", -1);
-            nomeEquipe8 = preferences.getString("nomeEquipe8", "");
             equipe9ID = preferences.getInt("equipe9ID", -1);
-            nomeEquipe9 = preferences.getString("nomeEquipe9", "");
             equipe10ID = preferences.getInt("equipe10ID", -1);
-            nomeEquipe10 = preferences.getString("nomeEquipe10", "");
             equipe11ID = preferences.getInt("equipe11ID", -1);
-            nomeEquipe11 = preferences.getString("nomeEquipe11", "");
             equipe12ID = preferences.getInt("equipe12ID", -1);
-            nomeEquipe12 = preferences.getString("nomeEquipe12", "");
 
             if (qtdEquipes == Torneio.TORNEIO_DOZE_EQUIPES) {
                 placarEquipe1J1 = preferences.getString("placarEquipe1J1", "");
@@ -2049,13 +2031,9 @@ public class JogosPrimeiraFase extends AppCompatActivity {
         }
         if (qtdEquipes > Torneio.TORNEIO_DOZE_EQUIPES) {
             equipe13ID = preferences.getInt("equipe13ID", -1);
-            nomeEquipe13 = preferences.getString("nomeEquipe13", "");
             equipe14ID = preferences.getInt("equipe14ID", -1);
-            nomeEquipe14 = preferences.getString("nomeEquipe14", "");
             equipe15ID = preferences.getInt("equipe15ID", -1);
-            nomeEquipe15 = preferences.getString("nomeEquipe15", "");
             equipe16ID = preferences.getInt("equipe16ID", -1);
-            nomeEquipe16 = preferences.getString("nomeEquipe16", "");
 
             if (qtdEquipes == Torneio.TORNEIO_DEZESSEIS_EQUIPES) {
                 placarEquipe1J1 = preferences.getString("placarEquipe1J1", "");

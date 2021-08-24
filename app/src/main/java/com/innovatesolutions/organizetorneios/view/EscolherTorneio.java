@@ -41,7 +41,6 @@ public class EscolherTorneio extends AppCompatActivity {
     private int qtdEquipes;
     private String nomeEquipe1;
     private InterstitialAd mInterstitialAd;
-    private AdView mAdView;
     private TextView txtNomeUsuario;
     private Button btnQuatroEquipes, btnDozeEquipes, btnDezesseisEquipes;
 
@@ -55,7 +54,7 @@ public class EscolherTorneio extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        mAdView = findViewById(R.id.adView);
+        AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
@@ -66,25 +65,22 @@ public class EscolherTorneio extends AppCompatActivity {
 
         verificaTorneioAnterior();
 
-        btnQuatroEquipes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                qtdEquipes = 4;
-                showInterstitialAd(getString(R.string.anuncioIntersticial1), adRequest);
-                salvarSharedPreferences();
-            }
+        btnQuatroEquipes.setOnClickListener(v -> {
+            qtdEquipes = 4;
+            salvarSharedPreferences();
+            showInterstitialAd(getString(R.string.anuncioIntersticial1), adRequest);
         });
 
         btnDozeEquipes.setOnClickListener(view -> {
             qtdEquipes = 12;
-            showInterstitialAd(getString(R.string.anuncioIntersticial2), adRequest);
             salvarSharedPreferences();
+            showInterstitialAd(getString(R.string.anuncioIntersticial2), adRequest);
         });
 
         btnDezesseisEquipes.setOnClickListener(view -> {
             qtdEquipes = 16;
-            showInterstitialAd(getString(R.string.anuncioIntersticial2), adRequest);
             salvarSharedPreferences();
+            showInterstitialAd(getString(R.string.anuncioIntersticial2), adRequest);
         });
     }
 
