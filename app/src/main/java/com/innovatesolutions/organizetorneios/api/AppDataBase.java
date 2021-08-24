@@ -200,6 +200,8 @@ public class AppDataBase extends SQLiteOpenHelper {
         } catch (SQLException e) {
 
             Log.e(AppUtil.LOG_APP1, tabela + " falhou ao executar o list(): " + e.getMessage());
+        } finally {
+            cursor.close();
         }
         return list;
     }
@@ -225,6 +227,8 @@ public class AppDataBase extends SQLiteOpenHelper {
 
             Log.e(AppUtil.LOG_APP1, "ERRO getUsuarioByID" + obj.getId());
             Log.e(AppUtil.LOG_APP1, "ERRO " + e.getMessage());
+        } finally {
+            cursor.close();
         }
 
         return usuario;
@@ -341,6 +345,8 @@ public class AppDataBase extends SQLiteOpenHelper {
         } catch (SQLException e) {
 
             Log.e(AppUtil.LOG_APP2, tabela + " falhou ao executar o list(): " + e.getMessage());
+        } finally {
+            cursor.close();
         }
         return list;
     }
@@ -384,9 +390,9 @@ public class AppDataBase extends SQLiteOpenHelper {
         } catch (SQLException e) {
 
             Log.e(AppUtil.LOG_APP2, tabela + " falhou ao executar o listAllTeams(): " + e.getMessage());
+        } finally {
+            cursor.close();
         }
-
-        cursor.close();
 
         return list;
     }
@@ -418,6 +424,8 @@ public class AppDataBase extends SQLiteOpenHelper {
 
             Log.e(AppUtil.LOG_APP2, "ERRO getEquipeByID" + obj.getId());
             Log.e(AppUtil.LOG_APP2, "ERRO " + e.getMessage());
+        } finally {
+            cursor.close();
         }
 
         return equipe;
@@ -530,6 +538,8 @@ public class AppDataBase extends SQLiteOpenHelper {
         } catch (SQLException e) {
 
             Log.e(AppUtil.LOG_APP3, tabela + " falhou ao executar o list(): " + e.getMessage());
+        } finally {
+            cursor.close();
         }
         return list;
     }
@@ -555,6 +565,8 @@ public class AppDataBase extends SQLiteOpenHelper {
         } catch (SQLException e) {
 
             Log.e(AppUtil.LOG_APP1, tabela + " falhou ao recuperar ultimo ID: " + e.getMessage());
+        } finally {
+            cursor.close();
         }
         return -1;
     }
@@ -581,6 +593,8 @@ public class AppDataBase extends SQLiteOpenHelper {
 
             Log.e(AppUtil.LOG_APP2, "ERRO getGrupoByID" + obj.getId());
             Log.e(AppUtil.LOG_APP2, "ERRO " + e.getMessage());
+        } finally {
+            cursor.close();
         }
 
         return grupo;
@@ -608,6 +622,8 @@ public class AppDataBase extends SQLiteOpenHelper {
 
             Log.e(AppUtil.LOG_APP2, "ERRO getEquipeByFK" + idFK);
             Log.e(AppUtil.LOG_APP2, "ERRO " + e.getMessage());
+        } finally {
+            cursor.close();
         }
 
         return equipe;
@@ -714,6 +730,8 @@ public class AppDataBase extends SQLiteOpenHelper {
         } catch (SQLException e) {
 
             Log.e(AppUtil.LOG_APP4, tabela + " falhou ao executar o list(): " + e.getMessage());
+        } finally {
+            cursor.close();
         }
         return list;
     }
@@ -754,9 +772,9 @@ public class AppDataBase extends SQLiteOpenHelper {
         } catch (SQLException e) {
 
             Log.e(AppUtil.LOG_APP4, tabela + " falhou ao executar o listAllPlayers(): " + e.getMessage());
+        } finally {
+            cursor.close();
         }
-
-        cursor.close();
 
         return list;
     }
@@ -785,6 +803,8 @@ public class AppDataBase extends SQLiteOpenHelper {
 
             Log.e(AppUtil.LOG_APP4, "ERRO getJogadorByID" + obj.getId());
             Log.e(AppUtil.LOG_APP4, "ERRO " + e.getMessage());
+        } finally {
+            cursor.close();
         }
 
         return jogador;
