@@ -1514,10 +1514,6 @@ public class JogosPrimeiraFase extends AppCompatActivity {
             equipeController.alterar(equipe16);
 
             if (qtdEquipes == Torneio.TORNEIO_DEZESSEIS_EQUIPES) {
-                /*equipe1.setGrupoID(grupo1ID);
-                equipe2.setGrupoID(grupo1ID);
-                equipe3.setGrupoID(grupo1ID);
-                equipe4.setGrupoID(grupo1ID);*/
                 equipe5.setGrupoID(grupo2ID);
                 equipe6.setGrupoID(grupo2ID);
                 equipe7.setGrupoID(grupo2ID);
@@ -1531,18 +1527,6 @@ public class JogosPrimeiraFase extends AppCompatActivity {
                 equipe15.setGrupoID(grupo4ID);
                 equipe16.setGrupoID(grupo4ID);
 
-                /*editPlacarEquipe1J1.setEnabled(true);
-                editPlacarEquipe1J2.setEnabled(true);
-                editPlacarEquipe1J3.setEnabled(true);
-                editPlacarEquipe2J1.setEnabled(true);
-                editPlacarEquipe2J2.setEnabled(true);
-                editPlacarEquipe2J3.setEnabled(true);
-                editPlacarEquipe3J1.setEnabled(true);
-                editPlacarEquipe3J2.setEnabled(true);
-                editPlacarEquipe3J3.setEnabled(true);
-                editPlacarEquipe4J1.setEnabled(true);
-                editPlacarEquipe4J2.setEnabled(true);
-                editPlacarEquipe4J3.setEnabled(true);*/
                 editPlacarEquipe5J1.setEnabled(true);
                 editPlacarEquipe5J2.setEnabled(true);
                 editPlacarEquipe5J3.setEnabled(true);
