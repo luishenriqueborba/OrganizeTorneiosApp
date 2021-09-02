@@ -36,7 +36,8 @@
                 android:text="@string/jogador"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"/>
 
             <TextView
                 android:id="@+id/txtEquipe"
@@ -45,17 +46,19 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:text="@string/equipe"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textColor="@color/colorBlack"/>
 
             <TextView
                 android:id="@+id/txtNumero"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:gravity="center_vertical"
                 android:text="Nº"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textColor="@color/colorBlack"/>
 
         </LinearLayout>
 
@@ -121,7 +124,8 @@
                     android:gravity="center_horizontal"
                     android:text="0"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@color/colorBlack"/>
 
             </LinearLayout>
 
@@ -153,7 +157,8 @@
                     android:layout_marginTop="5dp"
                     android:text="0"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@color/colorBlack"/>
 
             </LinearLayout>
 
