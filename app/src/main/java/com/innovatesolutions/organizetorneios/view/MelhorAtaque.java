@@ -149,19 +149,6 @@ public class MelhorAtaque extends AppCompatActivity {
         equipes[2] = equipe3;
         equipes[3] = equipe4;
 
-        if (qtdEquipes == Torneio.TORNEIO_QUATRO_EQUIPES || qtdEquipes == Torneio.TORNEIO_DEZESSEIS_EQUIPES) {
-            ordenaMelhorAtaque(equipes);
-        }
-
-        txtEquipe1.setText(equipes[0].getNome());
-        gpEquipe1.setText(String.valueOf(equipes[0].getGolsPro()));
-        txtEquipe2.setText(equipes[1].getNome());
-        gpEquipe2.setText(String.valueOf(equipes[1].getGolsPro()));
-        txtEquipe3.setText(equipes[2].getNome());
-        gpEquipe3.setText(String.valueOf(equipes[2].getGolsPro()));
-        txtEquipe4.setText(equipes[3].getNome());
-        gpEquipe4.setText(String.valueOf(equipes[3].getGolsPro()));
-
         if (qtdEquipes > Torneio.TORNEIO_QUATRO_EQUIPES) {
             equipe5 = equipeController.getEquipeByID(equipe5);
             equipe6 = equipeController.getEquipeByID(equipe6);
@@ -181,8 +168,31 @@ public class MelhorAtaque extends AppCompatActivity {
             equipes[10] = equipe11;
             equipes[11] = equipe12;
 
-            ordenaMelhorAtaque(equipes);
+        }
+        if (qtdEquipes > Torneio.TORNEIO_DOZE_EQUIPES) {
+            equipe13 = equipeController.getEquipeByID(equipe13);
+            equipe14 = equipeController.getEquipeByID(equipe14);
+            equipe15 = equipeController.getEquipeByID(equipe15);
+            equipe16 = equipeController.getEquipeByID(equipe16);
 
+            equipes[12] = equipe13;
+            equipes[13] = equipe14;
+            equipes[14] = equipe15;
+            equipes[15] = equipe16;
+
+        }
+
+        ordenaMelhorAtaque(equipes);
+
+        txtEquipe1.setText(equipes[0].getNome());
+        gpEquipe1.setText(String.valueOf(equipes[0].getGolsPro()));
+        txtEquipe2.setText(equipes[1].getNome());
+        gpEquipe2.setText(String.valueOf(equipes[1].getGolsPro()));
+        txtEquipe3.setText(equipes[2].getNome());
+        gpEquipe3.setText(String.valueOf(equipes[2].getGolsPro()));
+        txtEquipe4.setText(equipes[3].getNome());
+        gpEquipe4.setText(String.valueOf(equipes[3].getGolsPro()));
+        if (qtdEquipes > Torneio.GRUPO_QUATRO_EQUIPES) {
             txtEquipe5.setText(equipes[4].getNome());
             gpEquipe5.setText(String.valueOf(equipes[4].getGolsPro()));
             txtEquipe6.setText(equipes[5].getNome());
@@ -201,18 +211,6 @@ public class MelhorAtaque extends AppCompatActivity {
             gpEquipe12.setText(String.valueOf(equipes[11].getGolsPro()));
         }
         if (qtdEquipes > Torneio.TORNEIO_DOZE_EQUIPES) {
-            equipe13 = equipeController.getEquipeByID(equipe13);
-            equipe14 = equipeController.getEquipeByID(equipe14);
-            equipe15 = equipeController.getEquipeByID(equipe15);
-            equipe16 = equipeController.getEquipeByID(equipe16);
-
-            equipes[12] = equipe13;
-            equipes[13] = equipe14;
-            equipes[14] = equipe15;
-            equipes[15] = equipe16;
-
-            ordenaMelhorAtaque(equipes);
-
             txtEquipe13.setText(equipes[12].getNome());
             gpEquipe13.setText(String.valueOf(equipes[12].getGolsPro()));
             txtEquipe14.setText(equipes[13].getNome());
