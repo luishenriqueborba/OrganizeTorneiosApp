@@ -27,6 +27,7 @@ import com.innovatesolutions.organizetorneios.R;
 import com.innovatesolutions.organizetorneios.api.AppUtil;
 import com.innovatesolutions.organizetorneios.model.Usuario;
 import com.shashank.sony.fancydialoglib.FancyAlertDialog;
+import com.shashank.sony.fancydialoglib.FancyAlertDialogListener;
 import com.shashank.sony.fancydialoglib.Icon;
 
 import java.text.MessageFormat;
@@ -128,8 +129,13 @@ public class EscolherTorneio extends AppCompatActivity {
                     AppUtil.goNextScreen(EscolherTorneio.this, Dashboard.class, true);
                     finish();
                 })
-                .OnNegativeClicked(() ->
-                        Toast.makeText(getApplicationContext(), "OK, inicie um novo torneio...", Toast.LENGTH_SHORT).show())
+                .OnNegativeClicked(new FancyAlertDialogListener() {
+                                       @Override
+                                       public void OnClick() {
+                                           AppUtil.limpaRegistros(getApplicationContext());
+                                           Toast.makeText(getApplicationContext(), "OK, inicie um novo torneio...", Toast.LENGTH_SHORT).show();
+                                       }
+                                   })
                 .build();
     }
 

@@ -1,24 +1,20 @@
 package com.innovatesolutions.organizetorneios.api;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.util.Log;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
-import com.innovatesolutions.organizetorneios.view.EscolherTorneio;
+import com.innovatesolutions.organizetorneios.controller.EquipeController;
+import com.innovatesolutions.organizetorneios.controller.GrupoController;
+import com.innovatesolutions.organizetorneios.controller.JogadorController;
+import com.innovatesolutions.organizetorneios.model.Equipe;
+import com.innovatesolutions.organizetorneios.model.Grupo;
+import com.innovatesolutions.organizetorneios.model.Jogador;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
-
-import static android.content.ContentValues.TAG;
+import java.util.List;
 
 /**
  * Classe de apoio contendo métodos que podem ser reutilizadas no projeto
@@ -146,5 +142,25 @@ public class AppUtil {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         }
         context.startActivity(intent);
+    }
+
+    public static void limpaRegistros(Context context) {
+        GrupoController grupoController = new GrupoController(context);
+        List<Grupo> listGrupos = grupoController.listar();
+        for (Grupo grupo : listGrupos) {
+            grupoController.deletar(grupo);
+        }
+
+        EquipeController equipeController = new EquipeController(context);
+        List<Equipe> listEquipes = equipeController.listarTodasEquipes();
+        for (Equipe equipe : listEquipes) {
+            equipeController.deletar(equipe);
+        }
+
+        JogadorController jogadorController = new JogadorController(context);
+        List<Jogador> list = jogadorController.listarTodosJogadores();
+        for(Jogador jogador : list) {
+            jogadorController.deletar(jogador);
+        }
     }
 }
