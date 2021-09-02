@@ -1,15 +1,23 @@
 package com.innovatesolutions.organizetorneios.api;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 
+import androidx.core.app.NotificationCompat;
+
+import com.innovatesolutions.organizetorneios.R;
 import com.innovatesolutions.organizetorneios.controller.EquipeController;
 import com.innovatesolutions.organizetorneios.controller.GrupoController;
 import com.innovatesolutions.organizetorneios.controller.JogadorController;
 import com.innovatesolutions.organizetorneios.model.Equipe;
 import com.innovatesolutions.organizetorneios.model.Grupo;
 import com.innovatesolutions.organizetorneios.model.Jogador;
+import com.innovatesolutions.organizetorneios.view.NotificacaoVersaoPremium;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -162,5 +170,39 @@ public class AppUtil {
         for(Jogador jogador : list) {
             jogadorController.deletar(jogador);
         }
+    }
+
+    public static void notificarUsuario(Context context, String mensagem,
+                                  String titulo) {
+
+        NotificationCompat.Builder notificacao =
+                new NotificationCompat.Builder(context);
+
+        notificacao.setContentTitle(titulo);
+        notificacao.setContentText(mensagem);
+        notificacao.setPriority(Notification.PRIORITY_HIGH);
+
+
+        notificacao.setLargeIcon(
+                BitmapFactory.decodeResource(context.getResources(),
+                        R.mipmap.ic_launcher_round));
+
+        notificacao.setSmallIcon(R.drawable.iconfinder_trophy);
+
+        Intent intent =
+                new Intent(context, NotificacaoVersaoPremium.class);
+
+        PendingIntent pendingIntent =
+                PendingIntent.getActivity(context, 100,
+                        intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        notificacao.setAutoCancel(true);
+        notificacao.setContentIntent(pendingIntent);
+
+        NotificationManager notificationManager =
+                (NotificationManager)
+                        context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        notificationManager.notify(9000, notificacao.build());
     }
 }
