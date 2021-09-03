@@ -9,8 +9,8 @@ android {
         minSdkVersion 19
         targetSdkVersion 30
         multiDexEnabled = true
-        versionCode 903
-        versionName "09.03"
+        versionCode 904
+        versionName "09.04"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
