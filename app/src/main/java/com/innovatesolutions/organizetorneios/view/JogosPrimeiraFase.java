@@ -137,7 +137,7 @@ public class JogosPrimeiraFase extends AppCompatActivity {
             if (finalizarPrimeiraFase()) {
                 restaurarSharedPreferencesQtdEquipes();
                 if (finalizouPrimeiraFase) {
-                    showInterstitialAd(getString(R.string.anuncioIntersticial2), adRequest);
+                    showInterstitialAd(getString(R.string.anuncioIntersticial1), adRequest);
                 }
             }
         });
