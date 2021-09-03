@@ -1,8 +1,6 @@
 package com.innovatesolutions.organizetorneios.adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.view.LayoutInflater;
@@ -29,30 +27,13 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class JogadorCartoesListAdapter extends ArrayAdapter<Jogador> implements View.OnClickListener {
 
-    SharedPreferences preferences;
-
-    Context context;
-
-    ArrayList<Jogador> dados;
-
-    Jogador jogador;
-
-    JogadorController jogadorController;
-
-    Equipe equipe;
-
-    EquipeController equipeController;
-
-    AlertDialog.Builder builder;
-
-    AlertDialog alert;
-
-    ViewHolder linha;
-
-    int qtdJogadores;
+    private SharedPreferences preferences;
+    private final Context context;
+    private final ArrayList<Jogador> dados;
+    private Jogador jogador;
+    private int qtdJogadores;
 
     private static class ViewHolder {
-
         TextView txtNome;
         TextView txtNumero;
         TextView txtEquipe;
@@ -66,16 +47,13 @@ public class JogadorCartoesListAdapter extends ArrayAdapter<Jogador> implements 
         ImageView imgDeletarJogador;
     }
 
-
     public JogadorCartoesListAdapter(ArrayList<Jogador> dataSet, Context context) {
         super(context, R.layout.listview_jogadores_cartoes, dataSet);
-
         this.dados = dataSet;
         this.context = context;
     }
 
     public void atualizarLista(ArrayList<Jogador> novosDados) {
-
         this.dados.clear();
         this.dados.addAll(novosDados);
 
@@ -88,16 +66,73 @@ public class JogadorCartoesListAdapter extends ArrayAdapter<Jogador> implements 
 
     @Override
     public void onClick(View view) {
-
         int posicao = (Integer) view.getTag();
-
         Object object = getItem(posicao);
-
         jogador = (Jogador) object;
+        JogadorController jogadorController = new JogadorController(getContext());
 
-        jogadorController = new JogadorController(getContext());
+        if (view.getId() == R.id.imgAvatar) {
+            Snackbar.make(view, "Nome: " + jogador.getNome() + " | Amarelos: " + jogador.getCartaoAmarelo() + " | Vermelhos: " + jogador.getCartaoVermelho(), Snackbar.LENGTH_SHORT).setAction("No action", null).show();
+        }
+        else if (view.getId() == R.id.imgAdicionarCartaoAmarelo) {
+            jogador.setCartaoAmarelo(jogador.getCartaoAmarelo() + 1);
+            if (jogadorController.alterar(jogador)) {
+                atualizarLista(jogadorController.listarTodosJogadores());
+                notifyDataSetChanged();
+                if (dados == null) {
+                    salvarSharedPreferences();
+                }
 
-        switch (view.getId()) {
+            } else
+                Toast.makeText(context, "Não foi possível fazer a alteração!", Toast.LENGTH_SHORT).show();
+        } else if (view.getId() == R.id.imgRemoverCartaoAmarelo) {
+            if (jogador.getCartaoAmarelo() > 0) {
+                jogador.setCartaoAmarelo(jogador.getCartaoAmarelo() - 1);
+                if (jogadorController.alterar(jogador)) {
+                    atualizarLista(jogadorController.listarTodosJogadores());
+                    notifyDataSetChanged();
+                    if (dados == null) {
+                        salvarSharedPreferences();
+                    }
+                } else
+                    Toast.makeText(context, "Não foi possível fazer a alteração!", Toast.LENGTH_SHORT).show();
+            }
+        } else if (view.getId() == R.id.imgAdicionarCartaoVermelho) {
+            jogador.setCartaoVermelho(jogador.getCartaoVermelho() + 1);
+            if (jogadorController.alterar(jogador)) {
+                atualizarLista(jogadorController.listarTodosJogadores());
+                notifyDataSetChanged();
+                if (dados == null) {
+                    salvarSharedPreferences();
+                }
+            } else
+                Toast.makeText(context, "Não foi possível fazer a alteração!", Toast.LENGTH_SHORT).show();
+        } else if (view.getId() == R.id.imgRemoverCartaoVermelho) {
+            if (jogador.getCartaoVermelho() > 0) {
+                jogador.setCartaoVermelho(jogador.getCartaoVermelho() - 1);
+                if (jogadorController.alterar(jogador)) {
+                    atualizarLista(jogadorController.listarTodosJogadores());
+                    notifyDataSetChanged();
+                    if (dados == null) {
+                        salvarSharedPreferences();
+                    }
+                } else
+                    Toast.makeText(context, "Não foi possível fazer a alteração!", Toast.LENGTH_SHORT).show();
+            }
+        } else if (view.getId() == R.id.imgDeletarJogador) {
+            if (jogadorController.deletar(jogador)) {
+                restaurarSharedPreferences();
+                qtdJogadores = qtdJogadores - 1;
+                atualizarLista(jogadorController.listarTodosJogadores());
+                notifyDataSetChanged();
+                salvarSharedPreferences();
+                if (dados == null) {
+                    salvarSharedPreferences();
+                }
+            }
+        }
+
+        /*switch (view.getId()) {
 
             case R.id.imgAvatar:
                 Snackbar.make(view, "Nome: " + jogador.getNome() + " | Amarelos: " + jogador.getCartaoAmarelo() + " | Vermelhos: " + jogador.getCartaoVermelho(), Snackbar.LENGTH_SHORT).setAction("No action", null).show();
@@ -186,7 +221,7 @@ public class JogadorCartoesListAdapter extends ArrayAdapter<Jogador> implements 
                 break;
 
             case R.id.imgDeletarJogador:
-                 /**builder = new AlertDialog.Builder(getContext());
+                 *//**builder = new AlertDialog.Builder(getContext());
                  builder.setTitle("ALERTA");
                  builder.setMessage("Realmente deseja DELETAR essa equipe?");
                  builder.setCancelable(true);
@@ -224,7 +259,7 @@ public class JogadorCartoesListAdapter extends ArrayAdapter<Jogador> implements 
                 });
 
                  alert = builder.create();
-                 alert.show();*/
+                 alert.show();*//*
 
                 if (jogadorController.deletar(jogador)) {
 
@@ -245,7 +280,7 @@ public class JogadorCartoesListAdapter extends ArrayAdapter<Jogador> implements 
 
                 }
                 break;
-        }
+        }*/
     }
 
     @NonNull
@@ -254,13 +289,14 @@ public class JogadorCartoesListAdapter extends ArrayAdapter<Jogador> implements 
 
         jogador = getItem(position);
 
-        equipe = new Equipe();
+        Equipe equipe = new Equipe();
         equipe.setId(jogador.getEquipeId());
 
-        equipeController = new EquipeController(getContext());
+        EquipeController equipeController = new EquipeController(getContext());
 
         equipe = equipeController.getEquipeByID(equipe);
 
+        ViewHolder linha;
         if (dataSet == null) {
 
             linha = new JogadorCartoesListAdapter.ViewHolder();
