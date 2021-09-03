@@ -152,6 +152,40 @@ public class JogosPrimeiraFase extends AppCompatActivity {
                         // an ad is loaded.
                         mInterstitialAd = interstitialAd;
                         Log.i(TAG, "onAdLoaded");
+
+                        if (mInterstitialAd != null) {
+
+                            mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                @Override
+                                public void onAdDismissedFullScreenContent() {
+                                    // Called when fullscreen content is dismissed.
+                                    Log.d("TAG", "The ad was dismissed.");
+                                    AppUtil.goNextScreen(JogosPrimeiraFase.this, Dashboard.class, false);
+                                    finish();
+                                }
+
+                                @Override
+                                public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                    // Called when fullscreen content failed to show.
+                                    Log.d("TAG", "The ad failed to show.");
+                                    AppUtil.goNextScreen(JogosPrimeiraFase.this, Dashboard.class, false);
+                                    finish();
+                                }
+
+                                @Override
+                                public void onAdShowedFullScreenContent() {
+                                    // Called when fullscreen content is shown.
+                                    // Make sure to set your reference to null so you don't
+                                    // show it a second time.
+                                    mInterstitialAd = null;
+                                    Log.d("TAG", "The ad was shown.");
+                                }
+                            });
+
+                            mInterstitialAd.show(JogosPrimeiraFase.this);
+                        } else {
+                            Log.d("TAG", "The interstitial ad wasn't ready yet.");
+                        }
                     }
 
                     @Override
@@ -161,40 +195,6 @@ public class JogosPrimeiraFase extends AppCompatActivity {
                         mInterstitialAd = null;
                     }
                 });
-
-        if (mInterstitialAd != null) {
-
-            mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                @Override
-                public void onAdDismissedFullScreenContent() {
-                    // Called when fullscreen content is dismissed.
-                    Log.d("TAG", "The ad was dismissed.");
-                    AppUtil.goNextScreen(JogosPrimeiraFase.this, CadastrarGrupos.class, false);
-                    finish();
-                }
-
-                @Override
-                public void onAdFailedToShowFullScreenContent(AdError adError) {
-                    // Called when fullscreen content failed to show.
-                    Log.d("TAG", "The ad failed to show.");
-                    AppUtil.goNextScreen(JogosPrimeiraFase.this, CadastrarGrupos.class, false);
-                    finish();
-                }
-
-                @Override
-                public void onAdShowedFullScreenContent() {
-                    // Called when fullscreen content is shown.
-                    // Make sure to set your reference to null so you don't
-                    // show it a second time.
-                    mInterstitialAd = null;
-                    Log.d("TAG", "The ad was shown.");
-                }
-            });
-
-            mInterstitialAd.show(JogosPrimeiraFase.this);
-        } else {
-            Log.d("TAG", "The interstitial ad wasn't ready yet.");
-        }
     }
 
     private void initFormulario() {
