@@ -5,20 +5,20 @@ public class Version {
 //Release notes
 
 /**
- * Versão: 9.3
+ * Versão: 09.03
  * Novidades:
  * Criada função de compartilhamento do app via whatsApp
  *
  * Correções:
  * Atualização dos Ads (anúncios)
  *
- * Versão: 9.2
+ * Versão: 09.02
  * Novidades:
  *
  * Correções:
  * Ajustes no controle de cartões e artilharia.
  *
- * Versão: 9.1
+ * Versão: 09.01
  * Novidades:
  * Implementação de controle de cartões e artilharia.
  *
