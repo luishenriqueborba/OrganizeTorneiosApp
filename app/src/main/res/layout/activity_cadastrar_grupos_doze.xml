@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
-    tools:context=".view.CadastrarGruposDoze">
+    tools:context=".view.CadastrarGrupos">
 
     <ScrollView
         android:layout_width="match_parent"
