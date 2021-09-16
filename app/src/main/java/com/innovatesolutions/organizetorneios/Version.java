@@ -4,7 +4,14 @@ public class Version {
 }
 //Release notes
 
-/**Versão: 09.06
+/**Versão: 09.07
+ * Novidades:
+ *
+ *
+ * Correções:
+ * Ajuste dos Ads (anúncios) de produção
+ * -------------------------------------------------------------------------------------------------
+ * Versão: 09.06
  * Novidades:
  *
  *
