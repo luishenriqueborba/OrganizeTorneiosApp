@@ -4,7 +4,7 @@ public class Version {
 }
 //Release notes
 
-/**Versão: 09.05
+/**Versão: 09.06
  * Novidades:
  *
  *
