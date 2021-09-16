@@ -69,7 +69,7 @@ public class EscolherTorneio extends AppCompatActivity {
         btnQuatroEquipes.setOnClickListener(v -> {
             qtdEquipes = 4;
             salvarSharedPreferences();
-            showInterstitialAd(getString(R.string.anuncioIntersticial1), adRequest);
+            showInterstitialAd(getString(R.string.anuncioIntersticial2), adRequest);
         });
 
         btnDozeEquipes.setOnClickListener(view -> {

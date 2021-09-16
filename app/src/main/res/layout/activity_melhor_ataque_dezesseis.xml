@@ -439,7 +439,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
                 ads:adSize="BANNER"
-                ads:adUnitId="@string/anuncioBanner1">
+                ads:adUnitId="@string/anuncioBanner3">
             </com.google.android.gms.ads.AdView>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
