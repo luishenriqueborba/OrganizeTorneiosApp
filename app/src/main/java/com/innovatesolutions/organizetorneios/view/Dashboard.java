@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,14 +17,15 @@ import com.innovatesolutions.organizetorneios.api.AppUtil;
 
 public class Dashboard extends AppCompatActivity {
 
+    public static final String URL_DOWNLOAD_APP = "https://play.google.com/store/apps/details?id=com.innovatesolutions.organizetorneios";
+
     private long backPressedTime;
     private SharedPreferences preferences;
-    private int qtdEquipes, qtdJogadores;
+    private int qtdJogadores;
     private boolean finalizouPrimeiraFase;
     private final String pasta = "fonts/";
     private final String fontBanger = "Bangers.ttf";
     private TextView txtTitulo;
-    private ImageView iconWhatsApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,6 @@ public class Dashboard extends AppCompatActivity {
 
     private void init() {
         txtTitulo = findViewById(R.id.txtTituloDashboard);
-        iconWhatsApp = findViewById(R.id.imageViewWhatsApp);
 
         Typeface font = Typeface.createFromAsset(getAssets(), pasta + fontBanger);
         txtTitulo.setTypeface(font);
@@ -46,7 +45,7 @@ public class Dashboard extends AppCompatActivity {
 
     public void compartilhar(View view) {
         if (AppUtil.isAppInstalled(Dashboard.this, "com.whatsapp")) {
-            String message = "Se liga nesse app pra organizar torneios...";
+            String message = "Se liga nesse app pra organizar torneios... \n" + URL_DOWNLOAD_APP;
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setPackage("com.whatsapp");
             intent.putExtra(Intent.EXTRA_TEXT, message);
@@ -89,33 +88,30 @@ public class Dashboard extends AppCompatActivity {
     public void verJogosEliminatorias(View view) {
         if (finalizouPrimeiraFase) {
             AppUtil.goNextScreen(Dashboard.this, MataMata.class, true);
-            finish();
         } else {
             AppUtil.goNextScreen(Dashboard.this, MataMataFake.class, true);
-            finish();
         }
+        finish();
     }
 
     public void verArtilharia(View view) {
         salvarTelaAnterior("artilharia");
         if (qtdJogadores >= 1) {
             AppUtil.goNextScreen(Dashboard.this, Artilharia.class, true);
-            finish();
         } else {
             AppUtil.goNextScreen(Dashboard.this, CadastrarJogador.class, true);
-            finish();
         }
+        finish();
     }
 
     public void verCartoes(View view) {
         salvarTelaAnterior("cartoes");
         if (qtdJogadores >= 1) {
             AppUtil.goNextScreen(Dashboard.this, Cartoes.class, true);
-            finish();
         } else {
             AppUtil.goNextScreen(Dashboard.this, CadastrarJogador.class, true);
-            finish();
         }
+        finish();
     }
 
     public void verMelhorDefesa(View view) {
@@ -151,7 +147,6 @@ public class Dashboard extends AppCompatActivity {
     private void restaurarSharedPreferences() {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
 
-        qtdEquipes = preferences.getInt("qtdEquipes", -1);
         finalizouPrimeiraFase = preferences.getBoolean("finalizouPrimeiraFase", false);
         qtdJogadores = preferences.getInt("qtdJogadores", 0);
     }
