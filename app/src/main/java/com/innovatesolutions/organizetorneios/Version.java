@@ -4,7 +4,19 @@ public class Version {
 }
 //Release notes
 
-/**Versão: 09.07
+/**
+ * Versão: 09.08
+ * Novidades:
+ * Atualização de targetSdkVersion para API 31 (Android 12)
+ * Atualização de algumas libs:
+ *  - androidx.appcompat:appcompat:1.4.0
+ *  - androidx.constraintlayout:constraintlayout:2.1.2
+ *  - com.google.android.gms:play-services-ads:20.5.0
+ *
+ * Correções:
+ *
+ * -------------------------------------------------------------------------------------------------
+ * Versão: 09.07
  * Novidades:
  *
  *
