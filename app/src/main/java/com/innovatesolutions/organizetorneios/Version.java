@@ -7,6 +7,7 @@ public class Version {
 /**
  * Versão: 09.08
  * Novidades:
+ * Criação de link de acesso ao site PechinchaLegal
  * Atualização de targetSdkVersion para API 31 (Android 12)
  * Atualização de algumas libs:
  *  - androidx.appcompat:appcompat:1.4.0

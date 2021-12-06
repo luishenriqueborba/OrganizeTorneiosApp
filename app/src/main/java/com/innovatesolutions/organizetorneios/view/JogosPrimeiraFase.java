@@ -1,7 +1,9 @@
 package com.innovatesolutions.organizetorneios.view;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -37,6 +39,9 @@ import com.shashank.sony.fancydialoglib.Icon;
 import static android.content.ContentValues.TAG;
 
 public class JogosPrimeiraFase extends AppCompatActivity {
+
+    public static final String URL_PECHINCHA_LEGAL = "https://www.magazinevoce.com.br/magazinepechinchalegal/";
+    public static final String PACKAGE_NAME_CHROME = "com.android.chrome";
 
     private TextView txtEquipe1J1, txtEquipe1J2, txtEquipe1J3,
             txtEquipe2J1, txtEquipe2J2, txtEquipe2J3,
@@ -1925,6 +1930,16 @@ public class JogosPrimeiraFase extends AppCompatActivity {
             }
         }
 
+    }
+
+    public void abrirLinkPechinchaLegal(View view) {
+        if(AppUtil.isAppInstalled(this, PACKAGE_NAME_CHROME)) {
+            new AppUtil().openUrlOnChromeCustomTab(this, URL_PECHINCHA_LEGAL, "#1D46D7");
+        }
+        else {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(URL_PECHINCHA_LEGAL));
+            startActivity(intent);
+        }
     }
 
     private void showFormErrorAlertDialog() {

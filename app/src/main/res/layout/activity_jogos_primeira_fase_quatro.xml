@@ -884,6 +884,20 @@
                 ads:adUnitId="@string/anuncioBanner1">
             </com.google.android.gms.ads.AdView>
 
+            <TextView
+                android:id="@+id/txtLinkPechinchaLegal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_horizontal"
+                android:text="@string/linkPechinchaLegal"
+                android:textStyle="bold"
+                android:textColor="@color/colorDenimBlue"
+                android:textSize="20sp"
+                android:onClick="abrirLinkPechinchaLegal"/>
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </ScrollView>

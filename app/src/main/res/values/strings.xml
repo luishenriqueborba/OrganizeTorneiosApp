@@ -17,10 +17,10 @@
     <string name="txtSenha">Senha</string>
     <string name="txtConfirmacaoSenha">Repita sua senha</string>
     <string name="chTermos">Li e concordo com os termos de uso.</string>
-    <string name="txtHintConfirmacaoSenha">Confirme a senha digitada...</string>
-    <string name="txtHintSenha">Informe uma senha...</string>
-    <string name="txtHintEmail">Digite seu e-mail...</string>
-    <string name="txtHintNome">Digite seu primeiro nome...</string>
+    <string name="txtHintConfirmacaoSenha">Confirme a senha digitada</string>
+    <string name="txtHintSenha">Informe uma senha</string>
+    <string name="txtHintEmail">Digite seu e-mail</string>
+    <string name="txtHintNome">Digite seu primeiro nome</string>
     <string name="txtTermos">Ler termos de uso.</string>
     <!-- Tela Recuperar de senha -->
     <string name="recuperarSenha">Recuperar Senha</string>
@@ -71,6 +71,7 @@
     <!-- Tela de Jogos -->
     <string name="btnFinalizarPrimeiraFase">finalizar 1ª Fase</string>
     <string name="btnFinalizar">finalizar Torneio</string>
+    <string name="linkPechinchaLegal">Confira promoções de artigos esportivos!!</string>
     <!-- Tela Termos de uso -->
     <string name="txtAceitacao">1. Aceitação</string>
     <string name="txtLicenca">\n2. Licença Limitada</string>
@@ -92,7 +93,7 @@
         Na extensão máxima permitida pela legislação aplicável a Innovate e seus fornecedores isentam-se de quaisquer garantias e condições expressas ou implícitas incluindo, sem limitação, garantias de comercialização, adequação a um propósito específico, titularidade e não violação no que diz respeito ao aplicativo e qualquer um de seus componentes ou ainda à prestação ou não de serviços de suporte.
         A Innovate não garante que a operação deste aplicativo seja contínua e sem defeitos. \nExceto pelo estabelecido neste documento não há outras garantias, condições ou promessas aos aplicativos, expressas ou implícitas, e todas essas garantias, condições e promessas podem ser excluídas de acordo com o que é permitido por lei sem prejuízo à Innovate e seus colaboradores.
 
-        \nI.     A Innovate não garante, declara ou assegura que o uso deste aplicativo será ininterrupto ou livre de erros e você concorda que a Innovate poderá remover por períodos indefinidos ou cancelar este aplicativo a qualquer momento sem que você seja avisado.
+        \nI.     A Innovate não garante, declara ou assegura que o uso deste aplicativo será ininterrupto ou livre de erros e você concorda que a Innovate poderá remover por períodos indefinidos ou cancelar este aplicativo a qualquer hora sem que você seja avisado.
 
         \nII.    A Innovate não garante, declara nem assegura que este aplicativo esteja livre de perda, interrupção, ataque, vírus, interferência, pirataria ou outra invasão de segurança e isenta-se de qualquer responsabilidade em relação à essas questões. Você é responsável pelo backup do seu próprio dispositivo.
 
@@ -100,7 +101,7 @@
 
         \nIV.    Os conteúdos transmitidos pelos aplicativos tais como a transmissão da programação de rádios AM, FM, programações televisivas e afins são de responsabilidade de seus idealizadores. A Innovate isenta-se de qualquer responsabilidade direta ou indireta sobre estes conteúdos e o acesso é facultativo ao usuário.</string>
     <!-- Tela de Notificação -->
-    <string name="mensagemNotificacaoVersaoPremium">Veja também a versão Premium do Organize torneios e tenha ainda mais recursos para organizar seus eventos...</string>
+    <string name="mensagemNotificacaoVersaoPremium">Veja também a versão Premium do Organize torneios e tenha ainda mais recursos para organizar seus eventos!!</string>
     <string name="tituloNotificacaoVersaoPremium">Organize torneios Premium</string>
     <!-- Tela de Eliminatórias -->
     <string name="eliminatorias">Eliminatórias</string>
@@ -128,20 +129,20 @@
     <string name="adicionarCartaoVermelho">Adicionar Cartão Vermelho</string>
     <string name="removerCartaoVermelho">Remover Cartão Vermelho</string>
 
-    <!-- Anuncios TESTE-->
-    <!--string name="anuncioBanner1">ca-app-pub-3940256099942544/6300978111</string>
+    <!--Anuncios TESTE-->
+    <string name="anuncioBanner1">ca-app-pub-3940256099942544/6300978111</string>
     <string name="anuncioBanner2">ca-app-pub-3940256099942544/6300978111</string>
     <string name="anuncioBanner3">ca-app-pub-3940256099942544/6300978111</string>
     <string name="anuncioIntersticial1">ca-app-pub-3940256099942544/1033173712</string>
     <string name="anuncioIntersticial2">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="anuncioIntersticial3">ca-app-pub-3940256099942544/1033173712</string-->
-    <!-- Anuncios -->
-    <string name="anuncioBanner1">ca-app-pub-5291707701088051/7893286011</string>
+    <string name="anuncioIntersticial3">ca-app-pub-3940256099942544/1033173712</string>
+    <!--Anuncios-->
+    <!--string name="anuncioBanner1">ca-app-pub-5291707701088051/7893286011</string>
     <string name="anuncioBanner2">ca-app-pub-5291707701088051/5091812529</string>
     <string name="anuncioBanner3">ca-app-pub-5291707701088051/7594898614</string>
     <string name="anuncioIntersticial1">ca-app-pub-5291707701088051/4772314564</string>
     <string name="anuncioIntersticial2">ca-app-pub-5291707701088051/6567013470</string>
-    <string name="anuncioIntersticial3">ca-app-pub-5291707701088051/5053524394</string>
+    <string name="anuncioIntersticial3">ca-app-pub-5291707701088051/5053524394</string-->
     <string name="first_fragment_label" />
     <string name="downloadApkError">Não foi possível efetuar o download do aplicativo. Por favor, tente novamente mais tarde.</string>
 </resources>

@@ -7,7 +7,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
+import android.webkit.CookieManager;
+import android.webkit.DownloadListener;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
+import androidx.browser.customtabs.CustomTabColorSchemeParams;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.app.NotificationCompat;
 
 import com.innovatesolutions.organizetorneios.R;
@@ -151,6 +162,69 @@ public class AppUtil {
         }
         context.startActivity(intent);
     }
+
+    public void openUrlOnChromeCustomTab(Context context, String url, String color) {
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        configuraChromeCustomTab(builder, color);
+        CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.launchUrl(context, Uri.parse(url));
+    }
+
+    private void configuraChromeCustomTab(CustomTabsIntent.Builder builder, String color) {
+        //Add color para o Toolbar
+        int colorInt = Color.parseColor(color);
+        CustomTabColorSchemeParams defaultColors = new CustomTabColorSchemeParams.Builder()
+                .setToolbarColor(colorInt)
+                .build();
+        builder.setDefaultColorSchemeParams(defaultColors);
+    }
+
+    public void addSettingsOnWebView(final WebView webView, final WebViewClient webViewClient, final WebChromeClient webChromeClient, boolean isCleanCache) {
+        CookieManager.getInstance().setAcceptCookie(true);
+
+        if (webViewClient != null) {
+            webView.setWebViewClient(webViewClient);
+        }
+
+        if (webChromeClient != null) {
+            webView.setWebChromeClient(webChromeClient);
+        }
+
+        if (isCleanCache) {
+            webView.clearCache(true);
+            webView.clearHistory();
+        }
+
+        webView.setDownloadListener(new DownloadListener() {
+
+            public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
+                try {
+                    if (mimetype.equals("application/pdf")) {
+                        //showPDFFileOnViewer(url, webView);
+                    } else {
+                        //downloadContentByUrl(url);
+                    }
+                } catch (Exception ex) {
+                }
+                if (webViewClient != null) {
+                    webViewClient.onPageFinished(webView, url);
+                }
+            }
+
+        });
+
+        WebSettings settings = webView.getSettings();
+        settings.setAllowFileAccess(true);
+        settings.setJavaScriptEnabled(true);
+        settings.setDomStorageEnabled(true);
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);
+        settings.setLoadsImagesAutomatically(true);
+        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+    }
+
 
     public static void limpaRegistros(Context context) {
         GrupoController grupoController = new GrupoController(context);
