@@ -110,7 +110,7 @@
                     android:layout_marginTop="5dp"
                     android:text="A"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/colorAmarelo2"
+                    android:textColor="@color/colorYellowSecond"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -144,7 +144,7 @@
                     android:layout_marginTop="5dp"
                     android:text="V"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/colorVermelho"
+                    android:textColor="@color/colorRed"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 

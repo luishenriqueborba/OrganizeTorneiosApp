@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Cores padrões do sistema-->
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="colorAmarelo">#FFC107</color>
-    <color name="colorAmarelo2">#ffdd13</color>
-    <color name="colorVermelho">#d90429</color>
+    <color name="colorAccentSecond">#BB86FC</color>
+    <color name="colorError">#B00020</color>
+    <color name="colorBackgroundOrSurface">#FFFFFF</color>
+
+    <!-- Cores customizadas do sistema-->
+    <color name="colorYellow">#FFC107</color>
+    <color name="colorYellowSecond">#ffdd13</color>
+    <color name="colorRed">#d90429</color>
     <color name="colorDenimBlue">#1D46D7</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
