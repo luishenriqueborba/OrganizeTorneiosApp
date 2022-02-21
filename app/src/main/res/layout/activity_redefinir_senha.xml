@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
-                android:background="@drawable/btn_custom"
+                android:background="@drawable/btn_custom_confirm"
                 android:onClick="redefinir"
                 android:text="@string/redefinir"
                 android:textColor="@color/colorWhite" />

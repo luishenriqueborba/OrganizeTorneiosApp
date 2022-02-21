@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="52dp"
-                android:background="@drawable/btn_custom"
+                android:background="@drawable/btn_custom_confirm"
                 android:onClick="recuperarSenha"
                 android:text="@string/recuperar"
                 android:textColor="@color/colorWhite" />

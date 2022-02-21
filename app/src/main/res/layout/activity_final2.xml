@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="25dp"
-        android:background="@drawable/btn_custom"
+        android:background="@drawable/btn_custom_confirm"
         android:foregroundGravity="center_horizontal"
         android:onClick="encerrar"
         android:padding="10dp"

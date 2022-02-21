@@ -330,7 +330,7 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_marginStart="10dp"
                             android:layout_marginBottom="8dp"
-                            android:background="@drawable/btn_custom"
+                            android:background="@drawable/btn_custom_confirm"
                             android:foregroundGravity="center_horizontal"
                             android:onClick="finalizarTorneio"
                             android:padding="10dp"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@drawable/background_grad"
     android:orientation="vertical"
     android:padding="20dp"
     android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
@@ -82,7 +82,15 @@
                     android:layout_margin="10dp"
                     android:layout_marginStart="2dp"
                     android:layout_marginTop="13dp"
-                    android:text="@string/chLembrar" />
+                    android:checked="false"
+                    android:outlineAmbientShadowColor="@color/colorWhite"
+                    android:outlineSpotShadowColor="@color/colorWhite"
+                    android:shadowColor="@color/colorWhite"
+                    android:text="@string/chLembrar"
+                    android:textColor="@color/colorWhite"
+                    android:textColorHighlight="@color/colorWhite"
+                    android:textColorHint="@color/colorWhite"
+                    android:textColorLink="@color/colorWhite" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnEntrar"
@@ -90,9 +98,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="20dp"
-                    android:background="@drawable/btn_custom_confirm"
+                    android:background="@drawable/btn_custom_confirm_new"
                     android:text="@string/btnEntrar"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBlack"
                     app:layout_constraintBottom_toTopOf="@+id/txtCadastrar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

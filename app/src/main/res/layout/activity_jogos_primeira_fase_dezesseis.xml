@@ -2617,7 +2617,7 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginStart="-5dp"
                                 android:layout_marginBottom="8dp"
-                                android:background="@drawable/btn_custom2"
+                                android:background="@drawable/btn_custom_cancel"
                                 android:text="@string/editar"
                                 android:textColor="@color/colorWhite"
                                 android:onClick="editarResultados"/>
@@ -2631,7 +2631,7 @@
                                 android:layout_marginTop="15dp"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginBottom="8dp"
-                                android:background="@drawable/btn_custom"
+                                android:background="@drawable/btn_custom_confirm"
                                 android:text="@string/btnSalvar"
                                 android:textColor="@color/colorWhite"
                                 android:onClick="salvarResultados"/>
@@ -2645,7 +2645,7 @@
                             android:layout_gravity="center_horizontal"
                             android:foregroundGravity="center_horizontal"
                             android:layout_marginBottom="8dp"
-                            android:background="@drawable/btn_custom"
+                            android:background="@drawable/btn_custom_confirm"
                             android:text="@string/btnFinalizarPrimeiraFase"
                             android:textColor="@color/colorWhite"
                             android:onClick="finalizarPrimeiraFase"/>
