@@ -5,6 +5,12 @@ public class Version {
 //Release notes
 
 /**
+ * Versão: 09.09
+ * Novidades:
+ * Criação de nova tela de login e de elementos da nova UI
+ *
+ * Correções:
+ * -------------------------------------------------------------------------------------------------
  * Versão: 09.08
  * Novidades:
  * Criação de link de acesso ao site PechinchaLegal
