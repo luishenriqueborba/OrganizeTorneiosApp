@@ -17,7 +17,7 @@ import com.innovatesolutions.organizetorneios.datamodel.UsuarioDataModel;
 import com.innovatesolutions.organizetorneios.model.Equipe;
 import com.innovatesolutions.organizetorneios.model.Grupo;
 import com.innovatesolutions.organizetorneios.model.Jogador;
-import com.innovatesolutions.organizetorneios.model.Usuario;
+import com.innovatesolutions.organizetorneios.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -167,11 +167,11 @@ public class AppDataBase extends SQLiteOpenHelper {
      *
      * @return
      */
-    public List<Usuario> listUsuario(String tabela) {
+    public List<User> listUsuario(String tabela) {
 
-        List<Usuario> list = new ArrayList<>();
+        List<User> list = new ArrayList<>();
 
-        Usuario usuario;
+        User user;
 
         //Select no DB
 
@@ -184,14 +184,14 @@ public class AppDataBase extends SQLiteOpenHelper {
             if (cursor.moveToFirst()) {
 
                 do {
-                    usuario = new Usuario();
+                    user = new User();
 
-                    usuario.setId(cursor.getInt(cursor.getColumnIndex(UsuarioDataModel.ID)));
-                    usuario.setNome(cursor.getString(cursor.getColumnIndex(UsuarioDataModel.NOME)));
-                    usuario.setEmail(cursor.getString(cursor.getColumnIndex(UsuarioDataModel.EMAIL)));
-                    usuario.setSenha(cursor.getString(cursor.getColumnIndex(UsuarioDataModel.SENHA)));
+                    user.setId(cursor.getInt(cursor.getColumnIndex(UsuarioDataModel.ID)));
+                    user.setName(cursor.getString(cursor.getColumnIndex(UsuarioDataModel.NOME)));
+                    user.setEmail(cursor.getString(cursor.getColumnIndex(UsuarioDataModel.EMAIL)));
+                    user.setPassword(cursor.getString(cursor.getColumnIndex(UsuarioDataModel.SENHA)));
 
-                    list.add(usuario);
+                    list.add(user);
 
                 } while (cursor.moveToNext());
 
@@ -206,9 +206,9 @@ public class AppDataBase extends SQLiteOpenHelper {
         return list;
     }
 
-    public Usuario getUsuarioByID(String tabela, Usuario obj) {
+    public User getUsuarioByID(String tabela, User obj) {
 
-        Usuario usuario = new Usuario();
+        User user = new User();
 
         String sql = "SELECT * FROM " + tabela + " WHERE id = " + obj.getId();
 
@@ -218,9 +218,9 @@ public class AppDataBase extends SQLiteOpenHelper {
 
             if (cursor.moveToNext()) {
 
-                usuario.setNome(cursor.getString(cursor.getColumnIndex(UsuarioDataModel.NOME)));
-                usuario.setEmail(cursor.getString(cursor.getColumnIndex(UsuarioDataModel.EMAIL)));
-                usuario.setSenha(cursor.getString(cursor.getColumnIndex(UsuarioDataModel.SENHA)));
+                user.setName(cursor.getString(cursor.getColumnIndex(UsuarioDataModel.NOME)));
+                user.setEmail(cursor.getString(cursor.getColumnIndex(UsuarioDataModel.EMAIL)));
+                user.setPassword(cursor.getString(cursor.getColumnIndex(UsuarioDataModel.SENHA)));
             }
 
         } catch (SQLException e) {
@@ -231,7 +231,7 @@ public class AppDataBase extends SQLiteOpenHelper {
             cursor.close();
         }
 
-        return usuario;
+        return user;
     }
 
 

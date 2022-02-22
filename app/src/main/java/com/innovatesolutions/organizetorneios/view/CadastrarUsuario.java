@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.innovatesolutions.organizetorneios.R;
 import com.innovatesolutions.organizetorneios.api.AppUtil;
 import com.innovatesolutions.organizetorneios.controller.UsuarioController;
-import com.innovatesolutions.organizetorneios.model.Usuario;
+import com.innovatesolutions.organizetorneios.model.User;
 import com.shashank.sony.fancydialoglib.FancyAlertDialog;
 import com.shashank.sony.fancydialoglib.Icon;
 
@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 public class CadastrarUsuario extends AppCompatActivity {
 
     private SharedPreferences preferences;
-    private Usuario novoUsuario;
+    private User novoUser;
     private UsuarioController controller;
     private int ultimoID, usuarioID;
     private String emailUsuario;
@@ -61,8 +61,8 @@ public class CadastrarUsuario extends AppCompatActivity {
         btnCadastrar = findViewById(R.id.btnCadastrar);
         txtTermos = findViewById(R.id.txtTermos);
 
-        novoUsuario = new Usuario();
-        novoUsuario.setId(usuarioID);
+        novoUser = new User();
+        novoUser.setId(usuarioID);
         controller = new UsuarioController(this);
     }
 
@@ -142,10 +142,10 @@ public class CadastrarUsuario extends AppCompatActivity {
                         editSenha.requestFocus();
                         showAlertDialog();
                     } else {
-                        novoUsuario.setNome(editNome.getText().toString());
-                        novoUsuario.setEmail(editEmail.getText().toString());
-                        novoUsuario.setSenha(AppUtil.gerarMD5Hash(editSenha.getText().toString()));
-                        controller.incluir(novoUsuario);
+                        novoUser.setName(editNome.getText().toString());
+                        novoUser.setEmail(editEmail.getText().toString());
+                        novoUser.setPassword(AppUtil.gerarMD5Hash(editSenha.getText().toString()));
+                        controller.incluir(novoUser);
                         ultimoID = controller.getUltimoID();
 
                         salvarSharedPreferences();
@@ -213,9 +213,9 @@ public class CadastrarUsuario extends AppCompatActivity {
         SharedPreferences.Editor dados = preferences.edit();
 
         dados.putInt("usuarioID", ultimoID);
-        dados.putString("nomeUsuario", novoUsuario.getNome());
-        dados.putString("emailUsuario", novoUsuario.getEmail());
-        dados.putString("senha", novoUsuario.getSenha());
+        dados.putString("nomeUsuario", novoUser.getName());
+        dados.putString("emailUsuario", novoUser.getEmail());
+        dados.putString("senha", novoUser.getPassword());
         dados.apply();
     }
 

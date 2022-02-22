@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 import com.innovatesolutions.organizetorneios.api.AppDataBase;
 import com.innovatesolutions.organizetorneios.datamodel.UsuarioDataModel;
-import com.innovatesolutions.organizetorneios.model.Usuario;
+import com.innovatesolutions.organizetorneios.model.User;
 
 import java.util.List;
 
@@ -20,35 +20,35 @@ public class UsuarioController extends AppDataBase {
         super(context);
     }
 
-    public boolean incluir(Usuario obj) {
+    public boolean incluir(User obj) {
 
         dados = new ContentValues();
 
-        dados.put(UsuarioDataModel.NOME, obj.getNome());
+        dados.put(UsuarioDataModel.NOME, obj.getName());
         dados.put(UsuarioDataModel.EMAIL, obj.getEmail());
-        dados.put(UsuarioDataModel.SENHA, obj.getSenha());
+        dados.put(UsuarioDataModel.SENHA, obj.getPassword());
 
         return insertUsuario(TABELA, dados);
     }
 
-    public boolean alterar(Usuario obj) {
+    public boolean alterar(User obj) {
 
         dados = new ContentValues();
 
         dados.put(UsuarioDataModel.ID, obj.getId());
-        dados.put(UsuarioDataModel.NOME, obj.getNome());
+        dados.put(UsuarioDataModel.NOME, obj.getName());
         dados.put(UsuarioDataModel.EMAIL, obj.getEmail());
-        dados.put(UsuarioDataModel.SENHA, obj.getSenha());
+        dados.put(UsuarioDataModel.SENHA, obj.getPassword());
 
         return updateUsuario(TABELA, dados);
     }
 
-    public boolean deletar(Usuario obj) {
+    public boolean deletar(User obj) {
 
         return deleteUsuario(TABELA, obj.getId());
     }
 
-    public List<Usuario> listar() {
+    public List<User> listar() {
 
         return listUsuario(TABELA);
     }
@@ -58,7 +58,7 @@ public class UsuarioController extends AppDataBase {
         return getLastPK(TABELA);
     }
 
-    public Usuario getUsuarioByID(Usuario obj) {
+    public User getUsuarioByID(User obj) {
 
         obj = getUsuarioByID(UsuarioDataModel.TABELA, obj);
 

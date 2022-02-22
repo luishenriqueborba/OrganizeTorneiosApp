@@ -6,12 +6,11 @@ import android.content.Context;
 import androidx.annotation.Nullable;
 
 import com.innovatesolutions.organizetorneios.api.AppDataBase;
-import com.innovatesolutions.organizetorneios.datamodel.EquipeDataModel;
 import com.innovatesolutions.organizetorneios.datamodel.JogadorDataModel;
 import com.innovatesolutions.organizetorneios.datamodel.UsuarioDataModel;
 import com.innovatesolutions.organizetorneios.model.Equipe;
 import com.innovatesolutions.organizetorneios.model.Jogador;
-import com.innovatesolutions.organizetorneios.model.Usuario;
+import com.innovatesolutions.organizetorneios.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +80,7 @@ public class JogadorController extends AppDataBase {
         return getLastPK(TABELA);
     }
 
-    public Usuario getUsuarioByID(Usuario obj) {
+    public User getUsuarioByID(User obj) {
 
         obj = getUsuarioByID(UsuarioDataModel.TABELA, obj);
 

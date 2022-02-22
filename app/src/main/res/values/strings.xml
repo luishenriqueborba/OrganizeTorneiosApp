@@ -9,6 +9,8 @@
     <string name="txtCadastrar">Cadastrar-se</string>
     <string name="txtEsqueceuSenha">Esqueceu sua senha?</string>
     <string name="chLembrar">Lembrar</string>
+    <string name="msgErrorInvalidLogin">O e-mail e/ou senha estão incorretos.</string>
+    <string name="msgAppExitAlert">Pressione novamente para sair.</string>
     <!-- Formulário cadastro de usuários -->
     <string name="btnCadastrar">CADASTRAR</string>
     <string name="txtTituloCadastro">Cadastro</string>

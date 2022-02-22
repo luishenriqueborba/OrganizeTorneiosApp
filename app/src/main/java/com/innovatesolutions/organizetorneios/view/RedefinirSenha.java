@@ -14,11 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.innovatesolutions.organizetorneios.R;
 import com.innovatesolutions.organizetorneios.api.AppUtil;
 import com.innovatesolutions.organizetorneios.controller.UsuarioController;
-import com.innovatesolutions.organizetorneios.model.Usuario;
+import com.innovatesolutions.organizetorneios.model.User;
 
 public class RedefinirSenha extends AppCompatActivity {
 
-    private Usuario usuario;
+    private User user;
     private UsuarioController controller;
     private SharedPreferences preferences;
     private int usuarioID;
@@ -42,8 +42,8 @@ public class RedefinirSenha extends AppCompatActivity {
         btnRedefinir = findViewById(R.id.btnRedefinirSenha);
 
         controller = new UsuarioController(getApplicationContext());
-        usuario = new Usuario();
-        usuario.setId(usuarioID);
+        user = new User();
+        user.setId(usuarioID);
     }
 
     private boolean validarFormulario() {
@@ -79,13 +79,13 @@ public class RedefinirSenha extends AppCompatActivity {
                 editNovaSenha.requestFocus();
                 showAlertDialog();
             } else {
-                usuario = controller.getUsuarioByID(usuario);
-                usuario.setId(usuarioID);
-                usuario.setNome(nomeUsuario);
-                usuario.setEmail(emailUsuario);
-                usuario.setSenha(AppUtil.gerarMD5Hash(editNovaSenha.getText().toString()));
+                user = controller.getUsuarioByID(user);
+                user.setId(usuarioID);
+                user.setName(nomeUsuario);
+                user.setEmail(emailUsuario);
+                user.setPassword(AppUtil.gerarMD5Hash(editNovaSenha.getText().toString()));
 
-                if (controller.alterar(usuario)) {
+                if (controller.alterar(user)) {
                     salvarSharedPreferences();
                     Toast.makeText(getApplicationContext(), "Senha alterada com sucesso!!", Toast.LENGTH_LONG).show();
                 } else {
@@ -120,7 +120,7 @@ public class RedefinirSenha extends AppCompatActivity {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
         SharedPreferences.Editor dados = preferences.edit();
 
-        dados.putString("senha", usuario.getSenha());
+        dados.putString("senha", user.getPassword());
         dados.apply();
     }
 

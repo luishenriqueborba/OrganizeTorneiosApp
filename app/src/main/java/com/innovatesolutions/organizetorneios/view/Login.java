@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,98 +13,97 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.innovatesolutions.organizetorneios.R;
 import com.innovatesolutions.organizetorneios.api.AppUtil;
-import com.innovatesolutions.organizetorneios.model.Usuario;
+import com.innovatesolutions.organizetorneios.model.User;
 
 public class Login extends AppCompatActivity {
 
-    private long backPressedTime;
-    private Usuario usuario;
+    private User user;
     private SharedPreferences preferences;
-
-    Button btnEntrar;
-    TextView txtCadastrar, txtEsqueceuSenha;
-    EditText editSenha, editEmail;
-    CheckBox chLembrar;
-    Boolean isLembrarSenha = false;
-    ImageView imgLogo;
+    private Button btnSignIn;
+    private TextView txtRegister;
+    private TextView txtForgotPassword;
+    private EditText editPassword;
+    private EditText editEmail;
+    private CheckBox chRemember;
+    private Boolean isRememberPassword = false;
+    private long backPressedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        initFormulario();
-        restaurarSharedPreferences();
+        initForm();
+        restoreSharedPreferences();
 
-        txtCadastrar.setOnClickListener(view -> {
+        txtRegister.setOnClickListener(view -> {
             AppUtil.goNextScreen(Login.this, CadastrarUsuario.class, false);
             finish();
         });
-        txtEsqueceuSenha.setOnClickListener(view -> {
+        txtForgotPassword.setOnClickListener(view -> {
             AppUtil.goNextScreen(Login.this, RecuperarSenha.class, false);
             finish();
         });
 
-        chLembrar.setOnClickListener(v ->
-                lembrarSenha());
+        chRemember.setOnClickListener(v ->
+                rememberPassword());
 
-        btnEntrar.setOnClickListener(v -> entrar());
+        btnSignIn.setOnClickListener(v -> signIn());
     }
 
-    private void initFormulario() {
-        btnEntrar = findViewById(R.id.btnEntrar);
-        txtCadastrar = findViewById(R.id.txtCadastrar);
-        txtEsqueceuSenha = findViewById(R.id.txtEsqueceuSenha);
+    private void initForm() {
+        btnSignIn = findViewById(R.id.btnSignIn);
+        txtRegister = findViewById(R.id.txtRegister);
+        txtForgotPassword = findViewById(R.id.txtForgotPassword);
         editEmail = findViewById(R.id.editEmailLogin);
-        editSenha = findViewById(R.id.editSenhaLogin);
-        chLembrar = findViewById(R.id.chLembrar);
-        imgLogo = findViewById(R.id.imgLogo);
+        editPassword = findViewById(R.id.editPasswordLogin);
+        chRemember = findViewById(R.id.chRemember);
 
-        usuario = new Usuario();
+        user = new User();
     }
 
-    public void entrar() {
-        if (validarFormulario()) {
-            if (!validarDadosUsuario()) {
+    public void signIn() {
+        if (validateForm()) {
+            if (!validateUserData()) {
                 editEmail.setError("*");
-                editSenha.setError("*");
+                editPassword.setError("*");
                 editEmail.requestFocus();
-                Toast.makeText(getApplicationContext(), "O e-mail e/ou senha estão incorretos.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.msgErrorInvalidLogin, Toast.LENGTH_LONG).show();
             } else {
-                salvarSharedPreferences();
+                saveSharedPreferences();
                 AppUtil.goNextScreen(Login.this, EscolherTorneio.class, true);
                 finish();
             }
         }
     }
 
-    public void lembrarSenha() {
-        isLembrarSenha = chLembrar.isChecked();
+    public void rememberPassword() {
+        isRememberPassword = chRemember.isChecked();
     }
 
-    private boolean validarFormulario() {
+    private boolean validateForm() {
         boolean isValid = true;
         if (TextUtils.isEmpty(editEmail.getText().toString())) {
             editEmail.setError("*");
             editEmail.requestFocus();
             isValid = false;
         }
-        if (TextUtils.isEmpty(editSenha.getText().toString())) {
-            editSenha.setError("*");
-            editSenha.requestFocus();
+        if (TextUtils.isEmpty(editPassword.getText().toString())) {
+            editPassword.setError("*");
+            editPassword.requestFocus();
             isValid = false;
         }
         return isValid;
     }
 
-    public boolean validarDadosUsuario() {
-        String emailDigitado = editEmail.getText().toString();
-        String emailCadastrado = usuario.getEmail();
-        boolean isEmailValid = emailCadastrado.equals(emailDigitado);
+    public boolean validateUserData() {
+        String typedEmail = editEmail.getText().toString();
+        String registeredEmail = user.getEmail();
+        String typedPassword = editPassword.getText().toString();
+        String registeredPassword = user.getPassword();
 
-        String senhaDigitada = editSenha.getText().toString();
-        String senhaCadastrada = usuario.getSenha();
-        boolean isPasswordValid = senhaCadastrada.equals(AppUtil.gerarMD5Hash(senhaDigitada));
+        boolean isEmailValid = registeredEmail.equals(typedEmail);
+        boolean isPasswordValid = registeredPassword.equals(AppUtil.gerarMD5Hash(typedPassword));
 
         return (isEmailValid && isPasswordValid);
     }
@@ -116,26 +114,24 @@ public class Login extends AppCompatActivity {
             super.onBackPressed();
             return;
         } else {
-            Toast.makeText(this, "Pressione novamente para sair.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.msgAppExitAlert, Toast.LENGTH_SHORT).show();
         }
         backPressedTime = System.currentTimeMillis();
     }
 
-    private void salvarSharedPreferences() {
+    private void saveSharedPreferences() {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
-        SharedPreferences.Editor dados = preferences.edit();
-
-        dados.putBoolean("loginAutomatico", isLembrarSenha);
-        dados.apply();
+        SharedPreferences.Editor data = preferences.edit();
+        data.putBoolean("loginAutomatico", isRememberPassword);
+        data.apply();
     }
 
-    private void restaurarSharedPreferences() {
+    private void restoreSharedPreferences() {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
-
-        usuario.setNome(preferences.getString("nomeUsuario", "Fake"));
-        usuario.setEmail(preferences.getString("emailUsuario", "teste@teste.com"));
-        usuario.setSenha(preferences.getString("senha", "123"));
-        isLembrarSenha = preferences.getBoolean("loginAutomatico", false);
+        user.setName(preferences.getString("nomeUsuario", "Fake"));
+        user.setEmail(preferences.getString("emailUsuario", "teste@teste.com"));
+        user.setPassword(preferences.getString("senha", "123"));
+        isRememberPassword = preferences.getBoolean("loginAutomatico", false);
     }
 
 }

@@ -19,7 +19,7 @@
         android:contentDescription="@string/txtContentDescriptionOrganizeSplash" />
 
     <TextView
-        android:id="@+id/txtTituloSplash"
+        android:id="@+id/txtTitleSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -41,7 +41,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTituloSplash"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitleSplash"
         android:contentDescription="@string/txtContentDescriptionInnovateSplash" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

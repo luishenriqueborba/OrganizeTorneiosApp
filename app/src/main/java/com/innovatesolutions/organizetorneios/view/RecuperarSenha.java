@@ -12,11 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.innovatesolutions.organizetorneios.R;
 import com.innovatesolutions.organizetorneios.api.AppUtil;
-import com.innovatesolutions.organizetorneios.model.Usuario;
+import com.innovatesolutions.organizetorneios.model.User;
 
 public class RecuperarSenha extends AppCompatActivity {
 
-    private Usuario usuario;
+    private User user;
 
     EditText editEmailRecuperacaoSenha;
     Button btnRecuperar;
@@ -33,7 +33,7 @@ public class RecuperarSenha extends AppCompatActivity {
     private void initFormulario() {
         editEmailRecuperacaoSenha = findViewById(R.id.editEmailRecuperacaoSenha);
         btnRecuperar = findViewById(R.id.btnRecuperarSenha);
-        usuario = new Usuario();
+        user = new User();
     }
 
     private boolean validarFormulario() {
@@ -47,7 +47,7 @@ public class RecuperarSenha extends AppCompatActivity {
 
     public boolean validarEmailUsuario() {
         String emailDigitado = editEmailRecuperacaoSenha.getText().toString();
-        String emailCadastrado = usuario.getEmail();
+        String emailCadastrado = user.getEmail();
 
         if (emailCadastrado.equals(emailDigitado)) {
             return true;
@@ -78,6 +78,6 @@ public class RecuperarSenha extends AppCompatActivity {
     private void restaurarSharedPreferences() {
         SharedPreferences preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
 
-        usuario.setEmail(preferences.getString("emailUsuario", "teste@teste.com"));
+        user.setEmail(preferences.getString("emailUsuario", "teste@teste.com"));
     }
 }

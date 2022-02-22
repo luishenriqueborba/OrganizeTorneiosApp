@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +24,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.innovatesolutions.organizetorneios.R;
 import com.innovatesolutions.organizetorneios.api.AppUtil;
-import com.innovatesolutions.organizetorneios.model.Usuario;
+import com.innovatesolutions.organizetorneios.model.User;
 import com.shashank.sony.fancydialoglib.FancyAlertDialog;
 import com.shashank.sony.fancydialoglib.FancyAlertDialogListener;
 import com.shashank.sony.fancydialoglib.Icon;
@@ -37,7 +36,7 @@ import static android.content.ContentValues.TAG;
 public class EscolherTorneio extends AppCompatActivity {
 
     private long backPressedTime;
-    private Usuario usuario;
+    private User user;
     private SharedPreferences preferences;
     private int qtdEquipes;
     private String nomeEquipe1;
@@ -62,7 +61,7 @@ public class EscolherTorneio extends AppCompatActivity {
         initFormulario();
         restaurarSharedPreferences();
 
-        txtNomeUsuario.setText(MessageFormat.format("Bem vindo, {0}.", usuario.getNome()));
+        txtNomeUsuario.setText(MessageFormat.format("Bem vindo, {0}.", user.getName()));
 
         verificaTorneioAnterior();
 
@@ -91,7 +90,7 @@ public class EscolherTorneio extends AppCompatActivity {
         btnDozeEquipes = findViewById(R.id.btnDozeEquipes);
         btnDezesseisEquipes = findViewById(R.id.btnDezesseisEquipes);
 
-        usuario = new Usuario();
+        user = new User();
     }
 
     @Override
@@ -664,7 +663,7 @@ public class EscolherTorneio extends AppCompatActivity {
     private void restaurarSharedPreferences() {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
 
-        usuario.setNome(preferences.getString("nomeUsuario", "NULO"));
+        user.setName(preferences.getString("nomeUsuario", "NULO"));
         qtdEquipes = preferences.getInt("qtdEquipes", -1);
         nomeEquipe1 = preferences.getString("nomeEquipe1", "");
     }
