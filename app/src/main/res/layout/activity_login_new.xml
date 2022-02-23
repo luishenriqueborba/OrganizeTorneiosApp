@@ -43,7 +43,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/txtEmail"
-                    app:boxBackgroundColor="@color/colorWhite">
+                    app:hintTextColor="@color/colorBlack"
+                    app:boxBackgroundColor="@color/colorWhite"
+                    app:startIconDrawable="@drawable/ic_email"
+                    app:startIconTint="@color/colorBlack"
+                    app:endIconMode="custom">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editEmailLogin"
@@ -60,37 +64,35 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/txtSenha"
+                    app:hintTextColor="@color/colorBlack"
                     app:boxBackgroundColor="@color/colorWhite"
+                    app:startIconDrawable="@drawable/ic_lock"
+                    app:startIconTint="@color/colorBlack"
                     app:endIconMode="password_toggle">
-
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editPasswordLogin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/txtSenha"
                         android:inputType="textPassword">
 
                     </com.google.android.material.textfield.TextInputEditText>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <androidx.appcompat.widget.AppCompatCheckBox
-                    android:id="@+id/chRemember"
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchRemember"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
                     android:layout_marginTop="13dp"
+                    android:layout_gravity="end"
                     android:checked="false"
-                    android:outlineAmbientShadowColor="@color/colorWhite"
-                    android:outlineSpotShadowColor="@color/colorWhite"
-                    android:shadowColor="@color/colorWhite"
-                    android:text="@string/chLembrar"
-                    android:textColor="@color/colorWhite"
-                    android:textColorHighlight="@color/colorWhite"
-                    android:textColorHint="@color/colorWhite"
-                    android:textColorLink="@color/colorWhite" />
+                    android:text="Lembrar"
+                    android:textColor="@color/colorWhite" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnSignIn"
@@ -115,7 +117,8 @@
                 android:layout_marginBottom="30dp"
                 android:gravity="center_horizontal"
                 android:text="@string/txtCadastrar"
-                android:textColor="@color/colorDenimBlue" />
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtForgotPassword"
@@ -123,7 +126,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="@string/txtEsqueceuSenha"
-                android:textColor="@color/colorDenimBlue" />
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

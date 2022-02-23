@@ -63,7 +63,7 @@ public class CadastrarJogador extends AppCompatActivity {
     private void initFormulario() {
 
         spinnerEquipes = findViewById(R.id.SpinnerEquipes);
-        editNome = findViewById(R.id.editNome);
+        editNome = findViewById(R.id.editName);
         editNumero = findViewById(R.id.editNumero);
         editGols = findViewById(R.id.editGols);
         editCartoesAmarelos = findViewById(R.id.editCartaoAmarelo);

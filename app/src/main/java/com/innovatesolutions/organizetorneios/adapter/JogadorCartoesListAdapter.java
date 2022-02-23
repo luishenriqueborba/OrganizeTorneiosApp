@@ -305,7 +305,7 @@ public class JogadorCartoesListAdapter extends ArrayAdapter<Jogador> implements 
 
             dataSet = layoutElencoList.inflate(R.layout.listview_jogadores_cartoes, parent, false);
 
-            linha.txtNome = dataSet.findViewById(R.id.txtNome);
+            linha.txtNome = dataSet.findViewById(R.id.txtName);
             linha.txtNumero = dataSet.findViewById(R.id.txtNumero);
             linha.txtEquipe = dataSet.findViewById(R.id.txtEquipe);
             linha.txtQtdCartoesAmarelos = dataSet.findViewById(R.id.txtQtdCartoesAmarelos);

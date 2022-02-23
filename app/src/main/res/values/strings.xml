@@ -24,6 +24,9 @@
     <string name="txtHintEmail">Digite seu e-mail</string>
     <string name="txtHintNome">Digite seu primeiro nome</string>
     <string name="txtTermos">Ler termos de uso.</string>
+    <string name="msgTermsOfUseAlert">É necessário aceitar os termos de uso para continuar o cadastro.</string>
+    <string name="msgUserRegistrationSuccess">Cadastro concluído! Seja bem vindo...</string>
+    <string name="msgContinueRegistration">Continue seu cadastro...</string>
     <!-- Tela Recuperar de senha -->
     <string name="recuperarSenha">Recuperar Senha</string>
     <string name="recuperar">Recuperar</string>

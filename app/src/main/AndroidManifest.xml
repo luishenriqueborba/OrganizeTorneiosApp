@@ -35,7 +35,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.Login" />
-        <activity android:name=".view.CadastrarUsuario" />
+        <activity android:name=".view.RegisterUser" />
         <activity android:name=".view.TermosDeUso" />
         <activity android:name=".view.RecuperarSenha" />
         <activity android:name=".view.RedefinirSenha" />

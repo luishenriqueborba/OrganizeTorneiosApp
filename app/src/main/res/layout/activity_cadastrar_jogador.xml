@@ -108,7 +108,7 @@
 
 
                         <TextView
-                            android:id="@+id/txtNome"
+                            android:id="@+id/txtName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
@@ -126,7 +126,7 @@
                             app:counterMaxLength="11">
 
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/editNome"
+                                android:id="@+id/editName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:maxLength="11">

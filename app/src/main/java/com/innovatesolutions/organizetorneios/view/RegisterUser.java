@@ -24,58 +24,59 @@ import com.shashank.sony.fancydialoglib.Icon;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CadastrarUsuario extends AppCompatActivity {
+public class RegisterUser extends AppCompatActivity {
 
     private SharedPreferences preferences;
-    private User novoUser;
+    private User newUser;
     private UsuarioController controller;
-    private int ultimoID, usuarioID;
-    private String emailUsuario;
-
-    EditText editNome, editEmail, editSenha, editConfirmacao;
-    TextView txtTermos;
-    Button btnCadastrar;
-    CheckBox chTermos;
+    private int lastID;
+    private int userID;
+    private String emailAddressUser;
+    private EditText editName;
+    private EditText editEmail;
+    private EditText editPassword;
+    private EditText editConfirmation;
+    private TextView txtTerms;
+    private CheckBox chTerms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_usuario);
 
-        restaurarSharedPreferences();
-        initFormulario();
+        restoreSharedPreferences();
+        initForm();
 
-        txtTermos.setOnClickListener(view -> {
-            AppUtil.goNextScreen(CadastrarUsuario.this, TermosDeUso.class, false);
+        txtTerms.setOnClickListener(view -> {
+            AppUtil.goNextScreen(RegisterUser.this, TermosDeUso.class, false);
             finish();
         });
-
     }
 
-    private void initFormulario() {
-        editNome = findViewById(R.id.editNome);
+    private void initForm() {
+        editName = findViewById(R.id.editName);
         editEmail = findViewById(R.id.editEmail);
-        editSenha = findViewById(R.id.editSenha);
-        editConfirmacao = findViewById(R.id.editConfirmacaoSenha);
-        chTermos = findViewById(R.id.checkBoxTermos);
-        btnCadastrar = findViewById(R.id.btnCadastrar);
-        txtTermos = findViewById(R.id.txtTermos);
+        editPassword = findViewById(R.id.editPassword);
+        editConfirmation = findViewById(R.id.editConfirmation);
+        chTerms = findViewById(R.id.checkBoxTerms);
+        txtTerms = findViewById(R.id.txtTerms);
+        Button btnRegister = findViewById(R.id.btnRegister);
 
-        novoUser = new User();
-        novoUser.setId(usuarioID);
+        newUser = new User();
+        newUser.setId(userID);
         controller = new UsuarioController(this);
     }
 
-    public void validarTermos(View view) {
-        if (!chTermos.isChecked()) {
-            Toast.makeText(getApplicationContext(), "É necessário aceitar os termos de uso para continuar o cadastro.", Toast.LENGTH_LONG).show();
+    public void validateTermsOfUse(View view) {
+        if (!chTerms.isChecked()) {
+            Toast.makeText(getApplicationContext(), R.string.msgTermsOfUseAlert, Toast.LENGTH_LONG).show();
         }
     }
 
-    private boolean validarFormulario() {
-        if (TextUtils.isEmpty(editNome.getText().toString())) {
-            editNome.setError("*");
-            editNome.requestFocus();
+    private boolean validateForm() {
+        if (TextUtils.isEmpty(editName.getText().toString())) {
+            editName.setError("*");
+            editName.requestFocus();
             return false;
         }
         if (TextUtils.isEmpty(editEmail.getText().toString())) {
@@ -83,23 +84,23 @@ public class CadastrarUsuario extends AppCompatActivity {
             editEmail.requestFocus();
             return false;
         }
-        if (TextUtils.isEmpty(editSenha.getText().toString())) {
-            editSenha.setError("*");
-            editSenha.requestFocus();
+        if (TextUtils.isEmpty(editPassword.getText().toString())) {
+            editPassword.setError("*");
+            editPassword.requestFocus();
             return false;
         }
-        if (TextUtils.isEmpty(editConfirmacao.getText().toString())) {
-            editConfirmacao.setError("*");
-            editConfirmacao.requestFocus();
+        if (TextUtils.isEmpty(editConfirmation.getText().toString())) {
+            editConfirmation.setError("*");
+            editConfirmation.requestFocus();
             return false;
         }
-        if (!chTermos.isChecked()) {
+        if (!chTerms.isChecked()) {
             return false;
         }
         return true;
     }
 
-    public boolean validarEmailUsuario(String email) {
+    public boolean validateUserEmailAddress(String email) {
         if (email != null && email.length() > 0) {
             String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
             Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
@@ -112,47 +113,45 @@ public class CadastrarUsuario extends AppCompatActivity {
 
     }
 
-    public boolean compararEmailUsuario() {
-        String emailDigitado = editEmail.getText().toString();
-        String emailCadastrado = emailUsuario;
-
-        if (emailCadastrado.equals(emailDigitado)) {
+    public boolean compareUserEmail() {
+        String typedEmail = editEmail.getText().toString();
+        String registeredEmail = emailAddressUser;
+        if (registeredEmail.equals(typedEmail)) {
             return true;
         }
         return false;
     }
 
-    public boolean validarSenha() {
-        String senhaA = editSenha.getText().toString();
-        String senhaB = editConfirmacao.getText().toString();
-
-        if (senhaA.equals(senhaB)) {
+    public boolean validatePassword() {
+        String password = editPassword.getText().toString();
+        String confirmation = editConfirmation.getText().toString();
+        if (password.equals(confirmation)) {
             return true;
         }
         return false;
     }
 
-    public void cadastrarUsuario(View view) {
-        if (validarFormulario()) {
-            if (validarEmailUsuario(editEmail.getText().toString())) {
-                if (!compararEmailUsuario()) {
-                    if (!validarSenha()) {
-                        editSenha.setError("*");
-                        editConfirmacao.setError("*");
-                        editSenha.requestFocus();
+    public void registerUser(View view) {
+        if (validateForm()) {
+            if (validateUserEmailAddress(editEmail.getText().toString())) {
+                if (!compareUserEmail()) {
+                    if (!validatePassword()) {
+                        editPassword.setError("*");
+                        editConfirmation.setError("*");
+                        editPassword.requestFocus();
                         showAlertDialog();
                     } else {
-                        novoUser.setName(editNome.getText().toString());
-                        novoUser.setEmail(editEmail.getText().toString());
-                        novoUser.setPassword(AppUtil.gerarMD5Hash(editSenha.getText().toString()));
-                        controller.incluir(novoUser);
-                        ultimoID = controller.getUltimoID();
+                        newUser.setName(editName.getText().toString());
+                        newUser.setEmail(editEmail.getText().toString());
+                        newUser.setPassword(AppUtil.gerarMD5Hash(editPassword.getText().toString()));
+                        controller.incluir(newUser);
+                        lastID = controller.getUltimoID();
 
-                        salvarSharedPreferences();
+                        saveSharedPreferences();
 
-                        Toast.makeText(getApplicationContext(), "Cadastro concluído! Seja bem vindo...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.msgUserRegistrationSuccess, Toast.LENGTH_SHORT).show();
 
-                        AppUtil.goNextScreen(CadastrarUsuario.this, Login.class, true);
+                        AppUtil.goNextScreen(RegisterUser.this, Login.class, true);
                         finish();
                     }
                 } else {
@@ -194,9 +193,9 @@ public class CadastrarUsuario extends AppCompatActivity {
                 .isCancellable(true)
                 .setIcon(R.mipmap.ic_launcher_round, Icon.Visible)
                 .OnPositiveClicked(() ->
-                        Toast.makeText(getApplicationContext(), "Continue seu cadastro...", Toast.LENGTH_SHORT).show())
+                        Toast.makeText(getApplicationContext(), R.string.msgContinueRegistration, Toast.LENGTH_SHORT).show())
                 .OnNegativeClicked(() -> {
-                    AppUtil.goNextScreen(CadastrarUsuario.this, Login.class, true);
+                    AppUtil.goNextScreen(RegisterUser.this, Login.class, true);
                     finish();
                 })
                 .build();
@@ -204,25 +203,23 @@ public class CadastrarUsuario extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AppUtil.goNextScreen(CadastrarUsuario.this, Login.class, true);
+        AppUtil.goNextScreen(RegisterUser.this, Login.class, true);
         finish();
     }
 
-    private void salvarSharedPreferences() {
+    private void saveSharedPreferences() {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
-        SharedPreferences.Editor dados = preferences.edit();
-
-        dados.putInt("usuarioID", ultimoID);
-        dados.putString("nomeUsuario", novoUser.getName());
-        dados.putString("emailUsuario", novoUser.getEmail());
-        dados.putString("senha", novoUser.getPassword());
-        dados.apply();
+        SharedPreferences.Editor data = preferences.edit();
+        data.putInt("usuarioID", lastID);
+        data.putString("nomeUsuario", newUser.getName());
+        data.putString("emailUsuario", newUser.getEmail());
+        data.putString("senha", newUser.getPassword());
+        data.apply();
     }
 
-    private void restaurarSharedPreferences() {
+    private void restoreSharedPreferences() {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
-
-        usuarioID = preferences.getInt("usuarioID", -1);
-        emailUsuario = preferences.getString("emailUsuario", "");
+        userID = preferences.getInt("usuarioID", -1);
+        emailAddressUser = preferences.getString("emailUsuario", "");
     }
 }

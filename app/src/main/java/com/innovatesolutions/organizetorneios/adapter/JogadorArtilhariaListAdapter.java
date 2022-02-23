@@ -225,7 +225,7 @@ public class JogadorArtilhariaListAdapter extends ArrayAdapter<Jogador> implemen
 
             dataSet = layoutElencoList.inflate(R.layout.listview_jogadores_artilharia, parent, false);
 
-            linha.txtNome = dataSet.findViewById(R.id.txtNome);
+            linha.txtNome = dataSet.findViewById(R.id.txtName);
             linha.txtNumero = dataSet.findViewById(R.id.txtNumero);
             linha.txtEquipe = dataSet.findViewById(R.id.txtEquipe);
             linha.txtQtdGols = dataSet.findViewById(R.id.txtQtdGols);

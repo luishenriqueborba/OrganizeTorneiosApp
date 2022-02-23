@@ -4,12 +4,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import com.innovatesolutions.organizetorneios.R;
 import com.innovatesolutions.organizetorneios.api.AppUtil;
@@ -24,20 +24,20 @@ public class Login extends AppCompatActivity {
     private TextView txtForgotPassword;
     private EditText editPassword;
     private EditText editEmail;
-    private CheckBox chRemember;
+    private SwitchCompat switchRemember;
     private Boolean isRememberPassword = false;
     private long backPressedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_new);
 
         initForm();
         restoreSharedPreferences();
 
         txtRegister.setOnClickListener(view -> {
-            AppUtil.goNextScreen(Login.this, CadastrarUsuario.class, false);
+            AppUtil.goNextScreen(Login.this, RegisterUser.class, false);
             finish();
         });
         txtForgotPassword.setOnClickListener(view -> {
@@ -45,10 +45,9 @@ public class Login extends AppCompatActivity {
             finish();
         });
 
-        chRemember.setOnClickListener(v ->
-                rememberPassword());
-
         btnSignIn.setOnClickListener(v -> signIn());
+
+        switchRemember.setOnClickListener(v -> rememberPassword());
     }
 
     private void initForm() {
@@ -57,7 +56,7 @@ public class Login extends AppCompatActivity {
         txtForgotPassword = findViewById(R.id.txtForgotPassword);
         editEmail = findViewById(R.id.editEmailLogin);
         editPassword = findViewById(R.id.editPasswordLogin);
-        chRemember = findViewById(R.id.chRemember);
+        switchRemember = findViewById(R.id.switchRemember);
 
         user = new User();
     }
@@ -78,7 +77,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void rememberPassword() {
-        isRememberPassword = chRemember.isChecked();
+        isRememberPassword = switchRemember.isChecked();
     }
 
     private boolean validateForm() {
