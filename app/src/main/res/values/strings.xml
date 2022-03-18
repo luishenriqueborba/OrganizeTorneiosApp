@@ -11,6 +11,10 @@
     <string name="chLembrar">Lembrar</string>
     <string name="msgErrorInvalidLogin">O e-mail e/ou senha estão incorretos.</string>
     <string name="msgAppExitAlert">Pressione novamente para sair.</string>
+    <string name="msgErrorInvalidEmail">E-mail inválido!</string>
+    <string name="msgBlankFieldsAlert">Favor, preencher todos os campos!</string>
+    <string name="msgDivergentPasswordAlert">As senhas digitadas devem ser iguais, por favor tente novamente.</string>
+    <string name="msgEmailIsAlreadyRegistered">Esse e-mail já está cadastrado!</string>
     <!-- Formulário cadastro de usuários -->
     <string name="btnCadastrar">CADASTRAR</string>
     <string name="txtTituloCadastro">Cadastro</string>

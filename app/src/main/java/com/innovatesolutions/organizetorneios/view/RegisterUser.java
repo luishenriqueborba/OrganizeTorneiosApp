@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.innovatesolutions.organizetorneios.R;
 import com.innovatesolutions.organizetorneios.api.AppUtil;
 import com.innovatesolutions.organizetorneios.controller.UsuarioController;
+import com.innovatesolutions.organizetorneios.fragment.BottomSheetTermsFragment;
 import com.innovatesolutions.organizetorneios.model.User;
 import com.shashank.sony.fancydialoglib.FancyAlertDialog;
 import com.shashank.sony.fancydialoglib.Icon;
@@ -38,6 +39,7 @@ public class RegisterUser extends AppCompatActivity {
     private EditText editConfirmation;
     private TextView txtTerms;
     private CheckBox chTerms;
+    private Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +48,7 @@ public class RegisterUser extends AppCompatActivity {
 
         restoreSharedPreferences();
         initForm();
-
-        txtTerms.setOnClickListener(view -> {
-            AppUtil.goNextScreen(RegisterUser.this, TermosDeUso.class, false);
-            finish();
-        });
+        configureButtons();
     }
 
     private void initForm() {
@@ -60,16 +58,31 @@ public class RegisterUser extends AppCompatActivity {
         editConfirmation = findViewById(R.id.editConfirmation);
         chTerms = findViewById(R.id.checkBoxTerms);
         txtTerms = findViewById(R.id.txtTerms);
-        Button btnRegister = findViewById(R.id.btnRegister);
+        btnRegister = findViewById(R.id.btnRegister);
 
         newUser = new User();
         newUser.setId(userID);
         controller = new UsuarioController(this);
     }
 
+    private void configureButtons() {
+        txtTerms.setOnClickListener(view -> {
+            BottomSheetTermsFragment fragment = new BottomSheetTermsFragment();
+            fragment.show(getSupportFragmentManager(), fragment.getTag());
+        });
+
+        btnRegister.setEnabled(false);
+        btnRegister.setAlpha(0.5F);
+    }
+
     public void validateTermsOfUse(View view) {
         if (!chTerms.isChecked()) {
             Toast.makeText(getApplicationContext(), R.string.msgTermsOfUseAlert, Toast.LENGTH_LONG).show();
+            btnRegister.setEnabled(false);
+            btnRegister.setAlpha(0.5F);
+        } else {
+            btnRegister.setEnabled(true);
+            btnRegister.setAlpha(1F);
         }
     }
 
@@ -162,17 +175,17 @@ public class RegisterUser extends AppCompatActivity {
             } else {
                 editEmail.setError("*");
                 editEmail.requestFocus();
-                Toast.makeText(getApplicationContext(), "E-mail inválido!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.msgErrorInvalidEmail, Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(getApplicationContext(), "Favor, preencher todos os campos!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.msgBlankFieldsAlert, Toast.LENGTH_SHORT).show();
         }
     }
 
     private void showAlertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("ATENÇÃO:");
-        builder.setMessage("As senhas digitadas devem ser iguais, por favor tente novamente.");
+        builder.setMessage(R.string.msgDivergentPasswordAlert);
         builder.setCancelable(true);
         builder.setIcon(R.mipmap.ic_launcher_round);
         builder.setPositiveButton("ENTENDI", (dialogInterface, i) ->

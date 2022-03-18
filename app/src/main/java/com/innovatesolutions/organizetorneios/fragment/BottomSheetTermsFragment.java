@@ -12,7 +12,8 @@ import com.innovatesolutions.organizetorneios.R;
 
 public class BottomSheetTermsFragment extends BottomSheetDialogFragment {
 
-    @Override public int getTheme() {
+    @Override
+    public int getTheme() {
         return R.style.Theme_MaterialComponents_Light_BottomSheetDialog;
     }
 
@@ -22,7 +23,7 @@ public class BottomSheetTermsFragment extends BottomSheetDialogFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.bottom_sheet_dialog_layout, container, false);
 
