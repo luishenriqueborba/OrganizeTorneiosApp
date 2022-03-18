@@ -42,8 +42,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/txtEmail"
-                    app:hintTextColor="@color/colorBlack"
+                    app:hintEnabled="false"
                     app:boxBackgroundColor="@color/colorWhite"
                     app:startIconDrawable="@drawable/ic_email"
                     app:startIconTint="@color/colorBlack"
@@ -53,6 +52,7 @@
                         android:id="@+id/editEmailLogin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="@string/txtEmail"
                         android:inputType="textEmailAddress">
 
                     </com.google.android.material.textfield.TextInputEditText>
@@ -65,8 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:hint="@string/txtSenha"
-                    app:hintTextColor="@color/colorBlack"
+                    app:hintEnabled="false"
                     app:boxBackgroundColor="@color/colorWhite"
                     app:startIconDrawable="@drawable/ic_lock"
                     app:startIconTint="@color/colorBlack"
@@ -76,6 +75,7 @@
                         android:id="@+id/editPasswordLogin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="@string/txtSenha"
                         android:inputType="textPassword">
 
                     </com.google.android.material.textfield.TextInputEditText>
