@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--Termos-->
+        <LinearLayout
+            android:id="@+id/terms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtAceitacao"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/txtAceitacao"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/mensagemAceitacao"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/mensagemAceitacao"
+                android:textColor="@color/colorBlack"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txtLicenca"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/txtLicenca"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/mensagemLicenca"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/mensagemLicenca"
+                android:textColor="@color/colorBlack"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txtAlteracoes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/txtAlteracoes"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/mensagemAlteracoes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/mensagemAlteracoes"
+                android:textColor="@color/colorBlack"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txtConsentimento"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/txtConsentimento"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/mensagemConsentimento"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/mensagemConsentimento"
+                android:textColor="@color/colorBlack"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txtIsencao"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/txtIsencao"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/mensagemIsencao"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/mensagemIsencao"
+                android:textColor="@color/colorBlack"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/btnOK"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/btn_custom_confirm"
+                android:foregroundGravity="center_horizontal"
+                android:text="OK"
+                android:textColor="@color/colorWhite" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
