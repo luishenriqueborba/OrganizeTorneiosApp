@@ -1,19 +1,52 @@
-Versão :
+Versão 01.07:
 Novidades:
-#noticket:
+
+Correções:
+
+----------------------------------------------------------------------------------
+Versão 01.06 (09.08):
+Novidades:
+#noticket: Criação de link de acesso ao site PechinchaLegal
+#noticket: Atualização de targetSdkVersion para API 31 (Android 12)
+#noticket: Criação de nova tela de login e de elementos da nova UI
+#noticket: Criação de bottomSheet para visualização dos termos de uso
+Atualização das seguintes libs:
+- androidx.appcompat:appcompat:1.4.0
+- androidx.constraintlayout:constraintlayout:2.1.2
+- com.google.android.gms:play-services-ads:20.5.0
 
 Correções:
 #noticket:
 ----------------------------------------------------------------------------------
-Versão :
+Versão 01.05 (09.07):
 Novidades:
-#noticket:
-#noticket:
-#noticket:
 
 Correções:
-#noticket:
-#noticket:
-#noticket:
+#noticket: Ajuste dos Ads (anúncios) de produção
+----------------------------------------------------------------------------------
+Versão 01.04 (09.06):
+Novidades:
+
+Correções:
+#noticket: Atualização dos Ads (anúncios)
+----------------------------------------------------------------------------------
+Versão 01.03 (09.03):
+Novidades:
+#noticket: Criada função de compartilhamento do app via whatsApp
+
+Correções:
+#noticket: Atualização dos Ads (anúncios)
+----------------------------------------------------------------------------------
+Versão 01.02 (09.02):
+Novidades:
+
+Correções:
+#noticket: Ajustes no controle de cartões e artilharia.
+----------------------------------------------------------------------------------
+Versão 01.01 (09.01):
+Novidades:
+#noticket: Implementação de controle de cartões e artilharia.
+
+Correções:
 ----------------------------------------------------------------------------------
 
