@@ -7,8 +7,6 @@ public class Version {
 /**
  * Versão: 09.09
  * Novidades:
- * Criação de nova tela de login e de elementos da nova UI
- * Criação de bottomSheet para visualização dos termos de uso
  *
  * Correções:
  * -------------------------------------------------------------------------------------------------
@@ -16,6 +14,8 @@ public class Version {
  * Novidades:
  * Criação de link de acesso ao site PechinchaLegal
  * Atualização de targetSdkVersion para API 31 (Android 12)
+ * Criação de nova tela de login e de elementos da nova UI
+ * Criação de bottomSheet para visualização dos termos de uso
  * Atualização de algumas libs:
  *  - androidx.appcompat:appcompat:1.4.0
  *  - androidx.constraintlayout:constraintlayout:2.1.2
