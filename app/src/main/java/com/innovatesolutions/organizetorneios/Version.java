@@ -8,6 +8,7 @@ public class Version {
  * Versão: 09.09
  * Novidades:
  * Criação de nova tela de login e de elementos da nova UI
+ * Criação de bottomSheet para visualização dos termos de uso
  *
  * Correções:
  * -------------------------------------------------------------------------------------------------

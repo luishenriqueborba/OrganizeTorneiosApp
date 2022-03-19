@@ -30,6 +30,8 @@ public class BottomSheetTermsFragment extends BottomSheetDialogFragment {
         LinearLayout terms = view.findViewById(R.id.terms);
         Button btnOk = view.findViewById(R.id.btnOK);
 
+        getDialog().setCanceledOnTouchOutside(true);
+
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

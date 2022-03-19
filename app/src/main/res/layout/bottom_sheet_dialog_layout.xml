@@ -110,7 +110,7 @@
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/btn_custom_confirm"
                 android:foregroundGravity="center_horizontal"
-                android:text="OK"
+                android:text="@string/ok"
                 android:textColor="@color/colorWhite" />
 
         </LinearLayout>

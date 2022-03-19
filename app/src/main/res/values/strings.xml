@@ -154,4 +154,5 @@
     <string name="anuncioIntersticial3">ca-app-pub-5291707701088051/5053524394</string-->
     <string name="first_fragment_label" />
     <string name="downloadApkError">Não foi possível efetuar o download do aplicativo. Por favor, tente novamente mais tarde.</string>
+    <string name="ok">OK</string>
 </resources>
