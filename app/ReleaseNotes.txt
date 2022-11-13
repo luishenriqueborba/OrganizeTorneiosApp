@@ -1,6 +1,14 @@
 Versão 01.07:
 Novidades:
 #noticket: Atualização para o gradle 7.2.0 e da url de distribuição do gradle também
+#noticket: Atualização das seguintes libs:
+- androidx.appcompat:appcompat:1.5.1
+- androidx.constraintlayout:constraintlayout:2.1.4
+- com.google.android.material:material:1.7.0
+- androidx.navigation:navigation-fragment:2.5.3
+- androidx.navigation:navigation-ui:2.5.3
+- com.google.android.gms:play-services-ads:21.3.0
+- androidx.core:core:1.9.0
 
 Correções:
 
