@@ -1,5 +1,6 @@
 Versão 01.07:
 Novidades:
+#noticket: Atualização para o gradle 7.2.0 e da url de distribuição do gradle também
 
 Correções:
 
