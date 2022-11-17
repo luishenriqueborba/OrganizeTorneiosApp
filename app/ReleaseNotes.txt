@@ -1,5 +1,6 @@
 Versão 01.07:
 Novidades:
+#noticket: Atualização de targetSdkVersion para API 33 (Android 13) e minSdkVersion para API 21
 #noticket: Atualização para o gradle 7.2.0 e da url de distribuição do gradle também
 #noticket: Atualização das seguintes libs:
 - androidx.appcompat:appcompat:1.5.1
