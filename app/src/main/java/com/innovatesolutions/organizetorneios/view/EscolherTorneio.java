@@ -49,14 +49,14 @@ public class EscolherTorneio extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_escolher_torneio);
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+        /*MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        mAdView.loadAd(adRequest);*/
 
         initFormulario();
         restaurarSharedPreferences();
@@ -68,19 +68,22 @@ public class EscolherTorneio extends AppCompatActivity {
         btnQuatroEquipes.setOnClickListener(v -> {
             qtdEquipes = 4;
             salvarSharedPreferences();
-            showInterstitialAd(getString(R.string.anuncioIntersticial2), adRequest);
+            avancaProximaTela();
+            //showInterstitialAd(getString(R.string.anuncioIntersticial2), adRequest);
         });
 
         btnDozeEquipes.setOnClickListener(view -> {
             qtdEquipes = 12;
             salvarSharedPreferences();
-            showInterstitialAd(getString(R.string.anuncioIntersticial2), adRequest);
+            avancaProximaTela();
+            //showInterstitialAd(getString(R.string.anuncioIntersticial2), adRequest);
         });
 
         btnDezesseisEquipes.setOnClickListener(view -> {
             qtdEquipes = 16;
             salvarSharedPreferences();
-            showInterstitialAd(getString(R.string.anuncioIntersticial2), adRequest);
+            avancaProximaTela();
+            //showInterstitialAd(getString(R.string.anuncioIntersticial2), adRequest);
         });
     }
 
@@ -91,6 +94,11 @@ public class EscolherTorneio extends AppCompatActivity {
         btnDezesseisEquipes = findViewById(R.id.btnDezesseisEquipes);
 
         user = new User();
+    }
+
+    public void avancaProximaTela() {
+        AppUtil.goNextScreen(EscolherTorneio.this, CadastrarGrupos.class, false);
+        finish();
     }
 
     @Override
