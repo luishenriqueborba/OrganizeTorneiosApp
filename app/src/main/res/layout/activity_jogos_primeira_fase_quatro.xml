@@ -884,7 +884,7 @@
                 ads:adUnitId="@string/anuncioBanner1">
             </com.google.android.gms.ads.AdView>
 
-            <TextView
+            <!--TextView
                 android:id="@+id/txtLinkPechinchaLegal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -896,7 +896,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorDenimBlue"
                 android:textSize="20sp"
-                android:onClick="abrirLinkPechinchaLegal"/>
+                android:onClick="abrirLinkPechinchaLegal"/-->
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
