@@ -139,19 +139,19 @@
     <string name="removerCartaoVermelho">Remover Cartão Vermelho</string>
 
     <!--Anuncios TESTE-->
-    <string name="anuncioBanner1">ca-app-pub-3940256099942544/6300978111</string>
+    <!--string name="anuncioBanner1">ca-app-pub-3940256099942544/6300978111</string>
     <string name="anuncioBanner2">ca-app-pub-3940256099942544/6300978111</string>
     <string name="anuncioBanner3">ca-app-pub-3940256099942544/6300978111</string>
     <string name="anuncioIntersticial1">ca-app-pub-3940256099942544/1033173712</string>
     <string name="anuncioIntersticial2">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="anuncioIntersticial3">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="anuncioIntersticial3">ca-app-pub-3940256099942544/1033173712</string-->
     <!--Anuncios-->
-    <!--string name="anuncioBanner1">ca-app-pub-5291707701088051/7893286011</string>
+    <string name="anuncioBanner1">ca-app-pub-5291707701088051/7893286011</string>
     <string name="anuncioBanner2">ca-app-pub-5291707701088051/5091812529</string>
     <string name="anuncioBanner3">ca-app-pub-5291707701088051/7594898614</string>
     <string name="anuncioIntersticial1">ca-app-pub-5291707701088051/4772314564</string>
     <string name="anuncioIntersticial2">ca-app-pub-5291707701088051/6567013470</string>
-    <string name="anuncioIntersticial3">ca-app-pub-5291707701088051/5053524394</string-->
+    <string name="anuncioIntersticial3">ca-app-pub-5291707701088051/5053524394</string>
 
 
     <string name="first_fragment_label" />
