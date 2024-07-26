@@ -1,4 +1,4 @@
-Versão 01.09:
+Versão 09.10:
 Novidades:
 #noticket: Atualização para o gradle 8.4.0 e da url de distribuição do gradle também
 #noticket: Atualização das seguintes libs:
