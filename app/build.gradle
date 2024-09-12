@@ -2,12 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdk 34
-    buildToolsVersion "34.0.0"
 
     defaultConfig {
         applicationId "com.innovatesolutions.organizetorneios"
         minSdkVersion 22
-        targetSdk 33
+        targetSdkVersion 34
         multiDexEnabled = true
         versionCode 910
         versionName "09.10"

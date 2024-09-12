@@ -1,6 +1,7 @@
 Versão 09.11:
 Novidades:
 #noticket: Atualização para o gradle 8.5.1 e da url de distribuição do gradle também
+#noticket: Atualização do targetSdkVersion para API 34 (Android 14)
 
 Correções:
 
