@@ -8,8 +8,8 @@ android {
         minSdkVersion 22
         targetSdkVersion 34
         multiDexEnabled = true
-        versionCode 910
-        versionName "09.10"
+        versionCode 911
+        versionName "09.11"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
