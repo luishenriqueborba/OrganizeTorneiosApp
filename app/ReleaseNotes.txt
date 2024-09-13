@@ -1,3 +1,14 @@
+Versão 09.12:
+Novidades:
+#noticket: Atualização das seguintes libs:
+- com.android.tools.build:gradle:8.5.2
+- androidx.navigation:navigation-fragment:2.8.0
+- androidx.navigation:navigation-ui:2.8.0
+- com.google.android.gms:play-services-ads:23.3.0
+
+Correções:
+
+----------------------------------------------------------------------------------
 Versão 09.11:
 Novidades:
 #noticket: Atualização para o gradle 8.5.1 e da url de distribuição do gradle também
