@@ -1,7 +1,7 @@
 Versão 09.12:
 Novidades:
 #noticket: Atualização das seguintes libs:
-- com.android.tools.build:gradle:8.5.2
+- com.android.tools.build:gradle:8.10.0
 - androidx.navigation:navigation-fragment:2.8.0
 - androidx.navigation:navigation-ui:2.8.0
 - com.google.android.gms:play-services-ads:23.3.0
