@@ -5,6 +5,7 @@ Novidades:
 - androidx.navigation:navigation-fragment:2.8.0
 - androidx.navigation:navigation-ui:2.8.0
 - com.google.android.gms:play-services-ads:23.3.0
+#noticket: Criação de arquivo AGENTS.md para guiar agentes de IA
 
 Correções:
 
