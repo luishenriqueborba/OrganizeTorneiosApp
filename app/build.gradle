@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdk 34
+    compileSdk 37
 
     defaultConfig {
         applicationId "com.innovatesolutions.organizetorneios"
-        minSdkVersion 22
-        targetSdk 34
+        minSdkVersion 24
+        targetSdk 37
         multiDexEnabled = true
         versionCode 911
         versionName "09.11"
@@ -19,6 +19,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    buildFeatures {
+        buildConfig = true
     }
     namespace 'com.innovatesolutions.organizetorneios'
 }

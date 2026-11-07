@@ -1,7 +1,8 @@
 Versão 09.12:
 Novidades:
+#noticket: Atualização para o Gradle 9.6.0 e AGP 9.5.1
+#noticket: Atualização do targetSdkVersion e compileSdk para API 37, e minSdkVersion para 24
 #noticket: Atualização das seguintes libs:
-- com.android.tools.build:gradle:8.13.2
 - androidx.navigation:navigation-fragment:2.8.0
 - androidx.navigation:navigation-ui:2.8.0
 - com.google.android.gms:play-services-ads:23.3.0
