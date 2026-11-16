@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -64,7 +65,9 @@ public class Splash extends AppCompatActivity {
 
     private void restoreSharedPreferences() {
         SharedPreferences preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
-        isRememberPassword = preferences.getBoolean("loginAutomatico", false);
+        boolean loginAutomatico = preferences.getBoolean("loginAutomatico", false);
+        String nomeUsuario = preferences.getString("nomeUsuario", "");
+        isRememberPassword = loginAutomatico && !TextUtils.isEmpty(nomeUsuario);
     }
 
 }

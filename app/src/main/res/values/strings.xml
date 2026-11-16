@@ -6,6 +6,9 @@
     <!-- Tela Login -->
     <string name="txtLogo">Logo App Organize Torneios</string>
     <string name="btnEntrar">Entrar</string>
+    <string name="btnContinuar">Continuar</string>
+    <string name="txtWelcomeTitle">Bem-vindo!</string>
+    <string name="txtWelcomeSubtitle">Como você quer ser chamado no aplicativo?</string>
     <string name="txtCadastrar">Cadastrar-se</string>
     <string name="txtEsqueceuSenha">Esqueceu sua senha?</string>
     <string name="chLembrar">Lembrar</string>

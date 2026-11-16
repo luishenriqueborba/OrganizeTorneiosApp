@@ -18,7 +18,8 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgLogo"
@@ -26,14 +27,34 @@
                 android:layout_height="120dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="60dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="30dp"
                 android:contentDescription="@string/txtLogo"
                 android:src="@mipmap/ic_launcher_round" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txtWelcomeTitle"
+                android:textColor="@color/colorWhite"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/txtWelcomeSubtitle"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_marginBottom="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 android:orientation="vertical">
 
@@ -44,90 +65,32 @@
                     android:layout_height="wrap_content"
                     app:hintEnabled="false"
                     app:boxBackgroundColor="@color/colorWhite"
-                    app:startIconDrawable="@drawable/ic_email"
-                    app:startIconTint="@color/colorBlack"
-                    app:endIconMode="custom">
+                    app:startIconDrawable="@drawable/ic_user"
+                    app:startIconTint="@color/colorBlack">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editEmailLogin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/txtEmail"
-                        android:inputType="textEmailAddress">
+                        android:hint="@string/txtHintNome"
+                        android:inputType="textPersonName|textCapWords">
 
                     </com.google.android.material.textfield.TextInputEditText>
 
                 </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/PasswordLogin"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    app:hintEnabled="false"
-                    app:boxBackgroundColor="@color/colorWhite"
-                    app:startIconDrawable="@drawable/ic_lock"
-                    app:startIconTint="@color/colorBlack"
-                    app:endIconMode="password_toggle">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editPasswordLogin"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/txtSenha"
-                        android:inputType="textPassword">
-
-                    </com.google.android.material.textfield.TextInputEditText>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/switchRemember"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_marginEnd="2dp"
-                    android:layout_marginTop="13dp"
-                    android:layout_gravity="end"
-                    android:checked="false"
-                    android:text="Lembrar"
-                    android:textColor="@color/colorWhite" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnSignIn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="30dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/btn_custom_confirm_new"
-                    android:text="@string/btnEntrar"
-                    android:textColor="@color/colorBlack"
-                    app:layout_constraintBottom_toTopOf="@+id/txtRegister"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardViewFormLogin3" />
+                    android:text="@string/btnContinuar"
+                    android:textColor="@color/colorBlack" />
 
             </LinearLayout>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtRegister"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:gravity="center_horizontal"
-                android:text="@string/txtCadastrar"
-                android:textColor="@color/colorWhite"
-                android:textStyle="bold"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtForgotPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="@string/txtEsqueceuSenha"
-                android:textColor="@color/colorWhite"
-                android:textStyle="bold" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

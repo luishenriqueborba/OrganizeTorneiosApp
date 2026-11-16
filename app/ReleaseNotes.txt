@@ -1,3 +1,10 @@
+Versão 09.13:
+Novidades:
+#noticket: Substituição da tela de login por tela de boas-vindas e identificação do usuário para adequação às políticas da Google Play
+
+Correções:
+
+----------------------------------------------------------------------------------
 Versão 09.12:
 Novidades:
 #noticket: Atualização para o Gradle 9.6.0 e AGP 9.5.1
