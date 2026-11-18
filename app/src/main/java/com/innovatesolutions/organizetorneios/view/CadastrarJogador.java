@@ -1,5 +1,6 @@
 package com.innovatesolutions.organizetorneios.view;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -58,6 +59,17 @@ public class CadastrarJogador extends AppCompatActivity {
         popularSpinner();
 
         initFormulario();
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                limparTelaAnterior();
+                Intent intent = new Intent(CadastrarJogador.this, Dashboard.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void initFormulario() {
@@ -125,15 +137,6 @@ public class CadastrarJogador extends AppCompatActivity {
         return;
     }
 
-    @Override
-    public void onBackPressed() {
-        limparTelaAnterior();
-        Intent intent = new Intent(this, Dashboard.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
-        return;
-    }
 
     public void cadastrarJogador(View view) {
 

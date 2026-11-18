@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.innovatesolutions.organizetorneios.R;
@@ -59,6 +60,14 @@ public class Equipes extends AppCompatActivity {
         }
         initFormulario();
         popularFormulario();
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                AppUtil.goNextScreen(Equipes.this, Dashboard.class, true);
+                finish();
+            }
+        });
     }
 
     private void initFormulario() {
@@ -982,11 +991,6 @@ public class Equipes extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        AppUtil.goNextScreen(Equipes.this, Dashboard.class, true);
-        finish();
-    }
 
     private void salvarSharedPreferencesGA() {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);

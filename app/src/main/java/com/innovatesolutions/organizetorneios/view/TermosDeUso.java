@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.innovatesolutions.organizetorneios.R;
@@ -21,6 +22,14 @@ public class TermosDeUso extends AppCompatActivity {
         setContentView(R.layout.activity_termos_de_uso);
 
         init();
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                AppUtil.goNextScreen(TermosDeUso.this, RegisterUser.class, true);
+                finish();
+            }
+        });
     }
 
     private void init() {
@@ -42,9 +51,4 @@ public class TermosDeUso extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        AppUtil.goNextScreen(TermosDeUso.this, RegisterUser.class, true);
-        finish();
-    }
 }

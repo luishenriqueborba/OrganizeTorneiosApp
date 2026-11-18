@@ -1,3 +1,10 @@
+Versão 09.14:
+Novidades:
+
+Correções:
+#noticket: Correção do comportamento do botão/gesto de voltar em todas as telas para compatibilidade com Android 13+ / Android 17 (migração para OnBackPressedDispatcher / OnBackPressedCallback)
+
+----------------------------------------------------------------------------------
 Versão 09.13:
 Novidades:
 #noticket: Substituição da tela de login por tela de boas-vindas e identificação do usuário para adequação às políticas da Google Play

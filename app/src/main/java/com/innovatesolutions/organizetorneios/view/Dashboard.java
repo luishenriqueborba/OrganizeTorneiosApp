@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,6 +35,19 @@ public class Dashboard extends AppCompatActivity {
 
         restaurarSharedPreferences();
         init();
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (backPressedTime + 2000 > System.currentTimeMillis()) {
+                    finish();
+                    return;
+                } else {
+                    Toast.makeText(Dashboard.this, "Pressione novamente para sair.", Toast.LENGTH_SHORT).show();
+                }
+                backPressedTime = System.currentTimeMillis();
+            }
+        });
     }
 
     private void init() {
@@ -124,17 +138,6 @@ public class Dashboard extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        if (backPressedTime + 2000 > System.currentTimeMillis()) {
-            super.onBackPressed();
-            finish();
-            return;
-        } else {
-            Toast.makeText(this, "Pressione novamente para sair.", Toast.LENGTH_SHORT).show();
-        }
-        backPressedTime = System.currentTimeMillis();
-    }
 
     private void salvarTelaAnterior(String tela) {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);

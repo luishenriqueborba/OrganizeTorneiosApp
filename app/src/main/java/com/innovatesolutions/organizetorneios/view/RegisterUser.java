@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -49,6 +50,14 @@ public class RegisterUser extends AppCompatActivity {
         restoreSharedPreferences();
         initForm();
         configureButtons();
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                AppUtil.goNextScreen(RegisterUser.this, Login.class, true);
+                finish();
+            }
+        });
     }
 
     private void initForm() {
@@ -214,11 +223,6 @@ public class RegisterUser extends AppCompatActivity {
                 .build();
     }
 
-    @Override
-    public void onBackPressed() {
-        AppUtil.goNextScreen(RegisterUser.this, Login.class, true);
-        finish();
-    }
 
     private void saveSharedPreferences() {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);

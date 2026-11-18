@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.innovatesolutions.organizetorneios.R;
@@ -524,6 +525,16 @@ public class Classificacao extends AppCompatActivity {
             grupoController = new GrupoController(this);
 
         }
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent intent = new Intent(Classificacao.this, Dashboard.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void popularFormulario() {
@@ -1997,14 +2008,6 @@ public class Classificacao extends AppCompatActivity {
         return;
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, Dashboard.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
-        return;
-    }
 
     private void restaurarSharedPreferencesQtdEquipes() {
 

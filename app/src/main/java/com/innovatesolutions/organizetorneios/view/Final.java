@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -53,6 +54,14 @@ public class Final extends AppCompatActivity {
         restaurarSharedPreferences();
         initFormulario();
         popularFormulario();
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                AppUtil.goNextScreen(Final.this, MataMata.class, true);
+                finish();
+            }
+        });
 
     }
 
@@ -123,11 +132,6 @@ public class Final extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        AppUtil.goNextScreen(Final.this, MataMata.class, true);
-        finish();
-    }
 
     private void restaurarSharedPreferences() {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);

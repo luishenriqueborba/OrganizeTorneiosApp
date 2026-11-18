@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.innovatesolutions.organizetorneios.R;
@@ -28,6 +29,19 @@ public class Login extends AppCompatActivity {
         restoreSharedPreferences();
 
         btnSignIn.setOnClickListener(v -> saveAndProceed());
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (backPressedTime + 2000 > System.currentTimeMillis()) {
+                    finish();
+                    return;
+                } else {
+                    Toast.makeText(Login.this, R.string.msgAppExitAlert, Toast.LENGTH_SHORT).show();
+                }
+                backPressedTime = System.currentTimeMillis();
+            }
+        });
     }
 
     private void initForm() {
@@ -48,16 +62,6 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        if (backPressedTime + 2000 > System.currentTimeMillis()) {
-            super.onBackPressed();
-            return;
-        } else {
-            Toast.makeText(this, R.string.msgAppExitAlert, Toast.LENGTH_SHORT).show();
-        }
-        backPressedTime = System.currentTimeMillis();
-    }
 
     private void saveSharedPreferences(String name) {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);

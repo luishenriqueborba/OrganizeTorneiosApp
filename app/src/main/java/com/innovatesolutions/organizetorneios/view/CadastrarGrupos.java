@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.innovatesolutions.organizetorneios.R;
@@ -47,6 +48,14 @@ public class CadastrarGrupos extends AppCompatActivity {
 
         btnSalvar.setOnClickListener(view ->
                 salvarFormulario());
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                AppUtil.goNextScreen(CadastrarGrupos.this, EscolherTorneio.class, true);
+                finish();
+            }
+        });
     }
 
     private void initFormulario() {
@@ -445,11 +454,6 @@ public class CadastrarGrupos extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        AppUtil.goNextScreen(CadastrarGrupos.this, EscolherTorneio.class, true);
-        finish();
-    }
 
     private void restaurarSharedPreferencesQtdEquipes() {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);

@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.innovatesolutions.organizetorneios.R;
@@ -28,6 +29,14 @@ public class RecuperarSenha extends AppCompatActivity {
 
         initFormulario();
         restaurarSharedPreferences();
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                AppUtil.goNextScreen(RecuperarSenha.this, Login.class, true);
+                finish();
+            }
+        });
     }
 
     private void initFormulario() {
@@ -69,11 +78,6 @@ public class RecuperarSenha extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Favor, preencher o campo indicado!", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onBackPressed() {
-        AppUtil.goNextScreen(RecuperarSenha.this, Login.class, true);
-        finish();
-    }
 
     private void restaurarSharedPreferences() {
         SharedPreferences preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);

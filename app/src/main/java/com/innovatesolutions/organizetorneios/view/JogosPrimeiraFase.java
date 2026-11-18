@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -144,6 +145,14 @@ public class JogosPrimeiraFase extends AppCompatActivity {
                 if (finalizouPrimeiraFase) {
                     showInterstitialAd(getString(R.string.anuncioIntersticial2), adRequest);
                 }
+            }
+        });
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                AppUtil.goNextScreen(JogosPrimeiraFase.this, Dashboard.class, true);
+                finish();
             }
         });
     }
@@ -1010,11 +1019,6 @@ public class JogosPrimeiraFase extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        AppUtil.goNextScreen(JogosPrimeiraFase.this, Dashboard.class, true);
-        finish();
-    }
 
     public void editarResultados(View view) {
         if (finalizouPrimeiraFase) {

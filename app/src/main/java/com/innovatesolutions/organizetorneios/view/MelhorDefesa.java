@@ -1,5 +1,6 @@
 package com.innovatesolutions.organizetorneios.view;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
@@ -60,6 +61,14 @@ public class MelhorDefesa extends AppCompatActivity {
         restaurarSharedPreferences();
         initFormulario();
         popularFormulario();
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                AppUtil.goNextScreen(MelhorDefesa.this, Dashboard.class, true);
+                finish();
+            }
+        });
     }
 
     private void initFormulario() {
@@ -229,11 +238,6 @@ public class MelhorDefesa extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        AppUtil.goNextScreen(MelhorDefesa.this, Dashboard.class, true);
-        finish();
-    }
 
     public void ordenaMelhorDefesa(Equipe[] equipes) {
         boolean troca = true;

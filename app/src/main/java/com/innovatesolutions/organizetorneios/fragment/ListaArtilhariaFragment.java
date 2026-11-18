@@ -1,7 +1,6 @@
 package com.innovatesolutions.organizetorneios.fragment;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -71,12 +70,6 @@ public class ListaArtilhariaFragment extends Fragment {
         });
     }
 
-    public void onBackPressed() {
 
-        Intent intent = new Intent(getActivity(), Dashboard.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        return;
-    }
 
 }

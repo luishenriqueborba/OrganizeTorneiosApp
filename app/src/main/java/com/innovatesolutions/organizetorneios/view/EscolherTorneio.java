@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -63,6 +64,19 @@ public class EscolherTorneio extends AppCompatActivity {
 
         txtNomeUsuario.setText(MessageFormat.format("Bem vindo, {0}.", user.getName()));
 
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (backPressedTime + 2000 > System.currentTimeMillis()) {
+                    finish();
+                    return;
+                }
+                Toast.makeText(EscolherTorneio.this, "Pressione novamente para sair.", Toast.LENGTH_SHORT).show();
+
+                backPressedTime = System.currentTimeMillis();
+            }
+        });
+
         verificaTorneioAnterior();
 
         btnQuatroEquipes.setOnClickListener(v -> {
@@ -101,17 +115,6 @@ public class EscolherTorneio extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        if (backPressedTime + 2000 > System.currentTimeMillis()) {
-            super.onBackPressed();
-            finish();
-            return;
-        }
-        Toast.makeText(this, "Pressione novamente para sair.", Toast.LENGTH_SHORT).show();
-
-        backPressedTime = System.currentTimeMillis();
-    }
 
     private void verificaTorneioAnterior() {
         if (!TextUtils.isEmpty(nomeEquipe1)) {

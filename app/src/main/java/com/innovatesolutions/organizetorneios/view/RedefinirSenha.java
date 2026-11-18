@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,6 +35,14 @@ public class RedefinirSenha extends AppCompatActivity {
 
         initFormulario();
         restaurarSharedPreferences();
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                AppUtil.goNextScreen(RedefinirSenha.this, RecuperarSenha.class, true);
+                finish();
+            }
+        });
     }
 
     private void initFormulario() {
@@ -110,11 +119,6 @@ public class RedefinirSenha extends AppCompatActivity {
         alert.show();
     }
 
-    @Override
-    public void onBackPressed() {
-        AppUtil.goNextScreen(RedefinirSenha.this, RecuperarSenha.class, true);
-        finish();
-    }
 
     private void salvarSharedPreferences() {
         preferences = getSharedPreferences(AppUtil.PREF_APP, MODE_PRIVATE);
